@@ -126,17 +126,17 @@ Nmap done: 1 IP address (1 host up) scanned in 152.47 seconds
 # Method to solve the challenge
 This challenge was stated easy but it is abit difficult compared to the previous machine that i have done. In this machine, the web server was hosted at port 60000 but it required username and password to further access.
 <br>
-![](../assets/img/posts/2022-07-14-ElMariachi-PC-1.png) 
+![](/assets/img/posts/2022-07-14-ElMariachi-PC-1.png) 
 <br>
 After looking around for my tips, i found out a great tip which is `ThinVnc`. This is a great tips for me as it is vulnerable. `ThinVnc` is vulnerable and it will somehow return the username and password needed to login into the web server.
 <br>
-![](../assets/img/posts/2022-07-14-ElMariachi-PC-2.png)
+![](/assets/img/posts/2022-07-14-ElMariachi-PC-2.png)
 <br>
 By intercepting the request and resend it with burpsuite, we managed to get the credentials `desperado:TooComplicatedToGuessMeAhahahahahahahh` Since we have the credentials, we can continue to move on and login into the web server. 
 <br>
-![](../assets/img/posts/2022-07-14-ElMariachi-PC-3.png)
+![](/assets/img/posts/2022-07-14-ElMariachi-PC-3.png)
 <br>
 After login into the web server, i have no idea what to do and i just clicked connect button. It appears to be a rdp which spawn a computer inside the browser. The flag is just inside the browser. 
 <br>
-![](../assets/img/posts/2022-07-14-ElMariachi-PC-4.png)
+![](/assets/img/posts/2022-07-14-ElMariachi-PC-4.png)
 <br>

@@ -247,30 +247,30 @@ Nmap done: 1 IP address (1 host up) scanned in 130.10 seconds
   
 # Method to solve the challenge
 - For starters, always look out for port 80 which is website of the ip address.
-- ![](../assets/img/posts/2022-07-13-PwnDrive-Academy-1.png)
+- ![](/assets/img/posts/2022-07-13-PwnDrive-Academy-1.png)
 - Since there is a login page, look into it and try to get access into the website by using SQL injection, default credentials or simple credentials such as `admin:admin`
 - In this challenge, SQL injection is hard to perform as it detect `=` sign.
-- ![](../assets/img/posts/2022-07-13-PwnDrive-Academy-2.png)
+- ![](/assets/img/posts/2022-07-13-PwnDrive-Academy-2.png)
 - Since simple SQL injection is unable to perform, try the other easy method first before moving on to some harder technique.
 - Simple credentials `admin:admin` is able to login into the system
-- ![](../assets/img/posts/2022-07-13-PwnDrive-Academy-3.png)
+- ![](/assets/img/posts/2022-07-13-PwnDrive-Academy-3.png)
 - In this page, the admin is allowed to upload images to the web server. 
 - Since it is able to upload images, it might have a chance to spawn reverse shell by uploading a malicious php file into the web server.
-- ![](../assets/img/posts/2022-07-13-PwnDrive-Academy-4.png)
+- ![](/assets/img/posts/2022-07-13-PwnDrive-Academy-4.png)
 - The malicious php file was able to upload successfully.
 - Since it is uploaded, clicking the php file to make it run and it should provides a reverse shell.
 - *remember to use `nc -nvlp [port]` when setting up for reverse shell
 - The only thing the remains are the paths which will redirected us to the uploaded php file.
 - When user clicked the view button from the personal files, it will redirected us to a page which show us the source code of the file but will not triggered.
-- ![](../assets/img/posts/2022-07-13-PwnDrive-Academy-5.png)
+- ![](/assets/img/posts/2022-07-13-PwnDrive-Academy-5.png)
 - Based on the url, it is redirecting us to another directory which might be the place that saves the uploaded php file. 
-- ![](../assets/img/posts/2022-07-13-PwnDrive-Academy-6.png)
+- ![](/assets/img/posts/2022-07-13-PwnDrive-Academy-6.png)
 - The php file was there when the path has changed.
-- ![](../assets/img/posts/2022-07-13-PwnDrive-Academy-7.png)
-- !![](../assets/img/posts/2022-07-13-PwnDrive-Academy-8.png)
+- ![](/assets/img/posts/2022-07-13-PwnDrive-Academy-7.png)
+- !![](/assets/img/posts/2022-07-13-PwnDrive-Academy-8.png)
 - The php file was unable to return a reverse shell.
 - This is because the php reverse shell is specifically created for linux machine and windows machines will not able to spawn a reverse shell.
 - The solution to this is either chaning the source code of the php file or each online for another [php reverse shell for windows](https://github.com/Dhayalanb/windows-php-reverse-shell/blob/master/Reverse%20Shell.php).
 - After uploading it the same method and run the php file, the reverse shell was managed to spawn.
-- ![](../assets/img/posts/2022-07-13-PwnDrive-Academy-9.png)
+- ![](/assets/img/posts/2022-07-13-PwnDrive-Academy-9.png)
 - The reverse shell is spawn for user `authority\system` which is also root privilege and therefore no privilege escalation is needed.

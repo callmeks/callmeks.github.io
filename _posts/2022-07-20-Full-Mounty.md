@@ -92,7 +92,7 @@ mount -v -o vers=3 10.150.150.134:/srv/exportnfs /mnt/exportnfs
 
 After mounted successfully, we could look into the mounted directory and look for information.
 <br>
-![](../assets/img/posts/2022-07-20-Full-Mounty-1.png)
+![](/assets/img/posts/2022-07-20-Full-Mounty-1.png)
 <br>
 The directory gave us our first flag as well as a `id_rsa` and `id_rsa.pub` file. `id_rsa` is useful for us as this file allow us to connect their ssh shell without having the need of their password. `id_rsa.pub` also gave us the username to connect their ssh shell.
 
@@ -131,17 +131,17 @@ Try: sudo apt-get install <selected package>
 ```
 Since this machine does not have `gcc` to compile the file, we will have to get a machine that have the same Linux kernel version and compile it then send it to the victim machine.
 <br>
-![](../assets/img/posts/2022-07-20-Full-Mounty-2.png)
+![](/assets/img/posts/2022-07-20-Full-Mounty-2.png)
 <br>
-![](../assets/img/posts/2022-07-20-Full-Mounty-3.png)
+![](/assets/img/posts/2022-07-20-Full-Mounty-3.png)
 <br>
 After that, let the exploit executable and run the file.
 <br>
-![](../assets/img/posts/2022-07-20-Full-Mounty-4.png)
+![](/assets/img/posts/2022-07-20-Full-Mounty-4.png)
 <br>
 After running the file, it will ask for new password. After typing the new password, `/etc/passwd` file will be changed and added a user named `firefart` and the password is based on the input given.
 <br>
-![](../assets/img/posts/2022-07-20-Full-Mounty-5.png)
+![](/assets/img/posts/2022-07-20-Full-Mounty-5.png)
 <br>
 Although the username is still firefart, we manage to get root account as the uid is 0.
 

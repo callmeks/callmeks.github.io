@@ -49,7 +49,8 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 # Method to solve the challenge
 After looking into the scan result, we will be starting off with website. 
 <br>
-![](../assets/img/posts/2022-09-05-Margheriti-Server-1.png)<br>
+![](/assets/img/posts/2022-09-05-Margheriti-Server-1.png)
+<br>
 After looking around with the website, we managed to found a suspicious subdirectory named `backup.zip`. After getting the file and extract, we found ourselves some interesting files.
 ```
 index.php    wp-activate.php     wp-comments-post.php  wp-content   wp-links-opml.php  wp-mail.php      wp-trackback.php
@@ -90,7 +91,7 @@ Query OK, 1 row affected (0.343 sec)
 ```
 With the SQL query, we managed to create remote code execution by creating a malicious php file.
 <br>
-![](../assets/img/posts/2022-09-05-Margheriti-Server-2.png)
+![](/assets/img/posts/2022-09-05-Margheriti-Server-2.png)
 <br>
 With this RCE, we are able to get a reverse shell.
 ```

@@ -40,7 +40,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 # Method to solve the challenge
 In this challenge, we will be starting off with their website.
 <br>
-![](../assets/img/posts/2022-08-01-GamingServer-1.png)
+![](/assets/img/posts/2022-08-01-GamingServer-1.png)
 <br>
 Running gobuster first might be useful as it need times to run and it might help us getting valuable information.
 ```
@@ -74,13 +74,13 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 ```
 With gobuster, we managed to found 2 interesting directories which is `secret` and `uploads`. 
 <br>
-![](../assets/img/posts/2022-08-01-GamingServer-2.png)
+![](/assets/img/posts/2022-08-01-GamingServer-2.png)
 <br>
-![](../assets/img/posts/2022-08-01-GamingServer-3.png)
+![](/assets/img/posts/2022-08-01-GamingServer-3.png)
 <br>
 From the directories, we managed to found a useful wordlist and a file which could be use to login into ssh server without a password.
 <br>
-![](../assets/img/posts/2022-08-01-GamingServer-4.png)
+![](/assets/img/posts/2022-08-01-GamingServer-4.png)
 <br>
 Not only that, we also managed to found a potential username from the source code of the website. Since we have so many information, we could try to ssh into their serverwith user `john` and hopefully getting shell.
 ```

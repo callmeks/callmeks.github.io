@@ -43,7 +43,7 @@ Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
 # Method to solve the challenge
 As usual, we will start with website after checking for each version and confirmed that they are not vulnerable.
 <br>
-![](../assets/img/posts/2022-07-15-Year-Of-The-Rabbits-1.png) 
+![](/assets/img/posts/2022-07-15-Year-Of-The-Rabbits-1.png) 
 <br>
 The website is just a normal default page. Since there are nothing much to search, we will be using `gobuster` to search for subdirectories in the website.
 ```
@@ -75,15 +75,15 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 ```
 Based on the result, `/assets/` seems to be only tip which might allow us to continue our challenge. 
 <br>
-![](../assets/img/posts/2022-07-15-Year-Of-The-Rabbits-2.png)
+![](/assets/img/posts/2022-07-15-Year-Of-The-Rabbits-2.png)
 <br>
 The mp4 file is really RickRolled and therefore we are only able to continue with the CSS file. 
 <br>
-![](../assets/img/posts/2022-07-15-Year-Of-The-Rabbits-3.png)
+![](/assets/img/posts/2022-07-15-Year-Of-The-Rabbits-3.png)
 <br>
 Inside the CSS file, there is our next tip which is giving us a hidden file named `/sup3r_s3cr3t_fl4g.php`. When we redirect to the file, it pop ups a message as below and we got rick rolled again! 
 <br>
-![](../assets/img/posts/2022-07-15-Year-Of-The-Rabbits-4.png) 
+![](/assets/img/posts/2022-07-15-Year-Of-The-Rabbits-4.png) 
 <br>
 Since it asked us to turn off javascript, we can either use `burpsuite` or `curl` to look for our next tips.
 ```
@@ -97,7 +97,7 @@ Content-Type: text/html; charset=UTF-8
 ```
 Our next tips was another hidden directory which is `/WExYY2Cv-qU`. When we redirect into the hidden directory, it was only a image there.
 <br>
-![](../assets/img/posts/2022-07-15-Year-Of-The-Rabbits-5.png)
+![](/assets/img/posts/2022-07-15-Year-Of-The-Rabbits-5.png)
 <br>
 Since we have no other clue, the image might have some clues since there are a lot of CTF out there which hide data inside images. After exploring with the image, there is a wonderful tip for us to proceed with our next session which is FTP.
 
@@ -222,9 +222,9 @@ cat Eli\'s_Creds.txt
 ```
 After downloading the file and view the data inside, we saw some weird character which is not human language. Luckily, there is a [online tool](https://www.dcode.fr/cipher-identifier) out there which could help us to identify that is this and the content inside.
 <br>
-![](../assets/img/posts/2022-07-15-Year-Of-The-Rabbits-6.png)
+![](/assets/img/posts/2022-07-15-Year-Of-The-Rabbits-6.png)
 <br>
-![](../assets/img/posts/2022-07-15-Year-Of-The-Rabbits-7.png)
+![](/assets/img/posts/2022-07-15-Year-Of-The-Rabbits-7.png)
 <br>
 The content was huge as it gave us the credentials. The credentials was use to get shell from ssh but it is not a root account and we will need to perform privilege escalation.
 

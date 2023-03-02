@@ -41,11 +41,11 @@ No exact OS matches for host (test conditions non-ideal).
 # Method to solve the challenge
 We will be starting off with website. The website is only one page and we could not continue.
 <br>
-![](../assets/img/posts/2022-08-03-Wonderland-1.png)
+![](/assets/img/posts/2022-08-03-Wonderland-1.png)
 <br>
 Since we could not continue, we could always check their subdirectory with any directory enumeration tool. After looking for a while, we manage to found a secret information in one of the subdirectory.
 <br>
-![](../assets/img/posts/2022-08-03-Wonderland-2.png)
+![](/assets/img/posts/2022-08-03-Wonderland-2.png)
 <br>
 That looks like our ssh username and password.
 ```
@@ -96,7 +96,7 @@ lrwxrwxrwx 1 root   root       9 May 25  2020 .bash_history -> /dev/null
 ```
 In the user directory, we found one application which have suid binary which mean we could get other user or even root. 
 <br>
-![](../assets/img/posts/2022-08-03-Wonderland-3.png)
+![](/assets/img/posts/2022-08-03-Wonderland-3.png)
 <br>
 Although `cat` is not the best method, we somehow manage to see that the application is running date and it is not a absolute path. We could try to change `$PATH` and create a `date` in our path.
 ```
