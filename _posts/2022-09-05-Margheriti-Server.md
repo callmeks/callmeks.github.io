@@ -1,6 +1,6 @@
 ---
 title: Margheriti-Server
-category: [writeups,PwnTillDawn]
+categories: [writeups,PwnTillDawn]
 tags: [Linux,SQL-Query-Outfile,RCE,Reverse-Shell]
 ---
 # Margheriti-Server

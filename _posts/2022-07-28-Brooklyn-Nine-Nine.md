@@ -1,6 +1,6 @@
 ---
 title: Brooklyn Nine Nine
-category: [writeups,TryHackMe]
+categories: [writeups,TryHackMe]
 tags: [Linux,Privilege-Escalation,SSH]
 ---
 # Brooklyn Nine Nine

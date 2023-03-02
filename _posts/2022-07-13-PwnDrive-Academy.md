@@ -1,6 +1,6 @@
 ---
 title: PwnDrive Academy
-category: [writeups,PwnTillDawn]
+categories: [writeups,PwnTillDawn]
 tags: [Windows,PHP-Reverse-Shell]
 # date: 13/07/2022
 ---

@@ -1,6 +1,6 @@
 ---
 title: ElMariachi-PC 
-category: [writeups,PwnTillDawn]
+categories: [writeups,PwnTillDawn]
 tags: [Windows,ThinVnc]
 ---
 

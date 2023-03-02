@@ -1,7 +1,6 @@
 ---
-layout: post
 title: Stuntman Mike
-category: [writeups,PwnTillDawn]
+categories: [writeups,PwnTillDawn]
 tags: [Linux,Privilege Escalation,SSH]
 ---
 
@@ -14,7 +13,6 @@ tags: [Linux,Privilege Escalation,SSH]
 - [Nmap Result](#nmap-result)
 - [Method to solve the challenge](#method-to-solve-the-challenge)
 - [Privilege Escalation](#privilege-escalation)
-- [Flag](#flag)
 
 ## Nmap Result
 ```

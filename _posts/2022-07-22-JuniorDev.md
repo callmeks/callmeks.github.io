@@ -1,6 +1,6 @@
 ---
 title: JuniorDev
-category: [writeups,PwnTillDawn]
+categories: [writeups,PwnTillDawn]
 tags: [Linux,Privilege-Escalation,Brute-Force-HTTP,Jenkins,Python-Reverse-Shell]
 ---
 # JuniorDev

@@ -1,6 +1,6 @@
 ---
 title: GamingServer
-category: [writeups,TryHackMe]
+categories: [writeups,TryHackMe]
 tags: [Linux,Privilege-Escalation,ssh2john,lxd]
 ---
 

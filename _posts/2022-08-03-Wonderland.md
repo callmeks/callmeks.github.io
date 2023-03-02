@@ -1,6 +1,6 @@
 ---
 title: Wonderland
-category: [writeups,TryHackMe]
+categories: [writeups,TryHackMe]
 tags: [Linux,Privilege-Escalation,Perl-Capabilities]
 ---
 

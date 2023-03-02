@@ -1,6 +1,6 @@
 ---
 title: Year Of The Rabbits
-category: [writeups,TryHackMe]
+categories: [writeups,TryHackMe]
 tags: [Linux,Privilege-Escalation,Steganography,Sudo-Exploit]
 # date: 13/07/2022
 ---

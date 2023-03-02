@@ -1,7 +1,6 @@
 ---
-layout: post
 title: Full Mounty
-category: [writeups,PwnTillDawn]
+categories: [writeups,PwnTillDawn]
 tags: [Linux,Privilege-Escalation,SSH,Linux-Kernel-Exploit]
 ---
 # Full Mounty

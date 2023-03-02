@@ -1,6 +1,6 @@
 ---
 title: Year Of The Fox
-category: [writeups,TryHackMe]
+categories: [writeups,TryHackMe]
 tags: [Linux,Privilege-Escalation,Reverse-Shell,Sudoer-File-Misconfiguration]
 ---
 # Year Of The Fox 

@@ -1,6 +1,6 @@
 ---
 title: Hollywood
-category: [writeups,PwnTillDawn]
+categories: [writeups,PwnTillDawn]
 tags: [Windows,ActiveMQ]
 ---
 # Hollywood
