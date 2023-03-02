@@ -1,26 +1,16 @@
 ---
-layout: post
 title: Brooklyn Nine Nine
-subtitle: Challenge
-tags: [TryHackMe,Easy,Linux,Privilege Escalation,Brute Force SSH]
+category: [writeups,TryHackMe]
+tags: [Linux,Privilege-Escalation,SSH]
 ---
 # Brooklyn Nine Nine
 - Difficulty : `Easy`
 - Operating System : `Linux`
 
 # Table of Content
-- [Rustscan result](#rustscan-result)
 - [Nmap Result](#nmap-result)
 - [Method to solve the challenge](#method-to-solve-the-challenge)
 - [Privilege Escalation](#privilege-escalation)
-- [Flag](#flag)
-
-## Rustscan Result
-```
-Open 10.10.14.0:22
-Open 10.10.14.0:21
-Open 10.10.14.0:80
-```
 
 ## Nmap Result
 ```
@@ -130,12 +120,4 @@ uid=0(root) gid=0(root) groups=0(root)
 ```
 That is how we got our root privilege.
 
-# Flag
-user.txt:
-<br>
-![image](https://user-images.githubusercontent.com/88197307/181453847-2c63263e-d3c9-4ed2-9eab-9614bcd73cda.png)
-<br>
-root.txt:
-<br>
-![image](https://user-images.githubusercontent.com/88197307/181453894-11a029f6-88d1-4723-8955-91314ccc5b4d.png)
-<br>
+

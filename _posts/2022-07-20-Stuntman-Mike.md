@@ -1,26 +1,20 @@
 ---
 layout: post
 title: Stuntman Mike
-subtitle: 10.150.150.166
-tags: [PwnTillDawn,Easy,Linux,Privilege Escalation,SSH]
+category: [writeups,PwnTillDawn]
+tags: [Linux,Privilege Escalation,SSH]
 ---
+
 # Stuntman Mike
 - Difficulty : `easy`
 - IP Address : `10.150.150.166`
 - Operating System : `Linux`
 
 # Table of Content
-- [Rustscan result](#rustscan-result)
 - [Nmap Result](#nmap-result)
 - [Method to solve the challenge](#method-to-solve-the-challenge)
 - [Privilege Escalation](#privilege-escalation)
 - [Flag](#flag)
-
-## Rustscan Result
-```
-Open 10.150.150.166:22
-Open 10.150.150.166:8089
-```
 
 ## Nmap Result
 ```
@@ -144,10 +138,3 @@ root@stuntmanmike:~# id
 uid=0(root) gid=0(root) groups=0(root)
 ```
 We then managed to get our root account.
-
-# Flag
-Flag 35: <br> ![image](https://user-images.githubusercontent.com/88197307/179914362-ebedf113-b9e2-47b1-ad15-739160fa6a71.png)
-<br>
-Flag 36: <br> ![image](https://user-images.githubusercontent.com/88197307/179914432-cec8ae0f-0773-42db-ab95-6a1eec32041c.png)
-<br>
-Flag 37: <br> ![image](https://user-images.githubusercontent.com/88197307/179914501-fdbe0cab-d676-4141-b47b-ab98d8c46193.png)

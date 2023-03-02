@@ -1,9 +1,9 @@
 ---
-layout: post
 title: Wonderland
-subtitle: Challenge
-tags: [TryHackMe,Medium,Linux,Privilege Escalation,Perl Capabilities]
+category: [writeups,TryHackMe]
+tags: [Linux,Privilege-Escalation,Perl-Capabilities]
 ---
+
 # Wonderland
 - Difficulty : `Medium`
 - Operating System : `Linux`
@@ -41,11 +41,11 @@ No exact OS matches for host (test conditions non-ideal).
 # Method to solve the challenge
 We will be starting off with website. The website is only one page and we could not continue.
 <br>
-![image](https://user-images.githubusercontent.com/88197307/182575590-b0c9ae43-bcea-4952-8616-4a598786562e.png)
+![](../assets/img/posts/2022-08-03-Wonderland-1.png)
 <br>
 Since we could not continue, we could always check their subdirectory with any directory enumeration tool. After looking for a while, we manage to found a secret information in one of the subdirectory.
 <br>
-![image](https://user-images.githubusercontent.com/88197307/182576335-aa214a7e-e6de-49f4-8f72-2021065cf4ce.png)
+![](../assets/img/posts/2022-08-03-Wonderland-2.png)
 <br>
 That looks like our ssh username and password.
 ```
@@ -96,7 +96,7 @@ lrwxrwxrwx 1 root   root       9 May 25  2020 .bash_history -> /dev/null
 ```
 In the user directory, we found one application which have suid binary which mean we could get other user or even root. 
 <br>
-![image](https://user-images.githubusercontent.com/88197307/182579395-8286916f-31ee-4634-be41-0cf4a07ca8d8.png)
+![](../assets/img/posts/2022-08-03-Wonderland-3.png)
 <br>
 Although `cat` is not the best method, we somehow manage to see that the application is running date and it is not a absolute path. We could try to change `$PATH` and create a `date` in our path.
 ```

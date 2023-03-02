@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Full Mounty
-subtitle: 10.150.150.134
-tags: [PwnTillDawn,Easy,Linux,Privilege Escalation,SSH Without Password,Linux Kernel Exploit]
+category: [writeups,PwnTillDawn]
+tags: [Linux,Privilege-Escalation,SSH,Linux-Kernel-Exploit]
 ---
 # Full Mounty
 - Difficulty : `easy`
@@ -10,22 +10,9 @@ tags: [PwnTillDawn,Easy,Linux,Privilege Escalation,SSH Without Password,Linux Ke
 - Operating System : `Linux`
 
 # Table of Content
-- [Rustscan result](#rustscan-result)
 - [Nmap Result](#nmap-result)
 - [Method to solve the challenge](#method-to-solve-the-challenge)
 - [Privilege Escalation](#privilege-escalation)
-- [Flag](#flag)
-
-## Rustscan Result
-```
-Open 10.150.150.134:22
-Open 10.150.150.134:111
-Open 10.150.150.134:2049
-Open 10.150.150.134:8089
-Open 10.150.150.134:34154
-Open 10.150.150.134:40110
-Open 10.150.150.134:45783
-```
 
 ## Nmap Result
 ```
@@ -85,13 +72,16 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 ```
 
 # Method to solve the challenge
-In this challenge, we will starting off with port 2049 also known as nfs. This is a port which share specific directory to other machine. We could check if there is any shared directory by using `showmount -e`. Click [here](https://book.hacktricks.xyz/network-services-pentesting/nfs-service-pentesting) for more infomartion.
+In this challenge, we will starting off with port 2049 also known as nfs. This is a port which share specific directory to other machine. We could check if there is any shared directory by using `showmount -e`. Click [here](https://book.hacktricks.xyz/network-services-pentesting/nfs-service-pentesting) for more information.
+
 ```
 showmount -e 10.150.150.134
 Export list for 10.150.150.134:
 /srv/exportnfs 10.0.0.0/8
 ```
+
 Based on the result, anyone with ip address within 10.0.0/8 is allow to connect `/srv/exportnfs`. Since our vpn is within the ip address, we could try to connect with it by using `mount`.
+
 ```
 mount -v -o vers=3 10.150.150.134:/srv/exportnfs /mnt/exportnfs
 
@@ -99,11 +89,13 @@ mount -v -o vers=3 10.150.150.134:/srv/exportnfs /mnt/exportnfs
 -v = verbose
 -o = version 
 ```
+
 After mounted successfully, we could look into the mounted directory and look for information.
 <br>
-![image](https://user-images.githubusercontent.com/88197307/179898486-32f474d5-cae6-4b1b-9fbe-4a8dfed7f440.png)
+![](../assets/img/posts/2022-07-20-Full-Mounty-1.png)
 <br>
 The directory gave us our first flag as well as a `id_rsa` and `id_rsa.pub` file. `id_rsa` is useful for us as this file allow us to connect their ssh shell without having the need of their password. `id_rsa.pub` also gave us the username to connect their ssh shell.
+
 ```
 cat id_rsa.pub 
 ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAucbPtwj/Ot2rkrMxBSo63gnu8cUE2NboLy226zUjXwdeSLsh9WPfON/atMJCg/uMcvlpo598E/qUsAJq3TTJTYbdMkVSH3ArxUI0gN9rNVeOOs+MBFqfXYhfyLCFv+wtKyYDMeOxTE63hhEdbKVcGLCW8qhp6yORE7CcDnXqcCP5mJHlKdUqC9VBiYzcOzcKqSh6eCpfraKGsXqOcVvHVMgK8TB/JEHxkIZY2nxEl1WC62LKctEx0ZV7KTgJHhpWy1wyiPir4FOSPWUvUZDGv15B3D/M6UCRIguFllFerAacFVPW7SmKdtV3p4+HY3H1clAsWoLJiV1DRiBxoqZgEQ== 
@@ -139,28 +131,19 @@ Try: sudo apt-get install <selected package>
 ```
 Since this machine does not have `gcc` to compile the file, we will have to get a machine that have the same Linux kernel version and compile it then send it to the victim machine.
 <br>
-![image](https://user-images.githubusercontent.com/88197307/179900221-ba75788c-6840-4cea-b4d6-b76660e5a866.png)
+![](../assets/img/posts/2022-07-20-Full-Mounty-2.png)
 <br>
-![image](https://user-images.githubusercontent.com/88197307/179900283-c3009ee3-45ce-49d8-bc62-765a2f8fd894.png)
+![](../assets/img/posts/2022-07-20-Full-Mounty-3.png)
 <br>
 After that, let the exploit executable and run the file.
 <br>
-![image](https://user-images.githubusercontent.com/88197307/179900379-567ca3d0-c359-493e-97ca-0802bf09ea0f.png)
+![](../assets/img/posts/2022-07-20-Full-Mounty-4.png)
 <br>
 After running the file, it will ask for new password. After typing the new password, `/etc/passwd` file will be changed and added a user named `firefart` and the password is based on the input given.
 <br>
-![image](https://user-images.githubusercontent.com/88197307/179900578-fa56126d-5f39-41e9-a60b-103a3efff9af.png)
+![](../assets/img/posts/2022-07-20-Full-Mounty-5.png)
 <br>
 Although the username is still firefart, we manage to get root account as the uid is 0.
 
-# Flag
-Flag 49: <br>
-![image](https://user-images.githubusercontent.com/88197307/179903162-49cc168d-de78-47af-8187-5a584abb03c3.png)
-<br>
-Flag 50: <br>
-![image](https://user-images.githubusercontent.com/88197307/179903194-1e4b429a-3819-4103-81ae-01c3388f731e.png)
-<br>
-Flag 51: <br>
-![image](https://user-images.githubusercontent.com/88197307/179903220-7d71eee6-1137-4133-9d5b-37d704cdc897.png)
 
 

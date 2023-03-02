@@ -1,8 +1,7 @@
 ---
-layout: post
 title: PwnDrive Academy
-subtitle: 10.150.150.11
-tags: [PwnTillDawn,Easy,Windows,PHP Reverse Shell]
+category: [writeups,PwnTillDawn]
+tags: [Windows,PHP-Reverse-Shell]
 # date: 13/07/2022
 ---
 # PwnDrive Academy 
@@ -11,31 +10,9 @@ tags: [PwnTillDawn,Easy,Windows,PHP Reverse Shell]
 - Operating System : `Windows`
 
 # Table of Content
-- [Rustscan result](#rustscan-result)
 - [Nmap Result](#nmap-result)
 - [Method to solve the challenge](#method-to-solve-the-challenge)
-- [Flag](#flag)
 
-
-## Rustscan result
-```
-Open 10.150.150.11:21
-Open 10.150.150.11:80
-Open 10.150.150.11:135
-Open 10.150.150.11:139
-Open 10.150.150.11:443
-Open 10.150.150.11:445
-Open 10.150.150.11:1433
-Open 10.150.150.11:3306
-Open 10.150.150.11:3389
-Open 10.150.150.11:49152
-Open 10.150.150.11:49155
-Open 10.150.150.11:49154
-Open 10.150.150.11:49153
-Open 10.150.150.11:49156
-Open 10.150.150.11:49157
-Open 10.150.150.11:49192
-```
 ## Nmap Result
 ```
 Nmap scan report for 10.150.150.11
@@ -270,45 +247,30 @@ Nmap done: 1 IP address (1 host up) scanned in 130.10 seconds
   
 # Method to solve the challenge
 - For starters, always look out for port 80 which is website of the ip address.
-- ![image](https://user-images.githubusercontent.com/88197307/178403372-eb197fb4-ec11-4f76-a401-d27c88990a90.png)
+- ![](../assets/img/posts/2022-07-13-PwnDrive-Academy-1.png)
 - Since there is a login page, look into it and try to get access into the website by using SQL injection, default credentials or simple credentials such as `admin:admin`
 - In this challenge, SQL injection is hard to perform as it detect `=` sign.
-- ![image](https://user-images.githubusercontent.com/88197307/178403643-42017034-c54e-4374-ae5e-04b5fda13762.png)
+- ![](../assets/img/posts/2022-07-13-PwnDrive-Academy-2.png)
 - Since simple SQL injection is unable to perform, try the other easy method first before moving on to some harder technique.
 - Simple credentials `admin:admin` is able to login into the system
-- ![image](https://user-images.githubusercontent.com/88197307/178403959-218b3b91-c8e3-4f6c-84a4-ac1e5449d532.png)
+- ![](../assets/img/posts/2022-07-13-PwnDrive-Academy-3.png)
 - In this page, the admin is allowed to upload images to the web server. 
 - Since it is able to upload images, it might have a chance to spawn reverse shell by uploading a malicious php file into the web server.
-- ![image](https://user-images.githubusercontent.com/88197307/178404365-b0de533b-404f-4c10-9446-5b3bcaaff57f.png)
+- ![](../assets/img/posts/2022-07-13-PwnDrive-Academy-4.png)
 - The malicious php file was able to upload successfully.
 - Since it is uploaded, clicking the php file to make it run and it should provides a reverse shell.
 - *remember to use `nc -nvlp [port]` when setting up for reverse shell
 - The only thing the remains are the paths which will redirected us to the uploaded php file.
 - When user clicked the view button from the personal files, it will redirected us to a page which show us the source code of the file but will not triggered.
-- ![image](https://user-images.githubusercontent.com/88197307/178405128-9bd1401d-e4dc-42d3-9d4d-cb9d039548f8.png)
+- ![](../assets/img/posts/2022-07-13-PwnDrive-Academy-5.png)
 - Based on the url, it is redirecting us to another directory which might be the place that saves the uploaded php file. 
-- ![image](https://user-images.githubusercontent.com/88197307/178405232-2dc38260-dc31-44cf-8537-a0f151ec06e0.png)
+- ![](../assets/img/posts/2022-07-13-PwnDrive-Academy-6.png)
 - The php file was there when the path has changed.
-- ![image](https://user-images.githubusercontent.com/88197307/178405331-94a42f38-ef84-4b36-a0dd-cb0639a4f09b.png)
-- ![image](https://user-images.githubusercontent.com/88197307/178405365-e30c36e3-751d-489c-9876-5216a42b89fc.png)
+- ![](../assets/img/posts/2022-07-13-PwnDrive-Academy-7.png)
+- !![](../assets/img/posts/2022-07-13-PwnDrive-Academy-8.png)
 - The php file was unable to return a reverse shell.
 - This is because the php reverse shell is specifically created for linux machine and windows machines will not able to spawn a reverse shell.
 - The solution to this is either chaning the source code of the php file or each online for another [php reverse shell for windows](https://github.com/Dhayalanb/windows-php-reverse-shell/blob/master/Reverse%20Shell.php).
 - After uploading it the same method and run the php file, the reverse shell was managed to spawn.
-- ![image](https://user-images.githubusercontent.com/88197307/178405910-28b399a9-7250-4baa-97cb-dd70d6e7cc7e.png)
+- ![](../assets/img/posts/2022-07-13-PwnDrive-Academy-9.png)
 - The reverse shell is spawn for user `authority\system` which is also root privilege and therefore no privilege escalation is needed.
-
-# Flag
-- Flag 1: 
-- ![image](https://user-images.githubusercontent.com/88197307/178406206-8fb5414f-d76d-41a1-a069-13229ae5df8f.png)
-
-
-
-
-
-
-
-
-
-
-

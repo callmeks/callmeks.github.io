@@ -1,25 +1,17 @@
 ---
-layout: post
 title: GamingServer
-subtitle: Challenge
-tags: [TryHackMe,Easy,Linux,Privilege Escalation,ssh2john,lxd]
+category: [writeups,TryHackMe]
+tags: [Linux,Privilege-Escalation,ssh2john,lxd]
 ---
+
 # GamingServer
 - Difficulty : `Easy`
 - Operating System : `Linux`
 
 # Table of Content
-- [Rustscan result](#rustscan-result)
 - [Nmap Result](#nmap-result)
 - [Method to solve the challenge](#method-to-solve-the-challenge)
 - [Privilege Escalation](#privilege-escalation)
-- [Flag](#flag)
-
-## Rustscan Result
-```
-Open 10.10.60.239:80
-Open 10.10.60.239:22
-```
 
 ## Nmap Result
 ```
@@ -48,7 +40,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 # Method to solve the challenge
 In this challenge, we will be starting off with their website.
 <br>
-![image](https://user-images.githubusercontent.com/88197307/182110452-0df150fe-2f9b-473f-ab88-4c24d424c572.png)
+![](../assets/img/posts/2022-08-01-GamingServer-1.png)
 <br>
 Running gobuster first might be useful as it need times to run and it might help us getting valuable information.
 ```
@@ -82,13 +74,13 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 ```
 With gobuster, we managed to found 2 interesting directories which is `secret` and `uploads`. 
 <br>
-![image](https://user-images.githubusercontent.com/88197307/182112093-3fe9903b-4cdb-42ba-b409-d3644ab63080.png)
+![](../assets/img/posts/2022-08-01-GamingServer-2.png)
 <br>
-![image](https://user-images.githubusercontent.com/88197307/182112142-a4f4c6f6-75b0-4b55-85a8-d5ecd508165f.png)
+![](../assets/img/posts/2022-08-01-GamingServer-3.png)
 <br>
 From the directories, we managed to found a useful wordlist and a file which could be use to login into ssh server without a password.
 <br>
-![image](https://user-images.githubusercontent.com/88197307/182112452-0b04ce48-610b-45dd-9ad6-c1f252d11dc5.png)
+![](../assets/img/posts/2022-08-01-GamingServer-4.png)
 <br>
 Not only that, we also managed to found a potential username from the source code of the website. Since we have so many information, we could try to ssh into their serverwith user `john` and hopefully getting shell.
 ```
@@ -207,13 +199,3 @@ john@exploitable:/tmp$ lxc exec callmeks /bin/sh
 uid=0(root) gid=0(root)
 ```
 Thats how we got our root! the main directory will be placed at `/mnt/root`.
-
-# Flag
-user.txt: 
-<br>
-![image](https://user-images.githubusercontent.com/88197307/182118100-85615fc9-a0ae-4649-bab5-45912c0df34c.png)
-<br>
-root.txt:
-<br>
-![image](https://user-images.githubusercontent.com/88197307/182118205-81851d3e-f14a-4e74-8106-53d8bc9ae441.png)
-<br>

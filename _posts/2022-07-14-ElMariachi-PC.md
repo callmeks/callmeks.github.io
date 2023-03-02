@@ -1,8 +1,7 @@
 ---
-layout: post
 title: ElMariachi-PC 
-subtitle: 10.150.150.69
-tags: [PwnTillDawn,Easy,Windows,ThinVnc]
+category: [writeups,PwnTillDawn]
+tags: [Windows,ThinVnc]
 ---
 
 # Portal
@@ -11,19 +10,8 @@ tags: [PwnTillDawn,Easy,Windows,ThinVnc]
 - Operating System : `Windows`
 
 # Table of Content
-- [Rustscan result](#rustscan-result)
 - [Nmap Result](#nmap-result)
 - [Method to solve the challenge](#method-to-solve-the-challenge)
-- [Flag](#flag)
-
-## Rustscan Result
-```
-Open 10.150.150.69:139
-Open 10.150.150.69:135
-Open 10.150.150.69:445
-Open 10.150.150.69:3389
-Open 10.150.150.69:60000
-```
 
 ## Nmap Result
 ```
@@ -136,16 +124,19 @@ Nmap done: 1 IP address (1 host up) scanned in 152.47 seconds
 ```
 
 # Method to solve the challenge
-This challenge was stated easy but it is abit difficult compared to the previous machine that i have done. In this machine, the web server was hosted at port 60000 but it required username and password to further access. <br>
-![image](https://user-images.githubusercontent.com/88197307/178955050-9c3521db-0c11-4083-845b-4965859a1297.png) <br>
-After looking around for my tips, i found out a great tip which is `ThinVnc`. This is a great tips for me as it is vulnerable. `ThinVnc` is vulnerable and it will somehow return the username and password needed to login into the web server. <br>
-![image](https://user-images.githubusercontent.com/88197307/178955293-e251b538-6fc3-458a-9694-ccb9de5a0c05.png) <br>
-By intercepting the request and resend it with burpsuite, we managed to get the credentials `desperado:TooComplicatedToGuessMeAhahahahahahahh` Since we have the credentials, we can continue to move on and login into the web server. <br>
-![image](https://user-images.githubusercontent.com/88197307/178955551-fe32008e-9ae3-4d06-8ed1-3284ad7fe67f.png) <br>
-After login into the web server, i have no idea what to do and i just clicked connect button. It appears to be a rdp which spawn a computer inside the browser. The flag is just inside the browser. <br>
-![image](https://user-images.githubusercontent.com/88197307/178956032-aa7b2993-deaa-4ee3-8de1-7dd9555495f2.png)<br>
-
-
-# Flag
-Flag 67: <br>
-![image](https://user-images.githubusercontent.com/88197307/178956124-fcbe6494-b32c-4f0f-a942-50c3da285d5d.png)
+This challenge was stated easy but it is abit difficult compared to the previous machine that i have done. In this machine, the web server was hosted at port 60000 but it required username and password to further access.
+<br>
+![](../assets/img/posts/2022-07-14-ElMariachi-PC-1.png) 
+<br>
+After looking around for my tips, i found out a great tip which is `ThinVnc`. This is a great tips for me as it is vulnerable. `ThinVnc` is vulnerable and it will somehow return the username and password needed to login into the web server.
+<br>
+![](../assets/img/posts/2022-07-14-ElMariachi-PC-2.png)
+<br>
+By intercepting the request and resend it with burpsuite, we managed to get the credentials `desperado:TooComplicatedToGuessMeAhahahahahahahh` Since we have the credentials, we can continue to move on and login into the web server. 
+<br>
+![](../assets/img/posts/2022-07-14-ElMariachi-PC-3.png)
+<br>
+After login into the web server, i have no idea what to do and i just clicked connect button. It appears to be a rdp which spawn a computer inside the browser. The flag is just inside the browser. 
+<br>
+![](../assets/img/posts/2022-07-14-ElMariachi-PC-4.png)
+<br>

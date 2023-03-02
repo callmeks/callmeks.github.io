@@ -1,8 +1,7 @@
 ---
-layout: post
 title: Hollywood
-subtitle: 10.150.150.219
-tags: [PwnTillDawn,Easy,Windows,ActiveMQ]
+category: [writeups,PwnTillDawn]
+tags: [Windows,ActiveMQ]
 ---
 # Hollywood
 - Difficulty : `easy`
@@ -10,39 +9,9 @@ tags: [PwnTillDawn,Easy,Windows,ActiveMQ]
 - Operating System : `Windows`
 
 # Table of Content
-- [Rustscan result](#rustscan-result)
 - [Nmap Result](#nmap-result)
 - [Method to solve the challenge](#method-to-solve-the-challenge)
-- [Flag](#flag)
 
-## Rustscan Result
-```
-Open 10.150.150.219:25
-Open 10.150.150.219:21
-Open 10.150.150.219:80
-Open 10.150.150.219:106
-Open 10.150.150.219:79
-Open 10.150.150.219:105
-Open 10.150.150.219:110
-Open 10.150.150.219:135
-Open 10.150.150.219:139
-Open 10.150.150.219:143
-Open 10.150.150.219:443
-Open 10.150.150.219:445
-Open 10.150.150.219:554
-Open 10.150.150.219:1883
-Open 10.150.150.219:2224
-Open 10.150.150.219:2869
-Open 10.150.150.219:3306
-Open 10.150.150.219:5672
-Open 10.150.150.219:8009
-Open 10.150.150.219:8161
-Open 10.150.150.219:10243
-Open 10.150.150.219:49153
-Open 10.150.150.219:49157
-Open 10.150.150.219:49155
-Open 10.150.150.219:49251
-```
 
 ## Nmap Result
 ```
@@ -186,7 +155,7 @@ Host script results:
 # Method to solve the challenge
 In this challenge, we will be focusing on website on port 8161 instead of port 80. This is because the website on port 8161 is running `ActiveMQ` which contains a vulnerability which get us a shell.
 <br>
-![image](https://user-images.githubusercontent.com/88197307/180158458-ca0c753e-f230-42d7-ad1c-deae91a9786e.png)
+![](../assets/img/posts/2022-07-21-Hollywood-1.png)
 <br>
 In this challenge we will be using metasploit to get the shell.
 ```
@@ -238,14 +207,6 @@ Server username: User
 ```
 With simple help of metasploit, we are able to get our shell. Although we are not root in the given shell, we will not perform privilege escalation as the flag is readable by current user.
 
-# Flag
-Flag 9: <br>
-![image](https://user-images.githubusercontent.com/88197307/180159639-d9116a8a-acf3-450c-9f44-63dae0b8b242.png)
-<br>
-Flag 30: <br>
-![image](https://user-images.githubusercontent.com/88197307/180159913-3a223afb-7675-40e1-a430-b2b6217661fd.png)
-<br>
-Flag 33: <br>
-![image](https://user-images.githubusercontent.com/88197307/180159775-092b51d6-39f7-4db7-b305-5f3fc0839676.png)
+
 
 

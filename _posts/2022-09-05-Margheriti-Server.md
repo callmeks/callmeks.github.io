@@ -1,8 +1,7 @@
 ---
-layout: post
 title: Margheriti-Server
-subtitle: 10.150.150.145
-tags: [PwnTillDawn,Medium,Linux,SQL Query Outfile,Remote Code Execution,Reverse Shell]
+category: [writeups,PwnTillDawn]
+tags: [Linux,SQL-Query-Outfile,RCE,Reverse-Shell]
 ---
 # Margheriti-Server
 - Difficulty : `Medium`
@@ -12,7 +11,6 @@ tags: [PwnTillDawn,Medium,Linux,SQL Query Outfile,Remote Code Execution,Reverse 
 # Table of Content
 - [Nmap Result](#nmap-result)
 - [Method to solve the challenge](#method-to-solve-the-challenge)
-- [Flag](#flag)
 
 # Nmap Result
 ```
@@ -51,8 +49,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 # Method to solve the challenge
 After looking into the scan result, we will be starting off with website. 
 <br>
-![image](https://user-images.githubusercontent.com/88197307/188355593-a77bbf32-2bd9-42f9-94a7-f35046449c04.png)
-<br>
+![](../assets/img/posts/2022-09-05-Margheriti-Server-1.png)<br>
 After looking around with the website, we managed to found a suspicious subdirectory named `backup.zip`. After getting the file and extract, we found ourselves some interesting files.
 ```
 index.php    wp-activate.php     wp-comments-post.php  wp-content   wp-links-opml.php  wp-mail.php      wp-trackback.php
@@ -93,7 +90,7 @@ Query OK, 1 row affected (0.343 sec)
 ```
 With the SQL query, we managed to create remote code execution by creating a malicious php file.
 <br>
-![image](https://user-images.githubusercontent.com/88197307/188357461-e6f1c412-6fc4-499d-bfa7-a355407e8995.png)
+![](../assets/img/posts/2022-09-05-Margheriti-Server-2.png)
 <br>
 With this RCE, we are able to get a reverse shell.
 ```
@@ -107,25 +104,4 @@ www-data
 ```
 We managed to get a reverse shell but it is not a root account. We will not continue privilege escalation as we managed to get all flag without root account.
 
-# Flag
-Flag 6:
-<br>
-![image](https://user-images.githubusercontent.com/88197307/188360714-7aeb1ced-0bae-411b-a913-62e921e831bd.png)
-<br>
-Flag 14:
-<br>
-![image](https://user-images.githubusercontent.com/88197307/188359962-4fdc0731-4355-4bb4-a3fd-6072e371cf27.png)
-<br>
-Flag 22:
-<br>
-![image](https://user-images.githubusercontent.com/88197307/188360401-fcc35bc9-4189-49c7-a5fb-e81e56da87ba.png)
-<br>
-Flag 23:
-<br>
-![image](https://user-images.githubusercontent.com/88197307/188360846-bf96e074-b56e-4a17-95f6-25b63fd736a5.png)
-<br>
-Flag 32:
-<br>
-![image](https://user-images.githubusercontent.com/88197307/188360291-9715c142-5451-421d-b073-d1fa3d16f8b9.png)
-<br>
 

