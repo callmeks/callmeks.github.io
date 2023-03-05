@@ -1,6 +1,10 @@
 #  The contact options.
 
 -
+  type: youtube
+  icon: 'fab fa-youtube'
+  url: 'https://www.youtube.com/@callmeks24'
+-
   type: github
   icon: 'fab fa-github'
 -
@@ -28,8 +32,3 @@
 #   type: stack-overflow
 #   icon: 'fab fa-stack-overflow'
 #   url:  ''                  # Fill with your stackoverflow homepage
-
--
-  type: youtube
-  icon: 'fab fa-youtube'
-  url: 'www.youtube.com/@callmeks24'
