@@ -35,6 +35,8 @@ github:
 twitter:
   username: callmeks24            # change to your twitter username
 
+youtube:
+  username: callmeks24
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
@@ -42,10 +44,10 @@ social:
   email: kskingggg@gmail.com             # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/callmeks24      # change to your twitter homepage
+    # - https://twitter.com/callmeks24      # change to your twitter homepage
     - https://github.com/callmeks       # change to your github homepage
     # Uncomment below to add more social links
-    - https://www.youtube.com/@callmeks24
+    # - https://www.youtube.com/@callmeks24
     # - https://www.linkedin.com/in/username
 
 google_site_verification:               # fill in to your verification string
