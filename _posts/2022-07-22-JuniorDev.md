@@ -11,10 +11,9 @@ tags: [b2r,Linux,Privilege-Escalation,Brute-Force-HTTP,Jenkins,Python-Reverse-Sh
 # Table of Content
 - [JuniorDev](#juniordev)
 - [Table of Content](#table-of-content)
-  - [Nmap Result](#nmap-result)
+- [Nmap Result](#nmap-result)
 - [Method to solve the challenge](#method-to-solve-the-challenge)
 - [Privilege Escalation](#privilege-escalation)
-
 
 # Nmap Result
 ```

@@ -3,6 +3,7 @@ title: Year Of The Fox
 categories: [writeups,TryHackMe]
 tags: [b2r,Linux,Privilege-Escalation,Reverse-Shell,Sudoer-File-Misconfiguration]
 ---
+
 # Year Of The Fox 
 - Difficulty : `Hard`
 - Series : `New Year Series`
@@ -11,7 +12,7 @@ tags: [b2r,Linux,Privilege-Escalation,Reverse-Shell,Sudoer-File-Misconfiguration
 # Table of Content
 - [Year Of The Fox](#year-of-the-fox)
 - [Table of Content](#table-of-content)
-  - [Nmap Result](#nmap-result)
+- [Nmap Result](#nmap-result)
 - [Method to solve the challenge](#method-to-solve-the-challenge)
 - [Privilege Escalation](#privilege-escalation)
 

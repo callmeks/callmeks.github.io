@@ -2,7 +2,6 @@
 title: Year Of The Rabbits
 categories: [writeups,TryHackMe]
 tags: [b2r,Linux,Privilege-Escalation,Steganography,Sudo-Exploit]
-# date: 13/07/2022
 ---
 # Year Of The Rabbits 
 - Difficulty : `easy`
@@ -12,7 +11,7 @@ tags: [b2r,Linux,Privilege-Escalation,Steganography,Sudo-Exploit]
 # Table of Content
 - [Year Of The Rabbits](#year-of-the-rabbits)
 - [Table of Content](#table-of-content)
-  - [Nmap Result](#nmap-result)
+- [Nmap Result](#nmap-result)
 - [Method to solve the challenge](#method-to-solve-the-challenge)
 - [Privilege Escalation](#privilege-escalation)
 
