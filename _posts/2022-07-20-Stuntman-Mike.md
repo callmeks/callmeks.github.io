@@ -1,7 +1,7 @@
 ---
 title: Stuntman Mike
 categories: [writeups,PwnTillDawn]
-tags: [Linux,Privilege Escalation,SSH]
+tags: [b2r,Linux,Privilege Escalation,SSH]
 ---
 
 # Stuntman Mike
@@ -10,11 +10,13 @@ tags: [Linux,Privilege Escalation,SSH]
 - Operating System : `Linux`
 
 # Table of Content
+- [Stuntman Mike](#stuntman-mike)
+- [Table of Content](#table-of-content)
 - [Nmap Result](#nmap-result)
-- [Method to solve the challenge](#method-to-solve-the-challenge)
+- [Method to solve this challenge](#method-to-solve-this-challenge)
 - [Privilege Escalation](#privilege-escalation)
 
-## Nmap Result
+# Nmap Result
 ```
 Nmap scan report for 10.150.150.166
 Host is up, received conn-refused (0.26s latency).

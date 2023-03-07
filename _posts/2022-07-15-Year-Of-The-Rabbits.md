@@ -1,7 +1,7 @@
 ---
 title: Year Of The Rabbits
 categories: [writeups,TryHackMe]
-tags: [Linux,Privilege-Escalation,Steganography,Sudo-Exploit]
+tags: [b2r,Linux,Privilege-Escalation,Steganography,Sudo-Exploit]
 # date: 13/07/2022
 ---
 # Year Of The Rabbits 
@@ -10,11 +10,13 @@ tags: [Linux,Privilege-Escalation,Steganography,Sudo-Exploit]
 - Operating System : `Linux`
 
 # Table of Content
-- [Nmap Result](#nmap-result)
+- [Year Of The Rabbits](#year-of-the-rabbits)
+- [Table of Content](#table-of-content)
+  - [Nmap Result](#nmap-result)
 - [Method to solve the challenge](#method-to-solve-the-challenge)
 - [Privilege Escalation](#privilege-escalation)
 
-## Nmap Result
+# Nmap Result
 ```
 Nmap scan report for 10.10.13.237
 Host is up, received syn-ack (0.33s latency).

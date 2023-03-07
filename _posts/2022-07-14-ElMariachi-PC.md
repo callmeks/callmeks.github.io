@@ -1,7 +1,7 @@
 ---
 title: ElMariachi-PC 
 categories: [writeups,PwnTillDawn]
-tags: [Windows,ThinVnc]
+tags: [b2r,Windows,ThinVnc]
 ---
 
 # Portal
@@ -10,10 +10,12 @@ tags: [Windows,ThinVnc]
 - Operating System : `Windows`
 
 # Table of Content
+- [Portal](#portal)
+- [Table of Content](#table-of-content)
 - [Nmap Result](#nmap-result)
 - [Method to solve the challenge](#method-to-solve-the-challenge)
 
-## Nmap Result
+# Nmap Result
 ```
 Nmap scan report for 10.150.150.69
 Host is up, received conn-refused (0.26s latency).

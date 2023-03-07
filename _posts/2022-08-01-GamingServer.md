@@ -1,7 +1,7 @@
 ---
 title: GamingServer
 categories: [writeups,TryHackMe]
-tags: [Linux,Privilege-Escalation,ssh2john,lxd]
+tags: [b2r,Linux,Privilege-Escalation,ssh2john,lxd]
 ---
 
 # GamingServer
@@ -9,11 +9,13 @@ tags: [Linux,Privilege-Escalation,ssh2john,lxd]
 - Operating System : `Linux`
 
 # Table of Content
+- [GamingServer](#gamingserver)
+- [Table of Content](#table-of-content)
 - [Nmap Result](#nmap-result)
 - [Method to solve the challenge](#method-to-solve-the-challenge)
 - [Privilege Escalation](#privilege-escalation)
 
-## Nmap Result
+# Nmap Result
 ```
 Nmap scan report for 10.10.60.239                                                
 Host is up, received conn-refused (0.32s latency).                               

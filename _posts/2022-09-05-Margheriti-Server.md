@@ -1,7 +1,7 @@
 ---
 title: Margheriti-Server
 categories: [writeups,PwnTillDawn]
-tags: [Linux,SQL-Query-Outfile,RCE,Reverse-Shell]
+tags: [b2r,Linux,SQL-Query-Outfile,RCE,Reverse-Shell]
 ---
 # Margheriti-Server
 - Difficulty : `Medium`
@@ -9,6 +9,8 @@ tags: [Linux,SQL-Query-Outfile,RCE,Reverse-Shell]
 - Operating System : `Linux`
 
 # Table of Content
+- [Margheriti-Server](#margheriti-server)
+- [Table of Content](#table-of-content)
 - [Nmap Result](#nmap-result)
 - [Method to solve the challenge](#method-to-solve-the-challenge)
 

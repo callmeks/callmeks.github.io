@@ -1,7 +1,7 @@
 ---
 title: Full Mounty
 categories: [writeups,PwnTillDawn]
-tags: [Linux,Privilege-Escalation,SSH,Linux-Kernel-Exploit]
+tags: [b2r,Linux,Privilege-Escalation,SSH,Linux-Kernel-Exploit]
 ---
 # Full Mounty
 - Difficulty : `easy`
@@ -9,11 +9,13 @@ tags: [Linux,Privilege-Escalation,SSH,Linux-Kernel-Exploit]
 - Operating System : `Linux`
 
 # Table of Content
+- [Full Mounty](#full-mounty)
+- [Table of Content](#table-of-content)
 - [Nmap Result](#nmap-result)
 - [Method to solve the challenge](#method-to-solve-the-challenge)
 - [Privilege Escalation](#privilege-escalation)
 
-## Nmap Result
+# Nmap Result
 ```
 Nmap scan report for 10.150.150.134
 Host is up, received conn-refused (0.26s latency).

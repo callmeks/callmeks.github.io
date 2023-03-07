@@ -1,7 +1,7 @@
 ---
 title: JuniorDev
 categories: [writeups,PwnTillDawn]
-tags: [Linux,Privilege-Escalation,Brute-Force-HTTP,Jenkins,Python-Reverse-Shell]
+tags: [b2r,Linux,Privilege-Escalation,Brute-Force-HTTP,Jenkins,Python-Reverse-Shell]
 ---
 # JuniorDev
 - Difficulty : `Medium`
@@ -9,12 +9,14 @@ tags: [Linux,Privilege-Escalation,Brute-Force-HTTP,Jenkins,Python-Reverse-Shell]
 - Operating System : `Linux`
 
 # Table of Content
-- [Nmap Result](#nmap-result)
+- [JuniorDev](#juniordev)
+- [Table of Content](#table-of-content)
+  - [Nmap Result](#nmap-result)
 - [Method to solve the challenge](#method-to-solve-the-challenge)
 - [Privilege Escalation](#privilege-escalation)
 
 
-## Nmap Result
+# Nmap Result
 ```
 Nmap scan report for 10.150.150.38
 Host is up, received conn-refused (0.26s latency).

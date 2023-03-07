@@ -1,18 +1,20 @@
 ---
 title: Brooklyn Nine Nine
 categories: [writeups,TryHackMe]
-tags: [Linux,Privilege-Escalation,SSH]
+tags: [b2r,Linux,Privilege-Escalation,SSH]
 ---
 # Brooklyn Nine Nine
 - Difficulty : `Easy`
 - Operating System : `Linux`
 
 # Table of Content
+- [Brooklyn Nine Nine](#brooklyn-nine-nine)
+- [Table of Content](#table-of-content)
 - [Nmap Result](#nmap-result)
 - [Method to solve the challenge](#method-to-solve-the-challenge)
 - [Privilege Escalation](#privilege-escalation)
 
-## Nmap Result
+# Nmap Result
 ```
 Nmap scan report for 10.10.14.0
 Host is up, received syn-ack (0.36s latency).

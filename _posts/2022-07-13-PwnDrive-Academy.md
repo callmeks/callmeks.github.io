@@ -1,7 +1,7 @@
 ---
 title: PwnDrive Academy
 categories: [writeups,PwnTillDawn]
-tags: [Windows,PHP-Reverse-Shell]
+tags: [b2r,Windows,PHP-Reverse-Shell]
 # date: 13/07/2022
 ---
 # PwnDrive Academy 
@@ -10,10 +10,12 @@ tags: [Windows,PHP-Reverse-Shell]
 - Operating System : `Windows`
 
 # Table of Content
+- [PwnDrive Academy](#pwndrive-academy)
+- [Table of Content](#table-of-content)
 - [Nmap Result](#nmap-result)
 - [Method to solve the challenge](#method-to-solve-the-challenge)
 
-## Nmap Result
+# Nmap Result
 ```
 Nmap scan report for 10.150.150.11
 Host is up, received syn-ack (0.25s latency).

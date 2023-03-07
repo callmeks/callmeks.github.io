@@ -1,7 +1,7 @@
 ---
 title: Wonderland
 categories: [writeups,TryHackMe]
-tags: [Linux,Privilege-Escalation,Perl-Capabilities]
+tags: [b2r,Linux,Privilege-Escalation,Perl-Capabilities]
 ---
 
 # Wonderland
@@ -9,11 +9,13 @@ tags: [Linux,Privilege-Escalation,Perl-Capabilities]
 - Operating System : `Linux`
 
 # Table of Content
+- [Wonderland](#wonderland)
+- [Table of Content](#table-of-content)
 - [Nmap Result](#nmap-result)
 - [Method to solve the challenge](#method-to-solve-the-challenge)
 - [Privilege Escalation](#privilege-escalation)
 
-## Nmap Result
+# Nmap Result
 ```
 Nmap scan report for 10.10.187.136                                                                                                                                                                                                                                                                                                            
 Host is up, received timestamp-reply ttl 60 (0.35s latency).                                                                                                                                                                                                                                                                                  

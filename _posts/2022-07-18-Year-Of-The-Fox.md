@@ -1,7 +1,7 @@
 ---
 title: Year Of The Fox
 categories: [writeups,TryHackMe]
-tags: [Linux,Privilege-Escalation,Reverse-Shell,Sudoer-File-Misconfiguration]
+tags: [b2r,Linux,Privilege-Escalation,Reverse-Shell,Sudoer-File-Misconfiguration]
 ---
 # Year Of The Fox 
 - Difficulty : `Hard`
@@ -9,11 +9,13 @@ tags: [Linux,Privilege-Escalation,Reverse-Shell,Sudoer-File-Misconfiguration]
 - Operating System : `Linux`
 
 # Table of Content
-- [Nmap Result](#nmap-result)
+- [Year Of The Fox](#year-of-the-fox)
+- [Table of Content](#table-of-content)
+  - [Nmap Result](#nmap-result)
 - [Method to solve the challenge](#method-to-solve-the-challenge)
 - [Privilege Escalation](#privilege-escalation)
 
-## Nmap Result
+# Nmap Result
 ```
 Nmap scan report for 10.10.30.135
 Host is up, received syn-ack (0.34s latency).

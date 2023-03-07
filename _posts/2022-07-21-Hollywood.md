@@ -1,7 +1,7 @@
 ---
 title: Hollywood
 categories: [writeups,PwnTillDawn]
-tags: [Windows,ActiveMQ]
+tags: [b2r,Windows,ActiveMQ]
 ---
 # Hollywood
 - Difficulty : `easy`
@@ -9,11 +9,13 @@ tags: [Windows,ActiveMQ]
 - Operating System : `Windows`
 
 # Table of Content
+- [Hollywood](#hollywood)
+- [Table of Content](#table-of-content)
 - [Nmap Result](#nmap-result)
 - [Method to solve the challenge](#method-to-solve-the-challenge)
 
 
-## Nmap Result
+# Nmap Result
 ```
 Nmap scan report for 10.150.150.219
 Host is up, received syn-ack (0.26s latency).
