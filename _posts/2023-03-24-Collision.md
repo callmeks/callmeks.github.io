@@ -14,7 +14,8 @@ tags: [pwn]
 
 # Description
 >Daddy told me about cool MD5 hash collision today.<br>
->I wanna do something like that too!
+I wanna do something like that too! 
+{: .prompt-info }
 
 # Program Code
 ```c
