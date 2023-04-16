@@ -10,8 +10,7 @@ order: 4
 
 ## My goals and objectives 
 - I will most probably focusing on web challenges & web pentest for now
-- Will try to stusy TCM academy courses and youtube related to web pentest / challenges
-- Focus on one thing at a time.  
+- Will try to study TCM academy courses and youtube related to web pentest / challenges
 - As for videos, I might start a new series by solving different web challenges from different website / vulnerable web application
 
 ## Useful-links for learning
