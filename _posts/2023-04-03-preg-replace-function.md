@@ -1,7 +1,7 @@
 ---
 title: preg_replace() function
-categories: [Cheat-Sheet,PHP]
-tags: [Cheat-Sheet]
+categories: [Knowledge,Web]
+tags: [Knowledge]
 ---
 
 
