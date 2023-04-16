@@ -8,16 +8,17 @@ order: 4
 > Just a APU university students studying in cybersecurity.
 {: .prompt-info }
 
-## These are the thing which i might share in future
--  wsl setup for pwn
--  more writeups on pwn / b2r
--  notes for all ctf / b2r
--  100 days challenge on pwn & b2r
+## My goals and objectives 
+- I will most probably focusing on web challenges & web pentest for now
+- Will try to stusy TCM academy courses and youtube related to web pentest / challenges
+- Focus on one thing at a time.  
+- As for videos, I might start a new series by solving different web challenges from different website / vulnerable web application
 
-## Challenges or video  which i might try on or look into
+## Useful-links for learning
 
 - Pentest / Boot2root  
   - [ ]  [TCM academy](https://academy.tcm-sec.com/)
+  - [ ]  [HackerSploit Pentest bootcamp video](https://www.youtube.com/watch?v=qJ9ZmkMvkcA&list=PLBf0hzazHTGOepimcP15eS6Y-aR4m6ql3)
 
 - CTF related (for pwn)
   - [ ]  [Taggart institute](https://taggartinstitute.org/courses)
