@@ -9,15 +9,16 @@ order: 4
 {: .prompt-info }
 
 ## My goals and objectives 
-- I will most probably focusing on web challenges & web pentest for now
-- Will try to study TCM academy courses and youtube related to web pentest / challenges
-- As for videos, I might start a new series by solving different web challenges from different website / vulnerable web application
+- I will most probably focusing on web pentest & boot2root for now
+- Will try to study TCM academy courses and youtube related to web pentest & boot2root
+- As for videos, I might start a new series by solving different web challenges from different website / vulnerable web application & boot2root machine from TJ Null list
 
 ## Useful-links for learning
 
 - Pentest / Boot2root  
   - [ ]  [TCM academy](https://academy.tcm-sec.com/)
   - [ ]  [HackerSploit Pentest bootcamp video](https://www.youtube.com/watch?v=qJ9ZmkMvkcA&list=PLBf0hzazHTGOepimcP15eS6Y-aR4m6ql3)
+  - [ ]  [TJNull list](https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview#)
 
 - CTF related (for pwn)
   - [ ]  [Taggart institute](https://taggartinstitute.org/courses)
