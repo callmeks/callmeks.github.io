@@ -1,6 +1,6 @@
 ---
 title: PHP Command Injection
-categories: [Cheat-Sheet,Web]
+categories: [Cheat-Sheet]
 tags: [Cheat-Sheet]
 ---
 
