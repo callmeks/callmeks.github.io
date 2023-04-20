@@ -33,6 +33,7 @@ sudo apt-get install -y nodejs
 - If there are no issue, try to access [http://localhost:3000/](http://localhost:3000/).
 
 ## Useful-links
+- [Youtube guide to install juice shop](https://youtu.be/muPEC9kw_q8)
 - [GitHub juice-shop](https://github.com/juice-shop/juice-shop/)
 - [GitHub Node Source](https://github.com/nodesource/distributions)
 - [GitHub juice-shop release](https://github.com/juice-shop/juice-shop/releases/)
