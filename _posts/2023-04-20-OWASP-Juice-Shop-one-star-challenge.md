@@ -389,18 +389,15 @@ tags: [web]
 <br>
 - According to the photo wall of juice shop, the cat image is not able to be retrieved. 
 - Since it is not able to retrieve, the next step should be look around the code with inspect element.
-```html
-<img _ngcontent-awl-c240="" class="image" src="assets/public/images/uploads/😼-#zatschi-#whoneedsfourlegs-1572600969477.jpg" alt="😼 #zatschi #whoneedsfourlegs">
-```
+<br>
+![](/assets/img/posts/2023-04-20-OWASP-Juice-Shop-one-star-challenge/2023-04-20-OWASP-Juice-Shop-one-star-challenge-23-26-56.png)
+<br>
 - According to the element code, the `src` contains a cat icon and hashtag.
 - This might be the reason why it is not possible to retrieve the image.
 - Since the category is improper input validation and the name is related to encoding, the first thing that could try is URL encoding
-```html
-<img _ngcontent-awl-c240="" class="image" src="assets/public/images/uploads/😼-#zatschi-#whoneedsfourlegs-1572600969477.jpg" alt="😼 #zatschi #whoneedsfourlegs">
-
-<img _ngcontent-awl-c240="" class="image" src="assets%2Fpublic%2Fimages%2Fuploads%2F%F0%9F%98%BC-%23zatschi-%23whoneedsfourlegs-1572600969477.jpg" alt="😼 #zatschi #whoneedsfourlegs">
-
-```
+<br>
+![](/assets/img/posts/2023-04-20-OWASP-Juice-Shop-one-star-challenge/2023-04-20-OWASP-Juice-Shop-one-star-challenge-23-27-21.png)
+<br>
 - After changing the `src` code to URL encoded, the image is successfully retrieved.
 <br>
 ![](/assets/img/posts/2023-04-20-OWASP-Juice-Shop-one-star-challenge/2023-04-20-OWASP-Juice-Shop-one-star-challenge-21-24-22.png)
