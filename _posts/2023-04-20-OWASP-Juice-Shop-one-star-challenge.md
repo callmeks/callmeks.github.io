@@ -78,6 +78,7 @@ tags: [web]
 
 ### Useful-links
 
+- [Youtube walkthrough](https://youtu.be/oxl5uQkaHsc)
 - [DomSanitizer Security risk](https://angular.io/api/platform-browser/DomSanitizer#security-risk)
 - [DOM XSS Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/DOM_based_XSS_Prevention_Cheat_Sheet.html)
 
@@ -97,6 +98,10 @@ tags: [web]
  - By constantly asking coupon from the chatbot, it will give us a 10% coupon.
 <br>
 ![](/assets/img/posts/2023-04-20-OWASP-Juice-Shop-one-star-challenge/2023-04-20-OWASP-Juice-Shop-one-star-challenge-16-26-16.png)
+
+### Useful-links
+
+- [Youtube walkthrough](https://youtu.be/oxl5uQkaHsc)
 
 ## Confidential Document
 
@@ -139,6 +144,9 @@ tags: [web]
   - It is better to **remove all the code** above to avoid public user to have access into FTP subdirectory.
   - If the web application need to provide information, the information should be place in a static subdirectory.
 
+### Useful-links
+
+- [Youtube walkthrough](https://youtu.be/oxl5uQkaHsc)
 
 ## DOM XSS
 
@@ -205,6 +213,7 @@ tags: [web]
     ```
 ### Useful-links
 
+- [Youtube walkthrough](https://youtu.be/oxl5uQkaHsc)
 - [DomSanitizer Security risk](https://angular.io/api/platform-browser/DomSanitizer#security-risk)
 - [DOM XSS Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/DOM_based_XSS_Prevention_Cheat_Sheet.html)
 
@@ -229,6 +238,7 @@ tags: [web]
 
 ### Useful-links
 
+- [Youtube walkthrough](https://youtu.be/oxl5uQkaHsc)
 - [Error Code](https://developers.google.com/webmaster-tools/v1/errors)
 - [Error handling cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Error_Handling_Cheat_Sheet.html)
 
@@ -355,6 +365,10 @@ tags: [web]
     ```
     - Since metrics still needed to be accessed by admin, the best method will be adding a security check to ensure that only admin is allowed to access. 
 
+### Useful-links
+
+- [Youtube walkthrough](https://youtu.be/oxl5uQkaHsc)
+
 ## Mass Dispel
 
 ```
@@ -370,6 +384,10 @@ tags: [web]
 ![](/assets/img/posts/2023-04-20-OWASP-Juice-Shop-one-star-challenge/2023-04-20-OWASP-Juice-Shop-one-star-challenge-20-45-55.png)
 <br>
 - This can be easily done by holding [shift] key when clicking close icon.
+
+### Useful-links
+
+- [Youtube walkthrough](https://youtu.be/oxl5uQkaHsc)
 
 ## Missing Encoding
 
@@ -402,6 +420,8 @@ tags: [web]
 ![](/assets/img/posts/2023-04-20-OWASP-Juice-Shop-one-star-challenge/2023-04-20-OWASP-Juice-Shop-one-star-challenge-21-24-22.png)
 
 ### Useful-links
+
+- [Youtube walkthrough](https://youtu.be/oxl5uQkaHsc)
 - [URL Encode](https://www.urlencoder.org/)
 
 ## Outdated Whitelist
@@ -475,6 +495,8 @@ tags: [web]
     - the solution is to remove all the crypto link.
 
 ### Useful-links
+
+- [Youtube walkthrough](https://youtu.be/oxl5uQkaHsc)
 - [Unvalidated redirects and forwards cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html)
 
 ## Privary Policy
@@ -491,6 +513,10 @@ tags: [web]
 - To read privary policy, user will need to be logged into any account first.
 <br>
 ![](/assets/img/posts/2023-04-20-OWASP-Juice-Shop-one-star-challenge/2023-04-20-OWASP-Juice-Shop-one-star-challenge-22-51-22.png)
+
+### Useful-links
+
+- [Youtube walkthrough](https://youtu.be/oxl5uQkaHsc)
 
 ## Repetitive Registration
 
@@ -522,6 +548,8 @@ tags: [web]
 - If we tried to register a user with this method, the challenge will be solved. 
 
 ### Useful-links
+
+- [Youtube walkthrough](https://youtu.be/oxl5uQkaHsc)
 - [Input Validation Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html)
 
 ## Score Board
@@ -537,6 +565,9 @@ tags: [web]
 - To solve this challenge, using some directory brute forcing tools or guessing the correct name will do.
 - The correct answer is : `http://localhost:3000/#/score-board`
 
+### Useful-links
+
+- [Youtube walkthrough](https://youtu.be/oxl5uQkaHsc)
 
 ## Zero Stars
 
@@ -578,3 +609,7 @@ tags: [web]
 ![](/assets/img/posts/2023-04-20-OWASP-Juice-Shop-one-star-challenge/2023-04-20-OWASP-Juice-Shop-one-star-challenge-23-21-50.png)
 <br>
 - There are other method to solve as well such as intercepting request with Burp Suite or sending a POST request using `curl` command.
+
+### Useful-links
+
+- [Youtube walkthrough](https://youtu.be/oxl5uQkaHsc)
