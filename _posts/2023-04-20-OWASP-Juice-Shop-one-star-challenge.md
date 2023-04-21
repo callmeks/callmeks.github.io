@@ -97,7 +97,6 @@ tags: [web]
  - By constantly asking coupon from the chatbot, it will give us a 10% coupon.
 <br>
 ![](/assets/img/posts/2023-04-20-OWASP-Juice-Shop-one-star-challenge/2023-04-20-OWASP-Juice-Shop-one-star-challenge-16-26-16.png)
-<br>
 
 ## Confidential Document
 
@@ -401,7 +400,6 @@ tags: [web]
 - After changing the `src` code to URL encoded, the image is successfully retrieved.
 <br>
 ![](/assets/img/posts/2023-04-20-OWASP-Juice-Shop-one-star-challenge/2023-04-20-OWASP-Juice-Shop-one-star-challenge-21-24-22.png)
-<br>
 
 ### Useful-links
 - [URL Encode](https://www.urlencoder.org/)
@@ -429,7 +427,6 @@ tags: [web]
 - heres the result of the crypto wallet link.
 <br>
 ![](/assets/img/posts/2023-04-20-OWASP-Juice-Shop-one-star-challenge/2023-04-20-OWASP-Juice-Shop-one-star-challenge-21-57-03.png)
-<br>
 
 ### Code Review
 
@@ -494,7 +491,6 @@ tags: [web]
 - To read privary policy, user will need to be logged into any account first.
 <br>
 ![](/assets/img/posts/2023-04-20-OWASP-Juice-Shop-one-star-challenge/2023-04-20-OWASP-Juice-Shop-one-star-challenge-22-51-22.png)
-<br>
 
 ## Repetitive Registration
 
