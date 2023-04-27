@@ -35,3 +35,6 @@ order: 4
   - [ ]  [HackerSploit Pentest bootcamp video](https://www.youtube.com/watch?v=qJ9ZmkMvkcA&list=PLBf0hzazHTGOepimcP15eS6Y-aR4m6ql3)
   - [ ]  [TJNull list](https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview#)
 
+- Taggart Institute
+  - [] [Intro to Regular Expressions](https://taggartinstitute.org/courses/enrolled/1812179)
+  - [] [Vim for everyone](https://taggartinstitute.org/courses/enrolled/2001986)
