@@ -15,17 +15,23 @@ order: 4
 
 ## Useful-links for learning
 
+- Learn programming
+  - [] [C# for n00bs](https://training.zeropointsecurity.co.uk/courses/csharp-for-n00bs)
+  - [] [Rust for n00bs](https://training.zeropointsecurity.co.uk/courses/rust-for-n00bs)
+
+- Azure Pentest
+  - [] [Introduction to Azure Penetration Testing](https://azure.enterprisesecurity.io/)
+
+- API Pentest
+  - [] [API Security Fundamentals](https://www.apisecuniversity.com/courses/api-security-fundamentals)
+  - [] [API Penetration Testing Course](https://www.apisecuniversity.com/courses/api-penetration-testing)
+
+- Web Pentest
+  - [] [WebSecurity Academy](https://portswigger.net/web-security)
+  - [] [OWASP Juice Shop](https://owasp.org/www-project-juice-shop/)
+
 - Pentest / Boot2root  
   - [ ]  [TCM academy](https://academy.tcm-sec.com/)
   - [ ]  [HackerSploit Pentest bootcamp video](https://www.youtube.com/watch?v=qJ9ZmkMvkcA&list=PLBf0hzazHTGOepimcP15eS6Y-aR4m6ql3)
   - [ ]  [TJNull list](https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview#)
-
-- CTF related (for pwn)
-  - [ ]  [Taggart institute](https://taggartinstitute.org/courses)
-  - [ ]  [YouTube - liveoverflow](https://youtube.com/playlist?list=PLhixgUqwRTjxglIswKp9mpkfPNfHkzyeN)
-  - [ ]  [https://dojo.pwn.college/](https://dojo.pwn.college/)
-  - [ ]  [https://ropemporium.com/](https://ropemporium.com/)
-  - [ ]  [https://seedsecuritylabs.org/Labs_20.04/Software/](https://seedsecuritylabs.org/Labs_20.04/Software/)  
-  - [ ]  [https://imaginaryctf.org/Challenges](https://imaginaryctf.org/Challenges)
-  - [ ]  [Youtube - security sttack](https://youtube.com/playlist?list=PLwCoMLt7WGjbBaHj_CbEdKZOL6uqAPh6d)
 
