@@ -59,7 +59,7 @@ tags: [web]
 
 ### Useful-links
 
-- [Youtube walkthrough](https://www.youtube.com/@callmeks24) - Coming Soon
+- [Youtube walkthrough](https://youtu.be/qTADGV_FP9s)
 - [Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html)
 
 
