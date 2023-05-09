@@ -9,7 +9,7 @@ tags: [web]
 ```
 - Difficulty: 2 star
 - Category: Broken Authentication
-- Log in with the administrator's user credentials without previously changing them or applying SQL Injection.
+- Description: Log in with the administrator's user credentials without previously changing them or applying SQL Injection.
 ```
 
 ### Method to solve

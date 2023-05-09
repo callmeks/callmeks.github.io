@@ -9,7 +9,7 @@ tags: [web]
 ```
 - Difficulty: 2 star
 - Category: Broken Access Control
-- Access the administration section of the store.
+- Description: Access the administration section of the store.
 ```
 
 ### Method to solve

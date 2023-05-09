@@ -9,7 +9,7 @@ tags: [web]
 ```
 - Difficulty: 2 star
 - Category: Injection
-- Log in with the administrator's user account.
+- Description: Log in with the administrator's user account.
 ```
 
 ### Method to solve
