@@ -24,6 +24,7 @@ tags: [Knowledge]
     18-Apr-23  02:38 PM           162,748 bof.png
                                         5 bof.png:test:$DATA
     ```
+    
     - powershell
     ```powershell
     PS directory> gi bof.png -stream *
