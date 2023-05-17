@@ -12,7 +12,7 @@ tags: [Knowledge]
 # Example
 - checking ADS
     - cmd
-        ```cmd
+        ```shell
         directory>dir /r
         Volume in drive D is Fake Volume
         Volume Serial Number is A0BA-07DC
