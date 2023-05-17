@@ -39,5 +39,6 @@ Mine's my dog, Mr. Noodles. It don't matter if you know
 - After trying each potential password, the correct credentials would be `mc.safesearch@juice-sh.op`:`Mr. N00dles`
 
 ### Useful-links
+
 - [Youtube Walkthrough](https://youtu.be/QgFC-056Mos)
 - [MC SafeSearch lyrics](https://genius.com/Collegehumor-protect-ya-passwordz-lyrics)
