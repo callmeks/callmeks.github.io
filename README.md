@@ -1,6 +1,5 @@
-# My own repo that share random stuff
-- Please have a look at my website if u have time 
-
+# My Notes and writeups for everyone including myself
+- To write down my own notes and writeups for anyone to view and learn.
 
 # Chirpy Starter 
 - this pages is created by using chirpy starter
