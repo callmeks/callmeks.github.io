@@ -1,7 +1,7 @@
 ---
 title: Stuntman Mike
 categories: [writeups,PwnTillDawn]
-tags: [b2r,Linux,Privilege Escalation,SSH]
+tags: [b2r,Linux,Privilege-Escalation,SSH]
 ---
 
 # Stuntman Mike
