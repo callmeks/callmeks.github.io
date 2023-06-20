@@ -29,7 +29,7 @@ $ curl http://159.65.30.65:32674/
 
 ```bash
 
-%7B%7B7%2A7%7D%7D == \{\{7*7\}\} URL encoded 
+%7B%7B7%2A7%7D%7D == /{/{7*7/}/} URL encoded 
 
 $ curl http://159.65.30.65:32674/%7B%7B7%2A7%7D%7D
 
