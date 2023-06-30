@@ -34,6 +34,3 @@ tags: [SQL-Injection]
 ![](/assets/img/posts/2023-06-30-SQL-Injection-in-WHERE-clause-allowing-retrieval-of-hidden-data/2023-06-30-SQL-Injection-in-WHERE-clause-allowing-retrieval-of-hidden-data-21-28-44.png)
 
 - We managed to get different products by performing SQL injection.
-- The first SQL injection return back all items that are released.
-- The second SQL injection return all products for both released and unreleased.
-- The third SQL injection return all products that are in category of Lifestyle and not released. 
