@@ -5,7 +5,7 @@ order: 4
 ---
 
 # About me 
-> Just a APU university students studying in cybersecurity.
+> Just a random guy that somehow interested in cybersec.
 {: .prompt-info }
 
 ## My goals and objectives 
