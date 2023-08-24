@@ -19,12 +19,12 @@ timezone: Asia/Kuala_Lumpur
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: callmeks                          # the main title
+title: KS Blog                          # the main title
 
-tagline: trying to better in cybersecurity   # it will display as the sub-title
+tagline: a place for me to write about interesting stuff   # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
-  trying to better in cybersecurity
+  a place for me to write about interesting stuff
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
 url: 'https://callmeks.github.io'
@@ -39,7 +39,7 @@ twitter:
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: callmeks
+  name: KS
   email: kskingggg@gmail.com             # change to your email address
   links:
     # The first element serves as the copyright owner's link
@@ -99,9 +99,9 @@ comments:
   # Giscus options › https://giscus.app
   giscus:
     repo: callmeks/callmeks.github.io          # <gh-username>/<repo>
-    repo_id: R_kgDOJD-zag
+    repo_id: R_kgDOKKy_Tg
     category: General
-    category_id: DIC_kwDOJD-zas4CWra0
+    category_id: DIC_kwDOKKy_Ts4CY0o2
     mapping:           # optional, default to 'pathname'
     input_position:    # optional, default to 'bottom'
     lang:              # optional, default to the value of `site.lang`
