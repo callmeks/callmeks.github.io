@@ -620,7 +620,7 @@ SharedCacheMap  0x1edb2470      591dedcb722fc7fea0c0f378e3192d78.pdf    file.0x1
 
 After dumping out the file, the next thing to do is try to analyze the file.
 
-## Analyzing the dumped file
+## Step 7: Analyzing the dumped file
 
 this section will still be same as previous as we will analyze files that dumped from both volatility.
 
@@ -644,7 +644,7 @@ v3/file.0x1edb2470.0xfa800743b250.DataSectionObject.591dedcb722fc7fea0c0f378e319
 
 Volatility 2 only have 2 files while volatility 3 have 4 files. This is because volatility 2 overwrite the file since it is same name while volatility 3 have different names. Based on the result, the files is not a pdf file but instead a zip file. The next step would be trying to unzip it. 
 
-## Step 7: Unzip the file
+## Step 8: Unzip the file
 
 Before that unzipping the file, it is compulsory to change the file extension to `.zip` to succuessfully unzip it. 
 
@@ -680,7 +680,7 @@ Did not find End Of Central Directory.
 
 After renaming the file, I used a tool named `zip2john` to check if the zip file is having any password. Based on the result, all the result is same as the provide the same hashes which means the zip file is password protected. Since the `firefox` processes has not gone through yet, lets try to go through it to check if there is any password. 
 
-## Step8: gathering informtion from firefox
+## Step 9: gathering informtion from firefox
 
 Since the processes stated that someone is running firefox, the best way to gather information is by checking the browser history. By default, the history of firefox will be saved into a file named `places`. for more information about default file name for each browser history, click [here](https://docs.nxlog.co/userguide/integrate/browser-history.html). Since we are looking for files, lets search for the relevant file name
 
@@ -717,7 +717,7 @@ vol -f memdump.raw windows.filescan | grep places.sql
 
 Based on the result, there are a few files that contain the names of `places`. Lets just dump one out from each volatility to check the information inside it.
 
-## Step 9: Dump the sqlite file
+## Step 10: Dump the sqlite file
 
 The command will be same as previous for dumping the files.
 
@@ -744,7 +744,7 @@ SharedCacheMap  0x1d8e3c60      places.sqlite   file.0x1d8e3c60.0xfa8009074d80.S
 
 After dumping out the file, lets read the file. 
 
-## Step 10: read the dumped sqlite file
+## Step 11: read the dumped sqlite file
 
 ### Volatility 2 dumped file
 
@@ -776,7 +776,7 @@ https://www.google.com/search?hl=en-MY&source=hp&biw=&bih=&q=amitriptyline&iflsi
 
 Based on the information provided from the `places.sqlite` file, there is a potential password provided `passwd: whodiditidk`. Lets just try to unzip the file with the password and hope it works.
 
-## Step 11: Unzip the file with the password given
+## Step 12: Unzip the file with the password given
 
 all files dumped from volatility 2 and 3 gives the same hashes which mean the password should be same. one of the filed will be used as example to unzip.
 
