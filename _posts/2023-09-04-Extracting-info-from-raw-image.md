@@ -818,7 +818,6 @@ BAT{442b6acb58091deddb8bf3b6f1062ee4}
 
 With that, we managed to solve the challenge and get the exact flag. 
 
-
 ## Things I learned from the challenge
 - volatility 2 and 3 commands
 - dumping out interesting files from raw image
