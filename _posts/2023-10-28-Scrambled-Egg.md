@@ -7,8 +7,9 @@ tags:
   - ITREXC 2023
 ---
 
-## Scrambled Egg
+## Challenge Description
 
+- Challenge Name: Scrambled Egg
 > Hmm, I found  this executable that should allow us access to some juicy innovation projects. But it asks for a key. Hmm, I'm stumped. Get the Key for me, please!
 
 
