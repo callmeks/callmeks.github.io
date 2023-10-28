@@ -1,8 +1,10 @@
 ---
 title: Function Discovery Quest
-categories: [ctf]
+categories:
+  - CTF
 tags:
-  -  
+  - ITREXC-2023
+  - rev
 ---
 
 ## Challenge Description

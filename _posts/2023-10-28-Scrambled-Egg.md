@@ -4,7 +4,7 @@ categories:
   - CTF
 tags:
   - rev
-  - ITREXC 2023
+  - ITREXC-2023
 ---
 
 ## Challenge Description
