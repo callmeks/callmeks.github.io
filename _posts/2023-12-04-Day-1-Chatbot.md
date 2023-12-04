@@ -9,6 +9,7 @@ tags:
 
 ## Challenge Information
 
+- Advent of Cyber Day 1
 - THM link [here](https://tryhackme.com/room/adventofcyber2023#)
 
 ## Explanation
