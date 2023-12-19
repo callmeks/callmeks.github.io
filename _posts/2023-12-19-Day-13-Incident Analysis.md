@@ -4,7 +4,7 @@ categories:
   - THM
 tags:
   - AoC-2023
-  - Intrusion detection
+  - Intrusion-Detection
 ---
 
 ## Challenge Information
