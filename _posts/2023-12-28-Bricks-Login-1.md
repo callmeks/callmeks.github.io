@@ -1,5 +1,5 @@
 ---
-title: Brick Login 1
+title: Bricks Login 1
 categories:
   - OWASP-Brick
 tags:
