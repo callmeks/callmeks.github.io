@@ -12,7 +12,7 @@ tags:
 - Docker version: [here](https://hub.docker.com/r/gjuniioor/owasp-bricks)
 
 
-> This is a series where I will write my own Nmap NSE script to solve that challenge. This is actually a task given by [masta ghimau](www.youtube.com/@mastaghimau) during [MCC 2023](https://cybercamp.my/mcc2023-the-journey-begins/).
+> This is a series where I will write my own Nmap NSE script to solve that challenge. This is actually a task given by [masta ghimau](https://www.youtube.com/@mastaghimau) during [MCC 2023](https://cybercamp.my/mcc2023-the-journey-begins/).
 {: .prompt-info }
 
 ## Challenge Solution
