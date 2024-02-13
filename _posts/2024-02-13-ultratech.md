@@ -265,3 +265,7 @@ By himself.
 
 With that, I managed to get root by using docker. 
 
+## Things I learned from the machine
+
+- docker to get root
+- weird command injection
