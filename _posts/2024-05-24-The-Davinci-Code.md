@@ -5,7 +5,6 @@ categories:
 tags:
   - nahamcon-CTF
   - Web
-published: false
 ---
 
 # Challenge Information
