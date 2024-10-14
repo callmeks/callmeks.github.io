@@ -5,13 +5,11 @@ order: 4
 ---
 
 # About me 
-> Just a random guy that somehow interested in cybersec.
+> Just a random guy that trying to survive in cybersecurity field
 {: .prompt-info }
 
 ## My goals and objectives 
-- I will most probably focusing on web pentest & boot2root for now
-- Will try to study TCM academy courses and youtube related to web pentest & boot2root
-- As for videos, I might start a new series by solving different web challenges from different website / vulnerable web application & boot2root machine from TJ Null list
+- survive the remaining year of 2024 and secure my oscp
 
 ## Useful-links for learning
 
