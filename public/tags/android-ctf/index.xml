@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Android CTF on KS Blog</title>
+    <link>https://callmeks.github.io/tags/android-ctf/</link>
+    <description>Recent content in Android CTF on KS Blog</description>
+    <generator>Hugo -- 0.139.3</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 03 Dec 2024 16:07:05 +0800</lastBuildDate>
+    <atom:link href="https://callmeks.github.io/tags/android-ctf/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Journey of Creating Android CTF</title>
+      <link>https://callmeks.github.io/posts/journey-of-creating-android-ctf/</link>
+      <pubDate>Tue, 03 Dec 2024 16:07:05 +0800</pubDate>
+      <guid>https://callmeks.github.io/posts/journey-of-creating-android-ctf/</guid>
+      <description>&lt;h2 id=&#34;overview-about-the-journey&#34;&gt;Overview about the journey&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;I have 0 knowledge about kotlin as well as creating Android APK. Most of the things that I mentioned below is also my first time.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;part-0&#34;&gt;PART 0&lt;/h2&gt;
+&lt;p&gt;Here&amp;rsquo;s the part where I started out by exploring how to create an Android APK. Basically just tons of youtube vidoes and blogs. The final decision? I just go with Android Studio. The installation is simple but remember to download system image for Virtual Device which is also a part of Android Studio.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,77 @@
+baseURL: https://callmeks.github.io
+languageCode: en-us
+title: KS Blog
+theme: PaperMod
+paginate: 3
+
+params:
+  defaultTheme: auto
+  ShowToc: true
+  UseHugoToc: true
+  ShowWordCount: true
+  ShowReadingTime: true
+  ShowShareButtons: false
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowRssButtonInSectionTermList: false
+  tocopen: false
+
+  assets:
+    favicon: "https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b"
+    favicon16x16: "https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b?size=16"
+    favicon32x32: "https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b?size=32"
+    apple_touch_icon: "https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b"
+    safari_pinned_tab: "https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b"
+
+  profileMode:
+    enabled: true
+    title: "Welcome to my blog"
+    subtitle: "I try hard on random things"
+    imageUrl: "https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b?size=200" # optional
+    imageTitle: "This is froakie" # optional
+    imageWidth: 200 # custom size
+    imageHeight: 200 # custom size
+
+
+  socialIcons:
+    - name: github
+      url: "https://github.com/callmeks"
+
+markup:
+  highlight:
+    anchorLineNos: true
+    codeFences: true
+    guessSyntax: true
+    lineNos: true
+    style: monokai
+
+
+menu:
+  main:
+    - identifier: Search
+      name: Search
+      url: /search/
+      weight: 10
+    - identifier: Posts
+      name: Posts
+      url: /posts/
+      weight: 20
+    - identifier: Tags
+      name: Tags
+      url: /tags/
+      weight: 30
+    - identifier: Archives
+      name: Archives
+      url: /archives/
+      weight: 40
+    - identifier: Whoami
+      name: Whoami
+      url: /about/
+      weight: 50
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON # necessary for search
