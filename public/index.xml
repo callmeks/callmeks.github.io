@@ -255,11 +255,46 @@
       <link>https://callmeks.github.io/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://callmeks.github.io/about/</guid>
-      <description>&lt;p&gt;Im KS, a guy that hopes to be good in cybersecurity.&lt;/p&gt;
-&lt;h2 id=&#34;things-that-i-would-like-to-learn-&#34;&gt;Things that I would like to learn ~&lt;/h2&gt;
+      <description>&lt;p&gt;Hi there, My name is Loh Kae Shyan or you can just call me &lt;strong&gt;KS&lt;/strong&gt;. I no longer a student but instead working in a penetration testing company. I just like to share random content of what I have learn here for others to learn as well.&lt;/p&gt;
+&lt;h2 id=&#34;certification&#34;&gt;Certification&lt;/h2&gt;
+&lt;p&gt;Yes, I do have certification although its not even worth mentioning.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.credential.net/4f5b8e40-d7a7-4f5e-8448-3888c1082f8e#acc.OMZNiYyt&#34;&gt;OSCP&lt;/a&gt; / &lt;a href=&#34;https://www.credential.net/a030daf7-0dab-472c-a396-408eb1878a2f#acc.kLOgE7NA&#34;&gt;OSCP+&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;CPSA&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;things-that-i-would-like-to-learn&#34;&gt;Things that I would like to learn&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;a href=&#34;https://app.hextree.io/map&#34;&gt;https://app.hextree.io/map&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</description>
+&lt;/ul&gt;
+&lt;h2 id=&#34;social-media&#34;&gt;Social Media&lt;/h2&gt;
+&lt;div class=&#34;social-icons&#34;&gt;
+    &lt;a href=&#34;https://github.com/callmeks&#34; style=&#34;box-shadow:none&#34; target=&#34;_blank&#34; rel=&#34;noopener noreferrer me&#34;
+        title=&#34;Github&#34;&gt;
+        &lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34;
+    stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34;&gt;
+    &lt;path
+        d=&#34;M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22&#34;&gt;
+    &lt;/path&gt;
+&lt;/svg&gt;
+    &lt;/a&gt;
+    &lt;a href=&#34;https://www.linkedin.com/in/loh-kae-shyan/&#34; style=&#34;box-shadow:none&#34; target=&#34;_blank&#34; rel=&#34;noopener noreferrer me&#34;
+        title=&#34;Linkedin&#34;&gt;
+        &lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34;
+    stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34;&gt;
+    &lt;path d=&#34;M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z&#34;&gt;&lt;/path&gt;
+    &lt;rect x=&#34;2&#34; y=&#34;9&#34; width=&#34;4&#34; height=&#34;12&#34;&gt;&lt;/rect&gt;
+    &lt;circle cx=&#34;4&#34; cy=&#34;4&#34; r=&#34;2&#34;&gt;&lt;/circle&gt;
+&lt;/svg&gt;
+    &lt;/a&gt;
+    &lt;a href=&#34;https://x.com/callmeks24&#34; style=&#34;box-shadow:none&#34; target=&#34;_blank&#34; rel=&#34;noopener noreferrer me&#34;
+        title=&#34;X&#34;&gt;
+        &lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;currentColor&#34;&gt;
+    &lt;path
+        d=&#34;M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z&#34;&gt;
+    &lt;/path&gt;
+&lt;/svg&gt;
+    &lt;/a&gt;
+&lt;/div&gt;</description>
     </item>
   </channel>
 </rss>

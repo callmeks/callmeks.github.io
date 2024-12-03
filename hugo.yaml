@@ -37,6 +37,10 @@ params:
   socialIcons:
     - name: github
       url: "https://github.com/callmeks"
+    - name: linkedin
+      url: "https://www.linkedin.com/in/loh-kae-shyan/"
+    - name: x
+      url: "https://x.com/callmeks24"
 
 markup:
   highlight:
