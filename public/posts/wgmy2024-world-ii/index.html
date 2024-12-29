@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>WGMY2024 World II | KS Blog</title>
+<meta name="keywords" content="android CTF">
+<meta name="description" content="Challenge Description
+
+Welp, time to do it again.
+Unable to install? That is a part of the challenge, try to overcome it.
+Author: Trailbl4z3r &amp; Monaruku
+hint:
+Tbh this is not a natively built app, more like something just wrapped into an app
+World-II.apk
+
+Solution
+Since it&rsquo;s an APK file, Lets start with jadx-gui for static analysis. In terms of static analysis, it&rsquo;s always best to check out AndroidManifest.xml first.">
+<meta name="author" content="">
+<link rel="canonical" href="https://callmeks.github.io/posts/wgmy2024-world-ii/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d72444526d7ecbdb0015438a7fa89054a658bf759d0542e2e5df81ce94b493ee.css" integrity="sha256-1yREUm1&#43;y9sAFUOKf6iQVKZYv3WdBULi5d&#43;BzpS0k&#43;4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b">
+<link rel="icon" type="image/png" sizes="16x16" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b?size=16">
+<link rel="icon" type="image/png" sizes="32x32" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b?size=32">
+<link rel="apple-touch-icon" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b">
+<link rel="mask-icon" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://callmeks.github.io/posts/wgmy2024-world-ii/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="https://callmeks.github.io/posts/wgmy2024-world-ii/">
+  <meta property="og:site_name" content="KS Blog">
+  <meta property="og:title" content="WGMY2024 World II">
+  <meta property="og:description" content="Challenge Description Welp, time to do it again.
+Unable to install? That is a part of the challenge, try to overcome it.
+Author: Trailbl4z3r &amp; Monaruku
+hint: Tbh this is not a natively built app, more like something just wrapped into an app
+World-II.apk
+Solution Since it’s an APK file, Lets start with jadx-gui for static analysis. In terms of static analysis, it’s always best to check out AndroidManifest.xml first.">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-12-29T13:40:56+08:00">
+    <meta property="article:modified_time" content="2024-12-29T13:40:56+08:00">
+    <meta property="article:tag" content="Android CTF">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WGMY2024 World II">
+<meta name="twitter:description" content="Challenge Description
+
+Welp, time to do it again.
+Unable to install? That is a part of the challenge, try to overcome it.
+Author: Trailbl4z3r &amp; Monaruku
+hint:
+Tbh this is not a natively built app, more like something just wrapped into an app
+World-II.apk
+
+Solution
+Since it&rsquo;s an APK file, Lets start with jadx-gui for static analysis. In terms of static analysis, it&rsquo;s always best to check out AndroidManifest.xml first.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://callmeks.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "WGMY2024 World II",
+      "item": "https://callmeks.github.io/posts/wgmy2024-world-ii/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "WGMY2024 World II",
+  "name": "WGMY2024 World II",
+  "description": "Challenge Description Welp, time to do it again.\nUnable to install? That is a part of the challenge, try to overcome it.\nAuthor: Trailbl4z3r \u0026amp; Monaruku\nhint: Tbh this is not a natively built app, more like something just wrapped into an app\nWorld-II.apk\nSolution Since it\u0026rsquo;s an APK file, Lets start with jadx-gui for static analysis. In terms of static analysis, it\u0026rsquo;s always best to check out AndroidManifest.xml first.\n",
+  "keywords": [
+    "android CTF"
+  ],
+  "articleBody": "Challenge Description Welp, time to do it again.\nUnable to install? That is a part of the challenge, try to overcome it.\nAuthor: Trailbl4z3r \u0026 Monaruku\nhint: Tbh this is not a natively built app, more like something just wrapped into an app\nWorld-II.apk\nSolution Since it’s an APK file, Lets start with jadx-gui for static analysis. In terms of static analysis, it’s always best to check out AndroidManifest.xml first.\nBased on the code, there’s only one activity which is systems.altimit.rpgmakermv.WebPlayerActivity. Double click and see the activity code. There’s a lot of function in the WebPlayerActivity but I’ll be focusing on onCreate function first as that it is the starting point for all activities.\nAccording to the code, it is trying to construct the game by getting the value of id.application.rpgmakermv.R.string.mv_project_index. I then tried to have a look and search for the strings values. By using the global search feature in jadx-gui, I managed to get the strings value.\nNow that I know the value is //android_asset/www/index.html, my first thought is checking out for the files using the global search feature.\nWhile the index.html does not have a lot of code, I noticed that it’s using main.js. I then look for it and have a look in it.\nLooking into main.js, there’s a lot of code and several script as well. I then look into each of it and see which is interesting.\nLooking into rmmz_managers.js, I noticed that database file that are stored as json file. I then look into Actors.json as it seems like the game character’s database file.\nSince this is a json file, I think that I could modify the json file and repack the apk to make the me win easily. Since I have limited information at the moment, I tried to run the apk and see how the game works.\nHere’s how the main page looks like, which is similar to the index.html. I then started to play around to get more information.\nHere’s my current stat and equipment. I then look into the Actors.json to compare and identify which value I should modify. I noticed that the equip is the current weapon and body that the character has. The weapon database file is Weapons.json.\nThe id of the weapon is same as the number provided in equip in Actors.json. My next thought was to increase the damage of the weapon Dragon Blade since I could just edit the json file and repack it. While I have no idea, the params definitely consist the damage of the weapon. I then randomly edit every params into high value. To do so, I’ll need to unpack first.\n1 2 3 4 5 6 7 8 9 10 11 12 13 PS D:\\Desktop\\Android\\world2\u003e apktool d .\\World_II.apk I: Using Apktool 2.10.0 on World_II.apk with 8 thread(s). I: Baksmaling classes.dex... I: Loading resource table... I: Decoding file-resources... I: Loading resource table from file: C:\\Users\\a\\AppData\\Local\\apktool\\framework\\1.apk I: Decoding values */* XMLs... I: Decoding AndroidManifest.xml with resources... I: Regular manifest package... I: Copying assets and libs... I: Copying unknown files... I: Copying original files... Press any key to continue . . . After unpack the APK file, search for Weapons.json and modfiy the params value of Dragon Blade to 999. After modifying it, repack it.\n1 2 3 4 5 6 7 8 9 10 PS D:\\Desktop\\Android\\world2\u003e apktool b .\\World_II\\ -o world-2-modified.apk I: Using Apktool 2.10.0 with 8 thread(s). I: Checking whether sources has changed... I: Smaling smali folder into classes.dex... I: Checking whether resources has changed... I: Building resources... I: Building apk file... I: Copying unknown files/dir... I: Built apk into: world-2-modified.apk Press any key to continue . . . After repacking the APK, remember to sign it. To do so, create a keystore.\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 PS D:\\Desktop\\Android\\world2\u003e keytool -genkey -v -keystore modify.keystore -alias modify_key -keyalg RSA -keysize 2048 -validity 10000 Enter keystore password: Re-enter new password: Enter the distinguished name. Provide a single dot (.) to leave a sub-component empty or press ENTER to use the default value in braces. What is your first and last name? What is the name of your organizational unit? What is the name of your organization? What is the name of your City or Locality? What is the name of your State or Province? What is the two-letter country code for this unit? Is CN=a, OU=Unknown, O=Unknown, L=Unknown, ST=Unknown, C=Unknown correct? [no]: yes Generating 2,048 bit RSA key pair and self-signed certificate (SHA384withRSA) with a validity of 10,000 days for: CN=a, OU=Unknown, O=Unknown, L=Unknown, ST=Unknown, C=Unknown [Storing modify.keystore] After the keystore is created, sign the APK file.\n1 2 PS D:\\Desktop\\Android\\world2\u003e apksigner sign --ks .\\modify.keystore .\\world-2-modified.apk Keystore password for signer #1: After that, Just run the game and hope everything is working.\nAs shown in image, I managed to change the weapon stats by modifying the params value. Now that my stats are high, I could easily win the game.\nAfter I win each boss, I’ll get a partial flag.\nFlag 1 Flag 2 Flag 3 Flag 4 This part of flag appear in the map after winning boss 4 Flag 5 After winning the boss, you will need to talk to a dude and it will give you 23 7 13 25 which is order of the alphabelt wgmy. Then a QR will be provided. 4f51785} Things I learned from this challenge reading code using static analysis patching the APK Cheat the game to win ",
+  "wordCount" : "915",
+  "inLanguage": "en",
+  "datePublished": "2024-12-29T13:40:56+08:00",
+  "dateModified": "2024-12-29T13:40:56+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://callmeks.github.io/posts/wgmy2024-world-ii/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "KS Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://callmeks.github.io/" accesskey="h" title="KS Blog (Alt + H)">KS Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://callmeks.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://callmeks.github.io/posts/" title="Posts">
+                    <span>Posts</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://callmeks.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://callmeks.github.io/archives/" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://callmeks.github.io/about/" title="Whoami">
+                    <span>Whoami</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://callmeks.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://callmeks.github.io/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      WGMY2024 World II
+    </h1>
+    <div class="post-meta"><span title='2024-12-29 13:40:56 +0800 +08'>December 29, 2024</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;915 words
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#challenge-description">Challenge Description</a></li>
+    <li><a href="#solution">Solution</a></li>
+    <li><a href="#things-i-learned-from-this-challenge">Things I learned from this challenge</a></li>
+  </ul>
+</nav>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="challenge-description">Challenge Description<a hidden class="anchor" aria-hidden="true" href="#challenge-description">#</a></h2>
+<blockquote>
+<p>Welp, time to do it again.</p>
+<p>Unable to install? That is a part of the challenge, try to overcome it.</p>
+<p>Author: Trailbl4z3r &amp; Monaruku</p>
+<p>hint:
+Tbh this is not a natively built app, more like something just wrapped into an app</p>
+<p><a href="static/World_II.apk">World-II.apk</a></p>
+</blockquote>
+<h2 id="solution">Solution<a hidden class="anchor" aria-hidden="true" href="#solution">#</a></h2>
+<p>Since it&rsquo;s an APK file, Lets start with <code>jadx-gui</code> for static analysis. In terms of static analysis, it&rsquo;s always best to check out <code>AndroidManifest.xml</code> first.</p>
+<p><img alt="alt text" loading="lazy" src="/posts/wgmy2024-world-ii/img/index.png#center"></p>
+<p>Based on the code, there&rsquo;s only one activity which is <code>systems.altimit.rpgmakermv.WebPlayerActivity</code>. Double click and see the activity code. There&rsquo;s a lot of function in the <code>WebPlayerActivity</code> but I&rsquo;ll be focusing on <code>onCreate</code> function first as that it is the starting point for all activities.</p>
+<p><img alt="alt text" loading="lazy" src="/posts/wgmy2024-world-ii/img/index-1.png#center"></p>
+<p>According to the code, it is trying to construct the game by getting the value of <code>id.application.rpgmakermv.R.string.mv_project_index</code>. I then tried to have a look and search for the strings values. By using the global search feature in <code>jadx-gui</code>, I managed to get the strings value.</p>
+<p><img alt="alt text" loading="lazy" src="/posts/wgmy2024-world-ii/img/index-2.png#center"></p>
+<p>Now that I know the value is <code>//android_asset/www/index.html</code>, my first thought is checking out for the files using the global search feature.</p>
+<p><img alt="alt text" loading="lazy" src="/posts/wgmy2024-world-ii/img/index-3.png#center"></p>
+<p>While the <code>index.html</code> does not have a lot of code, I noticed that it&rsquo;s using <code>main.js</code>. I then look for it and have a look in it.</p>
+<p><img alt="alt text" loading="lazy" src="/posts/wgmy2024-world-ii/img/index-4.png#center"></p>
+<p>Looking into <code>main.js</code>, there&rsquo;s a lot of code and several script as well. I then look into each of it and see which is interesting.</p>
+<p><img alt="alt text" loading="lazy" src="/posts/wgmy2024-world-ii/img/index-5.png#center"></p>
+<p>Looking into <code>rmmz_managers.js</code>, I noticed that database file that are stored as json file. I then look into <code>Actors.json</code> as it seems like the game character&rsquo;s database file.</p>
+<p><img alt="alt text" loading="lazy" src="/posts/wgmy2024-world-ii/img/index-6.png#center"></p>
+<p>Since this is a json file, I think that I could modify the json file and repack the apk to make the me win easily. Since I have limited information at the moment, I tried to run the apk and see how the game works.</p>
+<p><img alt="alt text" loading="lazy" src="/posts/wgmy2024-world-ii/img/index-7.png#center"></p>
+<p>Here&rsquo;s how the main page looks like, which is similar to the <code>index.html</code>. I then started to play around to get more information.</p>
+<p><img alt="alt text" loading="lazy" src="/posts/wgmy2024-world-ii/img/index-8.png#center"></p>
+<p>Here&rsquo;s my current stat and equipment. I then look into the <code>Actors.json</code> to compare and identify which value I should modify. I noticed that the <code>equip</code> is the current weapon and body that the character has. The weapon database file is <code>Weapons.json</code>.</p>
+<p><img alt="alt text" loading="lazy" src="/posts/wgmy2024-world-ii/img/index-9.png#center"></p>
+<p>The id of the weapon is same as the number provided in <code>equip</code> in <code>Actors.json</code>. My next thought was to increase the damage of the weapon <code>Dragon Blade</code> since I could just edit the json file and repack it. While I have no idea, the <code>params</code> definitely consist the damage of the weapon. I then randomly edit every <code>params</code> into high value. To do so, I&rsquo;ll need to unpack first.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-1"> 1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-2"> 2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-3"> 3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-4"> 4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-5"> 5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-6"> 6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-7"> 7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-8"> 8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-9"> 9</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-10"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-10">10</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-11"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-11">11</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-12"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-12">12</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-13"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-13">13</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS D:\Desktop\Android\world2&gt; apktool d .\World_II.apk
+</span></span><span style="display:flex;"><span>I: Using Apktool <span style="color:#ae81ff">2.10</span>.0 on World_II.apk with <span style="color:#ae81ff">8</span> thread(s).
+</span></span><span style="display:flex;"><span>I: Baksmaling classes.dex...
+</span></span><span style="display:flex;"><span>I: Loading resource table...
+</span></span><span style="display:flex;"><span>I: Decoding file-resources...
+</span></span><span style="display:flex;"><span>I: Loading resource table from file<span style="color:#960050;background-color:#1e0010">:</span> C:\Users\a\AppData\Local\apktool\framework\<span style="color:#ae81ff">1</span>.apk
+</span></span><span style="display:flex;"><span>I: Decoding values */* XMLs...
+</span></span><span style="display:flex;"><span>I: Decoding AndroidManifest.xml with resources...
+</span></span><span style="display:flex;"><span>I: Regular manifest package...
+</span></span><span style="display:flex;"><span>I: Copying assets and libs...
+</span></span><span style="display:flex;"><span>I: Copying unknown files...
+</span></span><span style="display:flex;"><span>I: Copying original files...
+</span></span><span style="display:flex;"><span>Press any key to <span style="color:#66d9ef">continue</span> . . .
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>After unpack the APK file, search for <code>Weapons.json</code> and modfiy the <code>params</code> value of <code>Dragon Blade</code> to 999. After modifying it, repack it.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-1"> 1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-2"> 2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-3"> 3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-4"> 4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-5"> 5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-6"> 6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-7"> 7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-8"> 8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-9"> 9</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-10"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-10">10</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS D:\Desktop\Android\world2&gt; apktool b .\World_II\ -o world-<span style="color:#ae81ff">2</span>-modified.apk
+</span></span><span style="display:flex;"><span>I: Using Apktool <span style="color:#ae81ff">2.10</span>.0 with <span style="color:#ae81ff">8</span> thread(s).
+</span></span><span style="display:flex;"><span>I: Checking whether sources has changed...
+</span></span><span style="display:flex;"><span>I: Smaling smali folder into classes.dex...
+</span></span><span style="display:flex;"><span>I: Checking whether resources has changed...
+</span></span><span style="display:flex;"><span>I: Building resources...
+</span></span><span style="display:flex;"><span>I: Building apk file...
+</span></span><span style="display:flex;"><span>I: Copying unknown files/dir...
+</span></span><span style="display:flex;"><span>I: Built apk into<span style="color:#960050;background-color:#1e0010">:</span> world-<span style="color:#ae81ff">2</span>-modified.apk
+</span></span><span style="display:flex;"><span>Press any key to <span style="color:#66d9ef">continue</span> . . .
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>After repacking the APK, remember to sign it. To do so, create a keystore.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-1"> 1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-2"> 2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-3"> 3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-4"> 4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-5"> 5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-6"> 6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-7"> 7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-8"> 8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-9"> 9</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-10"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-10">10</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-11"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-11">11</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-12"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-12">12</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-13"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-13">13</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-14"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-14">14</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-15"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-15">15</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS D:\Desktop\Android\world2&gt; keytool -genkey -v -keystore modify.keystore -alias modify_key -keyalg RSA -keysize <span style="color:#ae81ff">2048</span> -validity <span style="color:#ae81ff">10000</span>
+</span></span><span style="display:flex;"><span>Enter keystore password<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>Re-enter new password<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>Enter the distinguished name. Provide a single dot (.) to leave a sub-component empty or press ENTER to use the <span style="color:#66d9ef">default</span> value <span style="color:#66d9ef">in</span> braces.
+</span></span><span style="display:flex;"><span>What is your first and last name?
+</span></span><span style="display:flex;"><span>What is the name of your organizational unit?
+</span></span><span style="display:flex;"><span>What is the name of your organization?
+</span></span><span style="display:flex;"><span>What is the name of your City or Locality?
+</span></span><span style="display:flex;"><span>What is the name of your State or Province?
+</span></span><span style="display:flex;"><span>What is the two-letter country code <span style="color:#66d9ef">for</span> this unit?
+</span></span><span style="display:flex;"><span>Is CN=a, OU=Unknown, O=Unknown, L=Unknown, ST=Unknown, C=Unknown correct?
+</span></span><span style="display:flex;"><span>  [<span style="color:#66d9ef">no</span>]<span style="color:#960050;background-color:#1e0010">:</span>  yes
+</span></span><span style="display:flex;"><span>Generating <span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">048</span> bit RSA key pair and self-signed certificate (SHA384withRSA) with a validity of <span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">000</span> days
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span><span style="color:#960050;background-color:#1e0010">:</span> CN=a, OU=Unknown, O=Unknown, L=Unknown, ST=Unknown, C=Unknown
+</span></span><span style="display:flex;"><span>[<span style="color:#66d9ef">Storing modify.keystore</span>]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>After the keystore is created, sign the APK file.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-1">1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-2">2</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS D:\Desktop\Android\world2&gt; apksigner sign --ks .\modify.keystore .\world-<span style="color:#ae81ff">2</span>-modified.apk
+</span></span><span style="display:flex;"><span>Keystore password <span style="color:#66d9ef">for</span> signer <span style="color:#75715e">#1:</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>After that, Just run the game and hope everything is working.</p>
+<p><img alt="alt text" loading="lazy" src="/posts/wgmy2024-world-ii/img/index-10.png#center"></p>
+<p>As shown in image, I managed to change the weapon stats by modifying the <code>params</code> value. Now that my stats are high, I could easily win the game.</p>
+<p><img alt="alt text" loading="lazy" src="/posts/wgmy2024-world-ii/img/index-11.png#center"></p>
+<p>After I win each boss, I&rsquo;ll get a partial flag.</p>
+<ul>
+<li>Flag 1</li>
+</ul>
+<p><img alt="alt text" loading="lazy" src="/posts/wgmy2024-world-ii/img/index-12.png#center"></p>
+<ul>
+<li>Flag 2</li>
+</ul>
+<p><img alt="alt text" loading="lazy" src="/posts/wgmy2024-world-ii/img/index-13.png#center"></p>
+<ul>
+<li>Flag 3</li>
+</ul>
+<p><img alt="alt text" loading="lazy" src="/posts/wgmy2024-world-ii/img/index-14.png#center"></p>
+<ul>
+<li>Flag 4
+<ul>
+<li>This part of flag appear in the map after winning boss 4</li>
+</ul>
+</li>
+</ul>
+<p><img alt="alt text" loading="lazy" src="/posts/wgmy2024-world-ii/img/index-15.png#center"></p>
+<ul>
+<li>Flag 5
+<ul>
+<li>After winning the boss, you will need to talk to a dude and it will give you <code>23 7 13 25</code> which is order of the alphabelt <code>wgmy</code>.</li>
+<li>Then a QR will be provided.</li>
+<li><code>4f51785}</code></li>
+</ul>
+</li>
+</ul>
+<p><img alt="alt text" loading="lazy" src="/posts/wgmy2024-world-ii/img/index-16.png#center"></p>
+<h2 id="things-i-learned-from-this-challenge">Things I learned from this challenge<a hidden class="anchor" aria-hidden="true" href="#things-i-learned-from-this-challenge">#</a></h2>
+<ul>
+<li>reading code using static analysis</li>
+<li>patching the APK</li>
+<li>Cheat the game to win</li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://callmeks.github.io/tags/android-ctf/">Android CTF</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://callmeks.github.io/posts/my-journey-of-cybersec/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>My Journey of Cybersec</span>
+  </a>
+  <a class="next" href="https://callmeks.github.io/posts/android-as-rubber-ducky/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Android as Rubber Ducky</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2024 <a href="https://callmeks.github.io/">KS Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

