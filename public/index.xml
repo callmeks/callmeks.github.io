@@ -331,6 +331,16 @@ Tbh this is not a natively built app, more like something just wrapped into an a
     &lt;/path&gt;
 &lt;/svg&gt;
     &lt;/a&gt;
+    &lt;a href=&#34;https://www.youtube.com/@imkstho&#34; style=&#34;box-shadow:none&#34; target=&#34;_blank&#34; rel=&#34;noopener noreferrer me&#34;
+        title=&#34;Youtube&#34;&gt;
+        &lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34;
+    stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34;&gt;
+    &lt;path
+        d=&#34;M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z&#34;&gt;
+    &lt;/path&gt;
+    &lt;polygon points=&#34;9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02&#34;&gt;&lt;/polygon&gt;
+&lt;/svg&gt;
+    &lt;/a&gt;
 &lt;/div&gt;</description>
     </item>
   </channel>

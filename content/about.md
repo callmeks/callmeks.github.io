@@ -15,6 +15,8 @@ params:
       url: "https://www.linkedin.com/in/loh-kae-shyan/"
     - name: x
       url: "https://x.com/callmeks24"
+    - name: youtube
+      url: "https://www.youtube.com/@imkstho"
 ---
 
 Hi there, My name is Loh Kae Shyan or you can just call me **KS**. I no longer a student but instead working in a penetration testing company. I just like to share random content of what I have learn here for others to learn as well. 

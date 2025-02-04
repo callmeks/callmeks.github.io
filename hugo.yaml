@@ -41,6 +41,8 @@ params:
       url: "https://www.linkedin.com/in/loh-kae-shyan/"
     - name: x
       url: "https://x.com/callmeks24"
+    - name: youtube
+      url: "https://www.youtube.com/@imkstho"
 
 markup:
   highlight:

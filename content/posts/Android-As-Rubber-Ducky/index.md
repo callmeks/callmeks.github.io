@@ -60,7 +60,7 @@ After everything is done, I could just run the `poc_pc_gadget` to perform HID at
 
 Here's a demonstration on how it works.
 
-{{< video src="vid/poc" autoplay="false" controls="true" loop="true" width="100%">}}
+{{< youtube id="nmWYHFWVi6E" >}}
 
 ## References
 
