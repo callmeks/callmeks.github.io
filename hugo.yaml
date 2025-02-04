@@ -27,7 +27,7 @@ params:
   profileMode:
     enabled: true
     title: "Welcome to my blog"
-    subtitle: "I try hard on random things"
+    subtitle: "I waste a lot of time on random things"
     imageUrl: "https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b?size=200" # optional
     imageTitle: "This is froakie" # optional
     imageWidth: 200 # custom size

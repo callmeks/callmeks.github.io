@@ -155,7 +155,7 @@
         <img draggable="false" src="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b?size=200" alt="This is froakie" title="This is froakie"
             height="200" width="200" />
         <h1>Welcome to my blog</h1>
-        <span>I try hard on random things</span><div class="social-icons" >
+        <span>I waste a lot of time on random things</span><div class="social-icons" >
     <a href="https://github.com/callmeks" target="_blank" rel="noopener noreferrer me"
         title="Github">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -214,6 +214,36 @@
     </svg>
 </a>
 
+<script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
+<script>
+    kofiWidgetOverlay.draw('imkstho', {
+        'type': 'floating-chat',
+        'floating-chat.donateButton.text': 'Feed Mee',
+        'floating-chat.donateButton.background-color': '#FF5E5B',
+        'floating-chat.donatebutton.image': 'https://media.giphy.com/media/kgKFcQk6oa1WIdHNSl/giphy.gif',
+        'floating-chat.donateButton.text-color': '#ffffff'
+    });
+</script>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js" integrity="sha512-9ZKhgaFdKlsELap/dGw3Iaz5Bj+Las0XXZiRKYZaN9QArg6FtkD5rULNmNH4rTCTFxjPiBGr3MX8smRADRorDA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+const images = Array.from(document.querySelectorAll(".post-content img"));
+images.forEach(img => {
+  mediumZoom(img, {
+    margin: 0,  
+    background: '#000000',
+    scrollOffset: 40,  
+    container: null,  
+    template: null  
+  });
+});
+</script>
+
+
+
 <script>
     let menu = document.getElementById('menu')
     if (menu) {
@@ -267,17 +297,6 @@
         }
     })
 
-</script>
-
-<script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
-<script>
-    kofiWidgetOverlay.draw('imkstho', {
-        'type': 'floating-chat',
-        'floating-chat.donateButton.text': 'Feed Mee',
-        'floating-chat.donateButton.background-color': '#FF5E5B',
-        'floating-chat.donatebutton.image': 'https://media.giphy.com/media/kgKFcQk6oa1WIdHNSl/giphy.gif',
-        'floating-chat.donateButton.text-color': '#ffffff'
-    });
 </script>
 </body>
 

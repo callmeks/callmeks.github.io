@@ -271,6 +271,36 @@
     </svg>
 </a>
 
+<script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
+<script>
+    kofiWidgetOverlay.draw('imkstho', {
+        'type': 'floating-chat',
+        'floating-chat.donateButton.text': 'Feed Mee',
+        'floating-chat.donateButton.background-color': '#FF5E5B',
+        'floating-chat.donatebutton.image': 'https://media.giphy.com/media/kgKFcQk6oa1WIdHNSl/giphy.gif',
+        'floating-chat.donateButton.text-color': '#ffffff'
+    });
+</script>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js" integrity="sha512-9ZKhgaFdKlsELap/dGw3Iaz5Bj+Las0XXZiRKYZaN9QArg6FtkD5rULNmNH4rTCTFxjPiBGr3MX8smRADRorDA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+const images = Array.from(document.querySelectorAll(".post-content img"));
+images.forEach(img => {
+  mediumZoom(img, {
+    margin: 0,  
+    background: '#000000',
+    scrollOffset: 40,  
+    container: null,  
+    template: null  
+  });
+});
+</script>
+
+
+
 <script>
     let menu = document.getElementById('menu')
     if (menu) {
@@ -324,17 +354,6 @@
         }
     })
 
-</script>
-
-<script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
-<script>
-    kofiWidgetOverlay.draw('imkstho', {
-        'type': 'floating-chat',
-        'floating-chat.donateButton.text': 'Feed Mee',
-        'floating-chat.donateButton.background-color': '#FF5E5B',
-        'floating-chat.donatebutton.image': 'https://media.giphy.com/media/kgKFcQk6oa1WIdHNSl/giphy.gif',
-        'floating-chat.donateButton.text-color': '#ffffff'
-    });
 </script>
 </body>
 
