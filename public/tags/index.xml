@@ -6,13 +6,20 @@
     <description>Recent content in Tags on KS Blog</description>
     <generator>Hugo -- 0.139.3</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 29 Dec 2024 13:40:56 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 19 Feb 2025 20:05:18 +0800</lastBuildDate>
     <atom:link href="https://callmeks.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Android CTF</title>
       <link>https://callmeks.github.io/tags/android-ctf/</link>
-      <pubDate>Sun, 29 Dec 2024 13:40:56 +0800</pubDate>
+      <pubDate>Wed, 19 Feb 2025 20:05:18 +0800</pubDate>
       <guid>https://callmeks.github.io/tags/android-ctf/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>HTB</title>
+      <link>https://callmeks.github.io/tags/htb/</link>
+      <pubDate>Wed, 19 Feb 2025 20:05:18 +0800</pubDate>
+      <guid>https://callmeks.github.io/tags/htb/</guid>
       <description></description>
     </item>
     <item>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Android CTF on KS Blog</title>
-    <link>https://callmeks.github.io/tags/android-ctf/</link>
-    <description>Recent content in Android CTF on KS Blog</description>
+    <title>HTB on KS Blog</title>
+    <link>https://callmeks.github.io/tags/htb/</link>
+    <description>Recent content in HTB on KS Blog</description>
     <generator>Hugo -- 0.139.3</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 19 Feb 2025 20:05:18 +0800</lastBuildDate>
-    <atom:link href="https://callmeks.github.io/tags/android-ctf/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://callmeks.github.io/tags/htb/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>HTB APKey</title>
       <link>https://callmeks.github.io/posts/htb-apkey/</link>
@@ -58,35 +58,6 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;Since it&amp;rsquo;s gonna be &lt;code&gt;MainActivity&lt;/code&gt;, we could have a look at the code. Inside the code, we have something interesting.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>WGMY2024 World II</title>
-      <link>https://callmeks.github.io/posts/wgmy2024-world-ii/</link>
-      <pubDate>Sun, 29 Dec 2024 13:40:56 +0800</pubDate>
-      <guid>https://callmeks.github.io/posts/wgmy2024-world-ii/</guid>
-      <description>&lt;h2 id=&#34;challenge-description&#34;&gt;Challenge Description&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Welp, time to do it again.&lt;/p&gt;
-&lt;p&gt;Unable to install? That is a part of the challenge, try to overcome it.&lt;/p&gt;
-&lt;p&gt;Author: Trailbl4z3r &amp;amp; Monaruku&lt;/p&gt;
-&lt;p&gt;hint:
-Tbh this is not a natively built app, more like something just wrapped into an app&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;static/World_II.apk&#34;&gt;World-II.apk&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
-&lt;p&gt;Since it&amp;rsquo;s an APK file, Lets start with &lt;code&gt;jadx-gui&lt;/code&gt; for static analysis. In terms of static analysis, it&amp;rsquo;s always best to check out &lt;code&gt;AndroidManifest.xml&lt;/code&gt; first.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Journey of Creating Android CTF</title>
-      <link>https://callmeks.github.io/posts/journey-of-creating-android-ctf/</link>
-      <pubDate>Tue, 03 Dec 2024 16:07:05 +0800</pubDate>
-      <guid>https://callmeks.github.io/posts/journey-of-creating-android-ctf/</guid>
-      <description>&lt;h2 id=&#34;overview-about-the-journey&#34;&gt;Overview about the journey&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;I have 0 knowledge about kotlin as well as creating Android APK. Most of the things that I mentioned below is also my first time.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;part-0&#34;&gt;PART 0&lt;/h2&gt;
-&lt;p&gt;Here&amp;rsquo;s the part where I started out by exploring how to create an Android APK. Basically just tons of youtube vidoes and blogs. The final decision? I just go with Android Studio. The installation is simple but remember to download system image for Virtual Device which is also a part of Android Studio.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

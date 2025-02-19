@@ -19,7 +19,8 @@ Yes, I do have certification although its not even worth mentioning.
 
 ## Things that I would like to learn 
 
-- [ ] https://app.hextree.io/map
+- [x] https://app.hextree.io/map/android
+- [ ] Now what ? no idea yet
 
 
 ## Social Media
