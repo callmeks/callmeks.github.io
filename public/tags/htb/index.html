@@ -144,6 +144,23 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">HTB SAW
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Challenge Description The malware forensics lab identified a new technique for hiding and executing code dynamically. A sample that seems to use this technique has just arrived in their queue. Can you help them?
+SAW.apk
+Solution This is something that I think quite hard but yea another fun challenge.
+Static Analysis As usual, I started with jadx-gui for reading the decompiled Java code.
+1 2 3 4 5 6 &lt;activity android:name=&#34;com.stego.saw.MainActivity&#34;&gt; &lt;intent-filter&gt; &lt;action android:name=&#34;android.intent.action.MAIN&#34;/&gt; &lt;category android:name=&#34;android.intent.category.LAUNCHER&#34;/&gt; &lt;/intent-filter&gt; &lt;/activity&gt; It seems like there’s only one activity to focus on. I then have a look in it. Inside the MainActivity.java, there’s a few that I think its interesting and useful.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-02-19 22:38:23 +0800 +08'>February 19, 2025</span>&nbsp;·&nbsp;10 min&nbsp;·&nbsp;1987 words</footer>
+  <a class="entry-link" aria-label="post link to HTB SAW" href="https://callmeks.github.io/posts/htb-saw/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">HTB APKey
     </h2>
   </header>

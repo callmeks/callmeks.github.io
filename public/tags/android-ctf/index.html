@@ -144,6 +144,23 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">HTB SAW
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Challenge Description The malware forensics lab identified a new technique for hiding and executing code dynamically. A sample that seems to use this technique has just arrived in their queue. Can you help them?
+SAW.apk
+Solution This is something that I think quite hard but yea another fun challenge.
+Static Analysis As usual, I started with jadx-gui for reading the decompiled Java code.
+1 2 3 4 5 6 &lt;activity android:name=&#34;com.stego.saw.MainActivity&#34;&gt; &lt;intent-filter&gt; &lt;action android:name=&#34;android.intent.action.MAIN&#34;/&gt; &lt;category android:name=&#34;android.intent.category.LAUNCHER&#34;/&gt; &lt;/intent-filter&gt; &lt;/activity&gt; It seems like there’s only one activity to focus on. I then have a look in it. Inside the MainActivity.java, there’s a few that I think its interesting and useful.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-02-19 22:38:23 +0800 +08'>February 19, 2025</span>&nbsp;·&nbsp;10 min&nbsp;·&nbsp;1987 words</footer>
+  <a class="entry-link" aria-label="post link to HTB SAW" href="https://callmeks.github.io/posts/htb-saw/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">HTB APKey
     </h2>
   </header>
@@ -175,20 +192,12 @@ Solution Since it’s an APK file, Lets start with jadx-gui for static analysis.
   <footer class="entry-footer"><span title='2024-12-29 13:40:56 +0800 +08'>December 29, 2024</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;915 words</footer>
   <a class="entry-link" aria-label="post link to WGMY2024 World II" href="https://callmeks.github.io/posts/wgmy2024-world-ii/"></a>
 </article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Journey of Creating Android CTF
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Overview about the journey I have 0 knowledge about kotlin as well as creating Android APK. Most of the things that I mentioned below is also my first time.
-PART 0 Here’s the part where I started out by exploring how to create an Android APK. Basically just tons of youtube vidoes and blogs. The final decision? I just go with Android Studio. The installation is simple but remember to download system image for Virtual Device which is also a part of Android Studio.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2024-12-03 16:07:05 +0800 +08'>December 3, 2024</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;1133 words</footer>
-  <a class="entry-link" aria-label="post link to Journey of Creating Android CTF" href="https://callmeks.github.io/posts/journey-of-creating-android-ctf/"></a>
-</article>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="next" href="https://callmeks.github.io/tags/android-ctf/page/2/">Next&nbsp;&nbsp;»
+    </a>
+  </nav>
+</footer>
     </main>
     
 <footer class="footer">
