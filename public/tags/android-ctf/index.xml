@@ -6,8 +6,21 @@
     <description>Recent content in Android CTF on KS Blog</description>
     <generator>Hugo -- 0.139.3</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Feb 2025 22:38:23 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 20 Mar 2025 16:28:41 +0800</lastBuildDate>
     <atom:link href="https://callmeks.github.io/tags/android-ctf/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MHL IOT Connect</title>
+      <link>https://callmeks.github.io/posts/mhl-iot-connect/</link>
+      <pubDate>Thu, 20 Mar 2025 16:28:41 +0800</pubDate>
+      <guid>https://callmeks.github.io/posts/mhl-iot-connect/</guid>
+      <description>&lt;h2 id=&#34;challenge-description&#34;&gt;Challenge Description&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This challenge focuses on exploiting a security flaw related to the broadcast receiver in the &amp;ldquo;IOT Connect&amp;rdquo; application, allowing unauthorized users to activate the master switch, which can turn on all connected devices. The goal is to send a broadcast in a way that only authenticated users can trigger the master switch.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;static/IOTConnect.apk&#34;&gt;IOT Connect APK&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
+&lt;p&gt;As usual, I started by performing static analysis and dynamic analysis to fully understand what the code is doing.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>HTB SAW</title>
       <link>https://callmeks.github.io/posts/htb-saw/</link>
