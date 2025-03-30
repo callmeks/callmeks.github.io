@@ -6,8 +6,23 @@
     <description>Recent content in Android CTF on KS Blog</description>
     <generator>Hugo -- 0.139.3</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 21 Mar 2025 20:35:52 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 30 Mar 2025 12:42:08 +0800</lastBuildDate>
     <atom:link href="https://callmeks.github.io/tags/android-ctf/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MHL Cyclic Scanner</title>
+      <link>https://callmeks.github.io/posts/mhl-cyclic-scanner/</link>
+      <pubDate>Sun, 30 Mar 2025 12:42:08 +0800</pubDate>
+      <guid>https://callmeks.github.io/posts/mhl-cyclic-scanner/</guid>
+      <description>&lt;h2 id=&#34;challenge-description&#34;&gt;Challenge Description&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Welcome to the Cyclic Scanner Challenge! This lab is designed to mimic real-world scenarios where vulnerabilities within Android services lead to exploitable situations. Participants will have the opportunity to exploit these vulnerabilities to achieve remote code execution (RCE) on an Android device.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;static/cyclicscanner.apk&#34;&gt;cyclicscanner.apk&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
+&lt;p&gt;I started by performing static analysis to get an understanding on what the application is doing.&lt;/p&gt;
+&lt;h3 id=&#34;static-analysis&#34;&gt;Static Analysis&lt;/h3&gt;
+&lt;p&gt;I started out by looking into the &lt;code&gt;AndroidManifest.xml&lt;/code&gt; after decompiling using &lt;code&gt;jadx-gui&lt;/code&gt;.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>MHL Strings</title>
       <link>https://callmeks.github.io/posts/mhl-strings/</link>

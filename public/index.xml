@@ -6,7 +6,7 @@
     <description>Recent content on KS Blog</description>
     <generator>Hugo -- 0.139.3</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 21 Mar 2025 20:35:52 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 30 Mar 2025 12:42:08 +0800</lastBuildDate>
     <atom:link href="https://callmeks.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>My Journey of Cybersec</title>
@@ -22,6 +22,21 @@
 &lt;h2 id=&#34;how-i-learn-ethical-hacking&#34;&gt;How I learn ethical hacking&lt;/h2&gt;
 &lt;h3 id=&#34;part-0&#34;&gt;Part 0&lt;/h3&gt;
 &lt;p&gt;Back then, I don&amp;rsquo;t really know about red team and blue team and I just decided to learn hacking for fun. Since hacking others looks more fun, I decided to look into videos and anything related. The first courses I go through is actually Practical Ethical Hacking from TCM Security. After going through the first few topic of the course, I have some basic understanding about how hacking works (that&amp;rsquo;s what I thought back then). Eventually, I stopped the course halfway because the course started to go through hackthebox retired machine and I don&amp;rsquo;t have a VIP account to follow along. Instead, I decided to move on with PicoCTF and Tryhackme as some of the people mentioned this 2 platform is great for learning cybersecurity. I further improved my basic skills such as linux command and getting more new knowledge from Tryhackme since it has a lot of different room. As for PicoCTF, I was stunned for quite some times as that is the first time I find out about CTF. That is also when I found out that there are a lot of different hacking.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>MHL Cyclic Scanner</title>
+      <link>https://callmeks.github.io/posts/mhl-cyclic-scanner/</link>
+      <pubDate>Sun, 30 Mar 2025 12:42:08 +0800</pubDate>
+      <guid>https://callmeks.github.io/posts/mhl-cyclic-scanner/</guid>
+      <description>&lt;h2 id=&#34;challenge-description&#34;&gt;Challenge Description&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Welcome to the Cyclic Scanner Challenge! This lab is designed to mimic real-world scenarios where vulnerabilities within Android services lead to exploitable situations. Participants will have the opportunity to exploit these vulnerabilities to achieve remote code execution (RCE) on an Android device.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;static/cyclicscanner.apk&#34;&gt;cyclicscanner.apk&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
+&lt;p&gt;I started by performing static analysis to get an understanding on what the application is doing.&lt;/p&gt;
+&lt;h3 id=&#34;static-analysis&#34;&gt;Static Analysis&lt;/h3&gt;
+&lt;p&gt;I started out by looking into the &lt;code&gt;AndroidManifest.xml&lt;/code&gt; after decompiling using &lt;code&gt;jadx-gui&lt;/code&gt;.&lt;/p&gt;</description>
     </item>
     <item>
       <title>MHL Strings</title>
