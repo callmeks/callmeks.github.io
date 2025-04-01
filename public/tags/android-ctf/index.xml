@@ -6,8 +6,23 @@
     <description>Recent content in Android CTF on KS Blog</description>
     <generator>Hugo -- 0.139.3</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 31 Mar 2025 22:47:33 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 01 Apr 2025 18:19:43 +0800</lastBuildDate>
     <atom:link href="https://callmeks.github.io/tags/android-ctf/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MHL Guess Me</title>
+      <link>https://callmeks.github.io/posts/mhl-guess-me/</link>
+      <pubDate>Tue, 01 Apr 2025 18:19:43 +0800</pubDate>
+      <guid>https://callmeks.github.io/posts/mhl-guess-me/</guid>
+      <description>&lt;h2 id=&#34;challenge-description&#34;&gt;Challenge Description&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Welcome to the &amp;ldquo;Guess Me&amp;rdquo; Deep Link Exploitation Challenge! Immerse yourself in the world of cybersecurity with this hands-on lab. This challenge revolves around a fictitious &amp;ldquo;Guess Me&amp;rdquo; app, shedding light on a critical security flaw related to deep links that can lead to remote code execution within the app&amp;rsquo;s framework.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;static/guessme.apk&#34;&gt;guessme.apk&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
+&lt;p&gt;I started out by performing static analysis.&lt;/p&gt;
+&lt;h3 id=&#34;static-analysis&#34;&gt;Static Analysis&lt;/h3&gt;
+&lt;p&gt;As usual, &lt;code&gt;jadx-gui&lt;/code&gt; for reading the code.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>MHL Secure Notes</title>
       <link>https://callmeks.github.io/posts/mhl-secure-notes/</link>
