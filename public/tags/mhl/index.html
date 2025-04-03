@@ -144,6 +144,23 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">MHL Food Store
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Challenge Description Welcome to the Android App Security Lab: SQL Injection Challenge! Dive into the world of cybersecurity with our hands-on lab. This challenge is centered around a fictitious “Food Store” app, highlighting the critical security flaw of SQL Injection (SQLi) within the app’s framework.
+foodstore.apk
+Solution As usual, static analysis to understand first.
+Static Analysis I started out by reading the AndroidManifest.xml code first.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 &lt;activity android:name=&#34;com.mobilehackinglab.foodstore.Signup&#34; android:exported=&#34;false&#34;/&gt; &lt;activity android:name=&#34;com.mobilehackinglab.foodstore.MainActivity&#34; android:exported=&#34;true&#34;/&gt; &lt;activity android:name=&#34;com.mobilehackinglab.foodstore.LoginActivity&#34; android:exported=&#34;true&#34;&gt; &lt;intent-filter&gt; &lt;action android:name=&#34;android.intent.action.MAIN&#34;/&gt; &lt;category android:name=&#34;android.intent.category.LAUNCHER&#34;/&gt; &lt;/intent-filter&gt; &lt;/activity&gt; There is a Signup, MainActivity and LoginActivity activity but only Signup activity is not exported. Reading the objective provided, this challenge will be focused in the signup function.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-04-03 22:58:30 +0800 +08'>April 3, 2025</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;770 words</footer>
+  <a class="entry-link" aria-label="post link to MHL Food Store" href="https://callmeks.github.io/posts/mhl-food-store/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">MHL Guess Me
     </h2>
   </header>
@@ -172,22 +189,6 @@ Static Analysis To read the apk code, I used jadx-gui.
   </div>
   <footer class="entry-footer"><span title='2025-03-31 22:47:33 +0800 +08'>March 31, 2025</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;596 words</footer>
   <a class="entry-link" aria-label="post link to MHL Secure Notes" href="https://callmeks.github.io/posts/mhl-secure-notes/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">MHL Cyclic Scanner
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Challenge Description Welcome to the Cyclic Scanner Challenge! This lab is designed to mimic real-world scenarios where vulnerabilities within Android services lead to exploitable situations. Participants will have the opportunity to exploit these vulnerabilities to achieve remote code execution (RCE) on an Android device.
-cyclicscanner.apk
-Solution I started by performing static analysis to get an understanding on what the application is doing.
-Static Analysis I started out by looking into the AndroidManifest.xml after decompiling using jadx-gui.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2025-03-30 12:42:08 +0800 +08'>March 30, 2025</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;809 words</footer>
-  <a class="entry-link" aria-label="post link to MHL Cyclic Scanner" href="https://callmeks.github.io/posts/mhl-cyclic-scanner/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
