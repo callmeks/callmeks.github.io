@@ -6,8 +6,23 @@
     <description>Recent content in MHL on KS Blog</description>
     <generator>Hugo -- 0.139.3</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 03 Apr 2025 22:58:30 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 04 Apr 2025 22:05:31 +0800</lastBuildDate>
     <atom:link href="https://callmeks.github.io/tags/mhl/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MHL Post Board</title>
+      <link>https://callmeks.github.io/posts/mhl-post-board/</link>
+      <pubDate>Fri, 04 Apr 2025 22:05:31 +0800</pubDate>
+      <guid>https://callmeks.github.io/posts/mhl-post-board/</guid>
+      <description>&lt;h2 id=&#34;challenge-description&#34;&gt;Challenge Description&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Welcome to the Android Insecure WebView Challenge! This challenge is designed to delve into the complexities of Android&amp;rsquo;s WebView component, exploiting a Cross-Site Scripting (XSS) vulnerability to achieve Remote Code Execution (RCE). It&amp;rsquo;s an immersive opportunity for participants to engage with Android application security, particularly focusing on WebView security issues.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;static/postboard.apk&#34;&gt;postboard.apk&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
+&lt;p&gt;As usual, I started by performing static analysis to get some understanding of the application.&lt;/p&gt;
+&lt;h3 id=&#34;static-analysis&#34;&gt;Static Analysis&lt;/h3&gt;
+&lt;p&gt;I started out by reading the &lt;code&gt;AndroidManifest.xml&lt;/code&gt; code after decompiling using &lt;code&gt;jadx-gui&lt;/code&gt;.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>MHL Food Store</title>
       <link>https://callmeks.github.io/posts/mhl-food-store/</link>
