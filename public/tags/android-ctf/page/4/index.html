@@ -144,6 +144,22 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">HTB APKey
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Challenge Description This app contains some unique keys. Can you get one?
+APKey.apk
+Solution Static Analysis The first step is always static analysis. I started by using jadx-gui to see the decompiled Java code. Looking into the AndroidManifest.xml, it looks like there’s only one activity which is MainActivity.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 &lt;application android:theme=&#34;@style/Theme.APKey&#34; android:label=&#34;@string/app_name&#34; android:icon=&#34;@mipmap/ic_launcher&#34; android:allowBackup=&#34;true&#34; android:supportsRtl=&#34;true&#34; android:roundIcon=&#34;@mipmap/ic_launcher_round&#34; android:appComponentFactory=&#34;androidx.core.app.CoreComponentFactory&#34;&gt; &lt;activity android:name=&#34;com.example.apkey.MainActivity&#34;&gt; &lt;intent-filter&gt; &lt;action android:name=&#34;android.intent.action.MAIN&#34;/&gt; &lt;category android:name=&#34;android.intent.category.LAUNCHER&#34;/&gt; &lt;/intent-filter&gt; &lt;/activity&gt; &lt;/application&gt; Since it’s gonna be MainActivity, we could have a look at the code. Inside the code, we have something interesting.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-02-19 20:05:18 +0800 +08'>February 19, 2025</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;861 words</footer>
+  <a class="entry-link" aria-label="post link to HTB APKey" href="https://callmeks.github.io/posts/htb-apkey/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">WGMY2024 World II
     </h2>
   </header>
