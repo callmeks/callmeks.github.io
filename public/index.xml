@@ -6,7 +6,7 @@
     <description>Recent content on KS Blog</description>
     <generator>Hugo -- 0.139.3</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 09 Apr 2025 15:35:42 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 21 Apr 2025 21:14:45 +0800</lastBuildDate>
     <atom:link href="https://callmeks.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>My Journey of Cybersec</title>
@@ -22,6 +22,24 @@
 &lt;h2 id=&#34;how-i-learn-ethical-hacking&#34;&gt;How I learn ethical hacking&lt;/h2&gt;
 &lt;h3 id=&#34;part-0&#34;&gt;Part 0&lt;/h3&gt;
 &lt;p&gt;Back then, I don&amp;rsquo;t really know about red team and blue team and I just decided to learn hacking for fun. Since hacking others looks more fun, I decided to look into videos and anything related. The first courses I go through is actually Practical Ethical Hacking from TCM Security. After going through the first few topic of the course, I have some basic understanding about how hacking works (that&amp;rsquo;s what I thought back then). Eventually, I stopped the course halfway because the course started to go through hackthebox retired machine and I don&amp;rsquo;t have a VIP account to follow along. Instead, I decided to move on with PicoCTF and Tryhackme as some of the people mentioned this 2 platform is great for learning cybersecurity. I further improved my basic skills such as linux command and getting more new knowledge from Tryhackme since it has a lot of different room. As for PicoCTF, I was stunned for quite some times as that is the first time I find out about CTF. That is also when I found out that there are a lot of different hacking.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Android Spyware Development</title>
+      <link>https://callmeks.github.io/posts/android-spyware-development/</link>
+      <pubDate>Mon, 21 Apr 2025 21:14:45 +0800</pubDate>
+      <guid>https://callmeks.github.io/posts/android-spyware-development/</guid>
+      <description>&lt;h2 id=&#34;prerequisite&#34;&gt;Prerequisite&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Android Studio&lt;/li&gt;
+&lt;li&gt;kotlin&lt;/li&gt;
+&lt;li&gt;Android Emulator or physical devices&lt;/li&gt;
+&lt;li&gt;Discord as C2&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I tested out this project in API 33 rooted device. Anything above API 33 might need to perform some modification to get everything works.&lt;/p&gt;
+&lt;h2 id=&#34;creating-the-spyware&#34;&gt;Creating the spyware&lt;/h2&gt;
+&lt;p&gt;I created this project using Android Studio and Kotlin. This project took me around 16 hours to complete with massive help of GPT.&lt;/p&gt;
+&lt;h3 id=&#34;part-0&#34;&gt;Part 0&lt;/h3&gt;
+&lt;p&gt;I started off by creating a project in Android Studio by pressing &lt;code&gt;New Project &amp;gt; Empty Activity&lt;/code&gt; and provide a name. It will have some generated code and function.&lt;/p&gt;</description>
     </item>
     <item>
       <title>MHL Config Editor</title>

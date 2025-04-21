@@ -6,8 +6,26 @@
     <description>Recent content in Android on KS Blog</description>
     <generator>Hugo -- 0.139.3</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 04 Dec 2024 16:25:45 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 21 Apr 2025 21:14:45 +0800</lastBuildDate>
     <atom:link href="https://callmeks.github.io/tags/android/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Android Spyware Development</title>
+      <link>https://callmeks.github.io/posts/android-spyware-development/</link>
+      <pubDate>Mon, 21 Apr 2025 21:14:45 +0800</pubDate>
+      <guid>https://callmeks.github.io/posts/android-spyware-development/</guid>
+      <description>&lt;h2 id=&#34;prerequisite&#34;&gt;Prerequisite&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Android Studio&lt;/li&gt;
+&lt;li&gt;kotlin&lt;/li&gt;
+&lt;li&gt;Android Emulator or physical devices&lt;/li&gt;
+&lt;li&gt;Discord as C2&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I tested out this project in API 33 rooted device. Anything above API 33 might need to perform some modification to get everything works.&lt;/p&gt;
+&lt;h2 id=&#34;creating-the-spyware&#34;&gt;Creating the spyware&lt;/h2&gt;
+&lt;p&gt;I created this project using Android Studio and Kotlin. This project took me around 16 hours to complete with massive help of GPT.&lt;/p&gt;
+&lt;h3 id=&#34;part-0&#34;&gt;Part 0&lt;/h3&gt;
+&lt;p&gt;I started off by creating a project in Android Studio by pressing &lt;code&gt;New Project &amp;gt; Empty Activity&lt;/code&gt; and provide a name. It will have some generated code and function.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Android as Rubber Ducky</title>
       <link>https://callmeks.github.io/posts/android-as-rubber-ducky/</link>

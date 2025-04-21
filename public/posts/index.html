@@ -172,6 +172,21 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Android Spyware Development
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Prerequisite Android Studio kotlin Android Emulator or physical devices Discord as C2 I tested out this project in API 33 rooted device. Anything above API 33 might need to perform some modification to get everything works.
+Creating the spyware I created this project using Android Studio and Kotlin. This project took me around 16 hours to complete with massive help of GPT.
+Part 0 I started off by creating a project in Android Studio by pressing New Project &gt; Empty Activity and provide a name. It will have some generated code and function.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-04-21 21:14:45 +0800 +08'>April 21, 2025</span>&nbsp;·&nbsp;9 min&nbsp;·&nbsp;1885 words</footer>
+  <a class="entry-link" aria-label="post link to Android Spyware Development" href="https://callmeks.github.io/posts/android-spyware-development/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">MHL Config Editor
     </h2>
   </header>
@@ -185,23 +200,6 @@ Static Analysis I started by looking into the AndroidManifest.xml.
   </div>
   <footer class="entry-footer"><span title='2025-04-09 15:35:42 +0800 +08'>April 9, 2025</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;757 words</footer>
   <a class="entry-link" aria-label="post link to MHL Config Editor" href="https://callmeks.github.io/posts/mhl-config-editor/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">MHL Note Keeper
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Challenge Description Welcome to the NoteKeeper Application, where users can create and encode short notes. However, lurking within the app is a critical buffer overflow vulnerability. Your mission is to uncover this vulnerability and exploit it to achieve remote code execution.
-notekeeper.apk
-Solution I started out by performing static analysis to look into the code
-Static Analysis I started out by looking into the AndroidManifest.xml.
-1 2 3 4 5 6 7 8 &lt;activity android:name=&#34;com.mobilehackinglab.notekeeper.MainActivity&#34; android:exported=&#34;true&#34;&gt; &lt;intent-filter&gt; &lt;action android:name=&#34;android.intent.action.MAIN&#34;/&gt; &lt;category android:name=&#34;android.intent.category.LAUNCHER&#34;/&gt; &lt;/intent-filter&gt; &lt;/activity&gt; There’s only one activity at the moment so lets look into it.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2025-04-08 23:00:57 +0800 +08'>April 8, 2025</span>&nbsp;·&nbsp;11 min&nbsp;·&nbsp;2323 words</footer>
-  <a class="entry-link" aria-label="post link to MHL Note Keeper" href="https://callmeks.github.io/posts/mhl-note-keeper/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
