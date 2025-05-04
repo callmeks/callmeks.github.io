@@ -6,7 +6,7 @@
     <description>Recent content on KS Blog</description>
     <generator>Hugo -- 0.139.3</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 21 Apr 2025 21:14:45 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 04 May 2025 14:56:10 +0800</lastBuildDate>
     <atom:link href="https://callmeks.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>My Journey of Cybersec</title>
@@ -22,6 +22,20 @@
 &lt;h2 id=&#34;how-i-learn-ethical-hacking&#34;&gt;How I learn ethical hacking&lt;/h2&gt;
 &lt;h3 id=&#34;part-0&#34;&gt;Part 0&lt;/h3&gt;
 &lt;p&gt;Back then, I don&amp;rsquo;t really know about red team and blue team and I just decided to learn hacking for fun. Since hacking others looks more fun, I decided to look into videos and anything related. The first courses I go through is actually Practical Ethical Hacking from TCM Security. After going through the first few topic of the course, I have some basic understanding about how hacking works (that&amp;rsquo;s what I thought back then). Eventually, I stopped the course halfway because the course started to go through hackthebox retired machine and I don&amp;rsquo;t have a VIP account to follow along. Instead, I decided to move on with PicoCTF and Tryhackme as some of the people mentioned this 2 platform is great for learning cybersecurity. I further improved my basic skills such as linux command and getting more new knowledge from Tryhackme since it has a lot of different room. As for PicoCTF, I was stunned for quite some times as that is the first time I find out about CTF. That is also when I found out that there are a lot of different hacking.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Android Spyware Maybank2u APK</title>
+      <link>https://callmeks.github.io/posts/android-spyware-maybank2u-apk/</link>
+      <pubDate>Sun, 04 May 2025 14:56:10 +0800</pubDate>
+      <guid>https://callmeks.github.io/posts/android-spyware-maybank2u-apk/</guid>
+      <description>&lt;h2 id=&#34;description&#34;&gt;Description&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;I asked this APK from Fareed after I saw his post in &lt;a href=&#34;https://x.com/frdfzi/status/1914682801674240012&#34;&gt;X&lt;/a&gt; and decided to have a look into it.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;analyzing-apk&#34;&gt;Analyzing APK&lt;/h2&gt;
+&lt;p&gt;This is interesting because this is my first time playing around malicious APK and I have no idea if it would affect anything on both my devices and my machine. As usual, I started out with static analysis first.&lt;/p&gt;
+&lt;h3 id=&#34;static-analysis&#34;&gt;Static Analysis&lt;/h3&gt;
+&lt;p&gt;I started out with both &lt;code&gt;jadx&lt;/code&gt; and &lt;code&gt;apktool&lt;/code&gt; but it has some error which fail to decompile the APK.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Android Spyware Development</title>

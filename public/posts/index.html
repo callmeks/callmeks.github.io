@@ -172,6 +172,21 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Android Spyware Maybank2u APK
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Description I asked this APK from Fareed after I saw his post in X and decided to have a look into it.
+Analyzing APK This is interesting because this is my first time playing around malicious APK and I have no idea if it would affect anything on both my devices and my machine. As usual, I started out with static analysis first.
+Static Analysis I started out with both jadx and apktool but it has some error which fail to decompile the APK.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-05-04 14:56:10 +0800 +08'>May 4, 2025</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;1466 words</footer>
+  <a class="entry-link" aria-label="post link to Android Spyware Maybank2u APK" href="https://callmeks.github.io/posts/android-spyware-maybank2u-apk/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Android Spyware Development
     </h2>
   </header>
@@ -183,23 +198,6 @@ Part 0 I started off by creating a project in Android Studio by pressing New Pro
   </div>
   <footer class="entry-footer"><span title='2025-04-21 21:14:45 +0800 +08'>April 21, 2025</span>&nbsp;·&nbsp;9 min&nbsp;·&nbsp;1885 words</footer>
   <a class="entry-link" aria-label="post link to Android Spyware Development" href="https://callmeks.github.io/posts/android-spyware-development/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">MHL Config Editor
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Challenge Description Welcome to the Config Editor Challenge! In this lab, you’ll dive into a realistic situation involving vulnerabilities in a widely-used third-party library. Your objective is to exploit a library-induced vulnerability to achieve RCE on an Android application.
-configeditor.apk
-Solution As usual, I started out by performing static analysis to read the code.
-Static Analysis I started by looking into the AndroidManifest.xml.
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 &lt;activity android:name=&#34;com.mobilehackinglab.configeditor.MainActivity&#34; android:exported=&#34;true&#34;&gt; &lt;intent-filter&gt; &lt;action android:name=&#34;android.intent.action.MAIN&#34;/&gt; &lt;category android:name=&#34;android.intent.category.LAUNCHER&#34;/&gt; &lt;/intent-filter&gt; &lt;intent-filter&gt; &lt;action android:name=&#34;android.intent.action.VIEW&#34;/&gt; &lt;category android:name=&#34;android.intent.category.DEFAULT&#34;/&gt; &lt;category android:name=&#34;android.intent.category.BROWSABLE&#34;/&gt; &lt;data android:scheme=&#34;file&#34;/&gt; &lt;data android:scheme=&#34;http&#34;/&gt; &lt;data android:scheme=&#34;https&#34;/&gt; &lt;data android:mimeType=&#34;application/yaml&#34;/&gt; &lt;/intent-filter&gt; &lt;/activity&gt; There’s only one activity and it has a intent filter which accept URI parameter.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2025-04-09 15:35:42 +0800 +08'>April 9, 2025</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;757 words</footer>
-  <a class="entry-link" aria-label="post link to MHL Config Editor" href="https://callmeks.github.io/posts/mhl-config-editor/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
