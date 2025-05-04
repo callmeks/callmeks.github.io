@@ -281,6 +281,16 @@ Looking into the screenshot, I also noticed that `https://weedoom.net/multipush`
 
 It is possible to decompile using the latest unstable release `jadx` or `jadx-gui`. Here's the link to get the latest unstable release. [https://nightly.link/skylot/jadx/workflows/build-artifacts/master](https://nightly.link/skylot/jadx/workflows/build-artifacts/master)
 
+I found out another easier method by using `zip` command.
+
+```bash
+zip -FF Maybank2u.apk --out yeehar.apk
+Fix archive (-FF) - salvage what can
+ Found end record (EOCDR) - says expect single disk archive
+```
+
+After it completes, just use any version of `jadx` or `apktool` and it should now working as intended.
+
 ## Things I learned from the APK 
 
 - you can protect AndroidManifest.xml ??? (latest `jadx` is immune to this)
