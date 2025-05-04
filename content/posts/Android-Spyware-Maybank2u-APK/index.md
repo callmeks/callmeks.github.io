@@ -277,7 +277,11 @@ Looking into the screenshot, I also noticed that `https://weedoom.net/multipush`
 
 ![alt text](img/index-11.png#center)
 
+### New Update
+
+It is possible to decompile using the latest unstable release `jadx` or `jadx-gui`. Here's the link to get the latest unstable release. [https://nightly.link/skylot/jadx/workflows/build-artifacts/master](https://nightly.link/skylot/jadx/workflows/build-artifacts/master)
+
 ## Things I learned from the APK 
 
-- you can protect AndroidManifest.xml ???
+- you can protect AndroidManifest.xml ??? (latest `jadx` is immune to this)
 - reverse engineer a simple malicious APK
