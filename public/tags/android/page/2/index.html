@@ -144,51 +144,22 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">Android Spyware Further Analysis
+    <h2 class="entry-hint-parent">Android as Rubber Ducky
     </h2>
   </header>
   <div class="entry-content">
-    <p>Description This is a continuation of the Android Spyware Maybank2u APK where I dig deeper specifically on the decompilation failure. Although several solution was found previously, I did not fully understand on the issue and thats the reason I’m having the research here
-The Issue The APK was not able to decompile as shown below.
-1 2 3 4 5 6 unzip Maybank2u.apk Archive: Maybank2u.apk [Maybank2u.apk] AndroidManifest.xml password: skipping: AndroidManifest.xml incorrect password inflating: classes.dex ...[snip]... 1 2 3 4 5 6 7 jadx .\Maybank2u.apk INFO - loading ... ERROR - Failed to process zip file: .\Maybank2u.apk jadx.core.utils.exceptions.JadxRuntimeException: Failed to process zip file: .\Maybank2u.apk ...[snip]... Caused by: java.util.zip.ZipException: invalid CEN header (encrypted entry) ...[snip]... 1 2 3 4 5 6 7 apktool d .\Maybank2u.apk I: Using Apktool 2.10.0 on Maybank2u.apk with 8 thread(s). Exception in thread &#34;main&#34; brut.androlib.exceptions.AndrolibException: brut.directory.DirectoryException: java.util.zip.ZipException: invalid CEN header (encrypted entry) ...[snip]... Caused by: brut.directory.DirectoryException: java.util.zip.ZipException: invalid CEN header (encrypted entry) ...[snip]... Caused by: java.util.zip.ZipException: invalid CEN header (encrypted entry) Analysis To fully understand that happened, I used apkInspector tool to understand the information behind it.
+    <p>Prerequisite a physical android devices rooted termux app As mentioned, the android devices must be rooted in order to work like a rubber ducky. I’ll be using my old devices that I have rooted as demonstration purposes.
+Here’s a quick evidence that my devices is rooted.
+Setting up Now that the android devices is rooted, I’ll need to download some useful files and application that has been created by others
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2025-06-29 20:44:04 +0800 +08'>June 29, 2025</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;715 words</footer>
-  <a class="entry-link" aria-label="post link to Android Spyware Further Analysis" href="https://callmeks.github.io/posts/android-spyware-further-analysis/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Android Spyware Maybank2u APK
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Description I asked this APK from Fareed after I saw his post in X and decided to have a look into it.
-Analyzing APK This is interesting because this is my first time playing around malicious APK and I have no idea if it would affect anything on both my devices and my machine. As usual, I started out with static analysis first.
-Static Analysis I started out with both jadx and apktool but it has some error which fail to decompile the APK.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2025-05-04 14:56:10 +0800 +08'>May 4, 2025</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;1550 words</footer>
-  <a class="entry-link" aria-label="post link to Android Spyware Maybank2u APK" href="https://callmeks.github.io/posts/android-spyware-maybank2u-apk/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Android Spyware Development
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Prerequisite Android Studio kotlin Android Emulator or physical devices Discord as C2 I tested out this project in API 33 rooted device. Anything above API 33 might need to perform some modification to get everything works.
-Creating the spyware I created this project using Android Studio and Kotlin. This project took me around 16 hours to complete with massive help of GPT.
-Part 0 I started off by creating a project in Android Studio by pressing New Project &gt; Empty Activity and provide a name. It will have some generated code and function.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2025-04-21 21:14:45 +0800 +08'>April 21, 2025</span>&nbsp;·&nbsp;9 min&nbsp;·&nbsp;1885 words</footer>
-  <a class="entry-link" aria-label="post link to Android Spyware Development" href="https://callmeks.github.io/posts/android-spyware-development/"></a>
+  <footer class="entry-footer"><span title='2024-12-04 16:25:45 +0800 +08'>December 4, 2024</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;290 words</footer>
+  <a class="entry-link" aria-label="post link to Android as Rubber Ducky" href="https://callmeks.github.io/posts/android-as-rubber-ducky/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
-    <a class="next" href="https://callmeks.github.io/tags/android/page/2/">Next&nbsp;&nbsp;»
+    <a class="prev" href="https://callmeks.github.io/tags/android/">
+      «&nbsp;Prev&nbsp;
     </a>
   </nav>
 </footer>

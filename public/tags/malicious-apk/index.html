@@ -144,6 +144,21 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Android Spyware Further Analysis
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Description This is a continuation of the Android Spyware Maybank2u APK where I dig deeper specifically on the decompilation failure. Although several solution was found previously, I did not fully understand on the issue and thats the reason I’m having the research here
+The Issue The APK was not able to decompile as shown below.
+1 2 3 4 5 6 unzip Maybank2u.apk Archive: Maybank2u.apk [Maybank2u.apk] AndroidManifest.xml password: skipping: AndroidManifest.xml incorrect password inflating: classes.dex ...[snip]... 1 2 3 4 5 6 7 jadx .\Maybank2u.apk INFO - loading ... ERROR - Failed to process zip file: .\Maybank2u.apk jadx.core.utils.exceptions.JadxRuntimeException: Failed to process zip file: .\Maybank2u.apk ...[snip]... Caused by: java.util.zip.ZipException: invalid CEN header (encrypted entry) ...[snip]... 1 2 3 4 5 6 7 apktool d .\Maybank2u.apk I: Using Apktool 2.10.0 on Maybank2u.apk with 8 thread(s). Exception in thread &#34;main&#34; brut.androlib.exceptions.AndrolibException: brut.directory.DirectoryException: java.util.zip.ZipException: invalid CEN header (encrypted entry) ...[snip]... Caused by: brut.directory.DirectoryException: java.util.zip.ZipException: invalid CEN header (encrypted entry) ...[snip]... Caused by: java.util.zip.ZipException: invalid CEN header (encrypted entry) Analysis To fully understand that happened, I used apkInspector tool to understand the information behind it.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-06-29 20:44:04 +0800 +08'>June 29, 2025</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;715 words</footer>
+  <a class="entry-link" aria-label="post link to Android Spyware Further Analysis" href="https://callmeks.github.io/posts/android-spyware-further-analysis/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Android Spyware Maybank2u APK
     </h2>
   </header>
@@ -153,7 +168,7 @@ Analyzing APK This is interesting because this is my first time playing around m
 Static Analysis I started out with both jadx and apktool but it has some error which fail to decompile the APK.
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2025-05-04 14:56:10 +0800 +08'>May 4, 2025</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;1466 words</footer>
+  <footer class="entry-footer"><span title='2025-05-04 14:56:10 +0800 +08'>May 4, 2025</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;1550 words</footer>
   <a class="entry-link" aria-label="post link to Android Spyware Maybank2u APK" href="https://callmeks.github.io/posts/android-spyware-maybank2u-apk/"></a>
 </article>
     </main>
