@@ -144,6 +144,21 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">ICSCTF Simple Guess
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Description I asked for the challenge from other people so I have no idea what the description is. SimpleGuess.apk
+Static Analysis As usual, I just start analyzing with jadx-gui. I started with the AndroidManifest.xml.
+1 2 3 4 5 6 7 8 9 10 &lt;activity android:theme=&#34;@style/Theme.SimpleGuess&#34; android:label=&#34;@string/app_name&#34; android:name=&#34;com.example.simpleguess.MainActivity&#34; android:exported=&#34;true&#34;&gt; &lt;intent-filter&gt; &lt;action android:name=&#34;android.intent.action.MAIN&#34;/&gt; &lt;category android:name=&#34;android.intent.category.LAUNCHER&#34;/&gt; &lt;/intent-filter&gt; &lt;/activity&gt; There’s only one activity named MainActivity so I just look into this.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-06-30 14:44:58 +0800 +08'>June 30, 2025</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;775 words</footer>
+  <a class="entry-link" aria-label="post link to ICSCTF Simple Guess" href="https://callmeks.github.io/posts/icsctf-simple-guess/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">MHL Config Editor
     </h2>
   </header>
@@ -174,23 +189,6 @@ Static Analysis I started out by looking into the AndroidManifest.xml.
   </div>
   <footer class="entry-footer"><span title='2025-04-08 23:00:57 +0800 +08'>April 8, 2025</span>&nbsp;·&nbsp;11 min&nbsp;·&nbsp;2323 words</footer>
   <a class="entry-link" aria-label="post link to MHL Note Keeper" href="https://callmeks.github.io/posts/mhl-note-keeper/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">MHL Document Viewer
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Challenge Description Welcome to the Remote Code Execution (RCE) Challenge! This lab provides a real-world scenario where you’ll explore vulnerabilities in popular software. Your mission is to exploit a path traversal vulnerability combined with dynamic code loading to achieve remote code execution.
-documentviewer.apk
-Solution I started out by working on static analysis.
-Static Analysis As usual, I check the AndroidManifest.xml.
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 &lt;activity android:name=&#34;com.mobilehackinglab.documentviewer.MainActivity&#34; android:exported=&#34;true&#34;&gt; &lt;intent-filter&gt; &lt;action android:name=&#34;android.intent.action.MAIN&#34;/&gt; &lt;category android:name=&#34;android.intent.category.LAUNCHER&#34;/&gt; &lt;/intent-filter&gt; &lt;intent-filter&gt; &lt;action android:name=&#34;android.intent.action.VIEW&#34;/&gt; &lt;category android:name=&#34;android.intent.category.DEFAULT&#34;/&gt; &lt;category android:name=&#34;android.intent.category.BROWSABLE&#34;/&gt; &lt;data android:scheme=&#34;file&#34;/&gt; &lt;data android:scheme=&#34;http&#34;/&gt; &lt;data android:scheme=&#34;https&#34;/&gt; &lt;data android:mimeType=&#34;application/pdf&#34;/&gt; &lt;/intent-filter&gt; &lt;/activity&gt; There is only one MainActivity activity and it has the intent filter where it accept some URI parameter.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2025-04-07 22:16:32 +0800 +08'>April 7, 2025</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;1402 words</footer>
-  <a class="entry-link" aria-label="post link to MHL Document Viewer" href="https://callmeks.github.io/posts/mhl-document-viewer/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
