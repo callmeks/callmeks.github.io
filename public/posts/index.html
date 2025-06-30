@@ -172,6 +172,21 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">ICSCTF Simple Guess
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Description I asked for the challenge from other people so I have no idea what the description is. SimpleGuess.apk
+Static Analysis As usual, I just start analyzing with jadx-gui. I started with the AndroidManifest.xml.
+1 2 3 4 5 6 7 8 9 10 &lt;activity android:theme=&#34;@style/Theme.SimpleGuess&#34; android:label=&#34;@string/app_name&#34; android:name=&#34;com.example.simpleguess.MainActivity&#34; android:exported=&#34;true&#34;&gt; &lt;intent-filter&gt; &lt;action android:name=&#34;android.intent.action.MAIN&#34;/&gt; &lt;category android:name=&#34;android.intent.category.LAUNCHER&#34;/&gt; &lt;/intent-filter&gt; &lt;/activity&gt; There’s only one activity named MainActivity so I just look into this.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-06-30 14:44:58 +0800 +08'>June 30, 2025</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;775 words</footer>
+  <a class="entry-link" aria-label="post link to ICSCTF Simple Guess" href="https://callmeks.github.io/posts/icsctf-simple-guess/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Android Spyware Further Analysis
     </h2>
   </header>
@@ -183,21 +198,6 @@ The Issue The APK was not able to decompile as shown below.
   </div>
   <footer class="entry-footer"><span title='2025-06-29 20:44:04 +0800 +08'>June 29, 2025</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;715 words</footer>
   <a class="entry-link" aria-label="post link to Android Spyware Further Analysis" href="https://callmeks.github.io/posts/android-spyware-further-analysis/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Android Spyware Maybank2u APK
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Description I asked this APK from Fareed after I saw his post in X and decided to have a look into it.
-Analyzing APK This is interesting because this is my first time playing around malicious APK and I have no idea if it would affect anything on both my devices and my machine. As usual, I started out with static analysis first.
-Static Analysis I started out with both jadx and apktool but it has some error which fail to decompile the APK.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2025-05-04 14:56:10 +0800 +08'>May 4, 2025</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;1550 words</footer>
-  <a class="entry-link" aria-label="post link to Android Spyware Maybank2u APK" href="https://callmeks.github.io/posts/android-spyware-maybank2u-apk/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
