@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="canonical" href="https://callmeks.github.io/tags/mhl/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.d72444526d7ecbdb0015438a7fa89054a658bf759d0542e2e5df81ce94b493ee.css" integrity="sha256-1yREUm1&#43;y9sAFUOKf6iQVKZYv3WdBULi5d&#43;BzpS0k&#43;4=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.a482bf00fa5c046040ef7973ad5fdf5657890cacb596c93f1382f664ca542074.css" integrity="sha256-pIK/APpcBGBA73lzrV/fVleJDKy1lsk/E4L2ZMpUIHQ=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b">
 <link rel="icon" type="image/png" sizes="16x16" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b?size=16">
 <link rel="icon" type="image/png" sizes="32x32" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b?size=32">
@@ -18,7 +18,7 @@
 <link rel="mask-icon" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://callmeks.github.io/tags/mhl/index.xml">
+<link rel="alternate" type="application/rss+xml" href="https://callmeks.github.io/tags/mhl/index.xml" title="rss">
 <link rel="alternate" hreflang="en" href="https://callmeks.github.io/tags/mhl/">
 <noscript>
     <style>
@@ -84,7 +84,7 @@
         <div class="logo">
             <a href="https://callmeks.github.io/" accesskey="h" title="KS Blog (Alt + H)">KS Blog</a>
             <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -155,7 +155,7 @@ Static Analysis I started by looking into the AndroidManifest.xml.
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 &lt;activity android:name=&#34;com.mobilehackinglab.configeditor.MainActivity&#34; android:exported=&#34;true&#34;&gt; &lt;intent-filter&gt; &lt;action android:name=&#34;android.intent.action.MAIN&#34;/&gt; &lt;category android:name=&#34;android.intent.category.LAUNCHER&#34;/&gt; &lt;/intent-filter&gt; &lt;intent-filter&gt; &lt;action android:name=&#34;android.intent.action.VIEW&#34;/&gt; &lt;category android:name=&#34;android.intent.category.DEFAULT&#34;/&gt; &lt;category android:name=&#34;android.intent.category.BROWSABLE&#34;/&gt; &lt;data android:scheme=&#34;file&#34;/&gt; &lt;data android:scheme=&#34;http&#34;/&gt; &lt;data android:scheme=&#34;https&#34;/&gt; &lt;data android:mimeType=&#34;application/yaml&#34;/&gt; &lt;/intent-filter&gt; &lt;/activity&gt; There’s only one activity and it has a intent filter which accept URI parameter.
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2025-04-09 15:35:42 +0800 +08'>April 9, 2025</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;757 words</footer>
+  <footer class="entry-footer"><span title='2025-04-09 15:35:42 +0800 +08'>April 9, 2025</span>&nbsp;·&nbsp;<span>4 min</span>&nbsp;·&nbsp;<span>757 words</span></footer>
   <a class="entry-link" aria-label="post link to MHL Config Editor" href="https://callmeks.github.io/posts/mhl-config-editor/"></a>
 </article>
 
@@ -172,7 +172,7 @@ Static Analysis I started out by looking into the AndroidManifest.xml.
 1 2 3 4 5 6 7 8 &lt;activity android:name=&#34;com.mobilehackinglab.notekeeper.MainActivity&#34; android:exported=&#34;true&#34;&gt; &lt;intent-filter&gt; &lt;action android:name=&#34;android.intent.action.MAIN&#34;/&gt; &lt;category android:name=&#34;android.intent.category.LAUNCHER&#34;/&gt; &lt;/intent-filter&gt; &lt;/activity&gt; There’s only one activity at the moment so lets look into it.
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2025-04-08 23:00:57 +0800 +08'>April 8, 2025</span>&nbsp;·&nbsp;11 min&nbsp;·&nbsp;2323 words</footer>
+  <footer class="entry-footer"><span title='2025-04-08 23:00:57 +0800 +08'>April 8, 2025</span>&nbsp;·&nbsp;<span>11 min</span>&nbsp;·&nbsp;<span>2323 words</span></footer>
   <a class="entry-link" aria-label="post link to MHL Note Keeper" href="https://callmeks.github.io/posts/mhl-note-keeper/"></a>
 </article>
 
@@ -189,7 +189,7 @@ Static Analysis As usual, I check the AndroidManifest.xml.
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 &lt;activity android:name=&#34;com.mobilehackinglab.documentviewer.MainActivity&#34; android:exported=&#34;true&#34;&gt; &lt;intent-filter&gt; &lt;action android:name=&#34;android.intent.action.MAIN&#34;/&gt; &lt;category android:name=&#34;android.intent.category.LAUNCHER&#34;/&gt; &lt;/intent-filter&gt; &lt;intent-filter&gt; &lt;action android:name=&#34;android.intent.action.VIEW&#34;/&gt; &lt;category android:name=&#34;android.intent.category.DEFAULT&#34;/&gt; &lt;category android:name=&#34;android.intent.category.BROWSABLE&#34;/&gt; &lt;data android:scheme=&#34;file&#34;/&gt; &lt;data android:scheme=&#34;http&#34;/&gt; &lt;data android:scheme=&#34;https&#34;/&gt; &lt;data android:mimeType=&#34;application/pdf&#34;/&gt; &lt;/intent-filter&gt; &lt;/activity&gt; There is only one MainActivity activity and it has the intent filter where it accept some URI parameter.
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2025-04-07 22:16:32 +0800 +08'>April 7, 2025</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;1402 words</footer>
+  <footer class="entry-footer"><span title='2025-04-07 22:16:32 +0800 +08'>April 7, 2025</span>&nbsp;·&nbsp;<span>7 min</span>&nbsp;·&nbsp;<span>1402 words</span></footer>
   <a class="entry-link" aria-label="post link to MHL Document Viewer" href="https://callmeks.github.io/posts/mhl-document-viewer/"></a>
 </article>
 <footer class="page-footer">

@@ -10,7 +10,7 @@
 <meta name="description" content="Posts - KS Blog">
 <meta name="author" content="">
 <link rel="canonical" href="https://callmeks.github.io/posts/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.d72444526d7ecbdb0015438a7fa89054a658bf759d0542e2e5df81ce94b493ee.css" integrity="sha256-1yREUm1&#43;y9sAFUOKf6iQVKZYv3WdBULi5d&#43;BzpS0k&#43;4=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.a482bf00fa5c046040ef7973ad5fdf5657890cacb596c93f1382f664ca542074.css" integrity="sha256-pIK/APpcBGBA73lzrV/fVleJDKy1lsk/E4L2ZMpUIHQ=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b">
 <link rel="icon" type="image/png" sizes="16x16" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b?size=16">
 <link rel="icon" type="image/png" sizes="32x32" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b?size=32">
@@ -18,7 +18,7 @@
 <link rel="mask-icon" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://callmeks.github.io/posts/index.xml">
+<link rel="alternate" type="application/rss+xml" href="https://callmeks.github.io/posts/index.xml" title="rss">
 <link rel="alternate" hreflang="en" href="https://callmeks.github.io/posts/">
 <noscript>
     <style>
@@ -99,7 +99,7 @@
         <div class="logo">
             <a href="https://callmeks.github.io/" accesskey="h" title="KS Blog (Alt + H)">KS Blog</a>
             <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -159,6 +159,21 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Android Spyware Further Analysis
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Description This is a continuation of the Android Spyware Maybank2u APK where I dig deeper specifically on the decompilation failure. Although several solution was found previously, I did not fully understand on the issue and thats the reason I’m having the research here
+The Issue The APK was not able to decompile as shown below.
+1 2 3 4 5 6 unzip Maybank2u.apk Archive: Maybank2u.apk [Maybank2u.apk] AndroidManifest.xml password: skipping: AndroidManifest.xml incorrect password inflating: classes.dex ...[snip]... 1 2 3 4 5 6 7 jadx .\Maybank2u.apk INFO - loading ... ERROR - Failed to process zip file: .\Maybank2u.apk jadx.core.utils.exceptions.JadxRuntimeException: Failed to process zip file: .\Maybank2u.apk ...[snip]... Caused by: java.util.zip.ZipException: invalid CEN header (encrypted entry) ...[snip]... 1 2 3 4 5 6 7 apktool d .\Maybank2u.apk I: Using Apktool 2.10.0 on Maybank2u.apk with 8 thread(s). Exception in thread &#34;main&#34; brut.androlib.exceptions.AndrolibException: brut.directory.DirectoryException: java.util.zip.ZipException: invalid CEN header (encrypted entry) ...[snip]... Caused by: brut.directory.DirectoryException: java.util.zip.ZipException: invalid CEN header (encrypted entry) ...[snip]... Caused by: java.util.zip.ZipException: invalid CEN header (encrypted entry) Analysis To fully understand that happened, I used apkInspector tool to understand the information behind it.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-06-29 20:44:04 +0800 +08'>June 29, 2025</span>&nbsp;·&nbsp;<span>4 min</span>&nbsp;·&nbsp;<span>715 words</span></footer>
+  <a class="entry-link" aria-label="post link to Android Spyware Further Analysis" href="https://callmeks.github.io/posts/android-spyware-further-analysis/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Android Spyware Maybank2u APK
     </h2>
   </header>
@@ -168,7 +183,7 @@ Analyzing APK This is interesting because this is my first time playing around m
 Static Analysis I started out with both jadx and apktool but it has some error which fail to decompile the APK.
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2025-05-04 14:56:10 +0800 +08'>May 4, 2025</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;1550 words</footer>
+  <footer class="entry-footer"><span title='2025-05-04 14:56:10 +0800 +08'>May 4, 2025</span>&nbsp;·&nbsp;<span>8 min</span>&nbsp;·&nbsp;<span>1550 words</span></footer>
   <a class="entry-link" aria-label="post link to Android Spyware Maybank2u APK" href="https://callmeks.github.io/posts/android-spyware-maybank2u-apk/"></a>
 </article>
 
@@ -183,25 +198,8 @@ Creating the spyware I created this project using Android Studio and Kotlin. Thi
 Part 0 I started off by creating a project in Android Studio by pressing New Project &gt; Empty Activity and provide a name. It will have some generated code and function.
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2025-04-21 21:14:45 +0800 +08'>April 21, 2025</span>&nbsp;·&nbsp;9 min&nbsp;·&nbsp;1885 words</footer>
+  <footer class="entry-footer"><span title='2025-04-21 21:14:45 +0800 +08'>April 21, 2025</span>&nbsp;·&nbsp;<span>9 min</span>&nbsp;·&nbsp;<span>1885 words</span></footer>
   <a class="entry-link" aria-label="post link to Android Spyware Development" href="https://callmeks.github.io/posts/android-spyware-development/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">MHL Config Editor
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Challenge Description Welcome to the Config Editor Challenge! In this lab, you’ll dive into a realistic situation involving vulnerabilities in a widely-used third-party library. Your objective is to exploit a library-induced vulnerability to achieve RCE on an Android application.
-configeditor.apk
-Solution As usual, I started out by performing static analysis to read the code.
-Static Analysis I started by looking into the AndroidManifest.xml.
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 &lt;activity android:name=&#34;com.mobilehackinglab.configeditor.MainActivity&#34; android:exported=&#34;true&#34;&gt; &lt;intent-filter&gt; &lt;action android:name=&#34;android.intent.action.MAIN&#34;/&gt; &lt;category android:name=&#34;android.intent.category.LAUNCHER&#34;/&gt; &lt;/intent-filter&gt; &lt;intent-filter&gt; &lt;action android:name=&#34;android.intent.action.VIEW&#34;/&gt; &lt;category android:name=&#34;android.intent.category.DEFAULT&#34;/&gt; &lt;category android:name=&#34;android.intent.category.BROWSABLE&#34;/&gt; &lt;data android:scheme=&#34;file&#34;/&gt; &lt;data android:scheme=&#34;http&#34;/&gt; &lt;data android:scheme=&#34;https&#34;/&gt; &lt;data android:mimeType=&#34;application/yaml&#34;/&gt; &lt;/intent-filter&gt; &lt;/activity&gt; There’s only one activity and it has a intent filter which accept URI parameter.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2025-04-09 15:35:42 +0800 +08'>April 9, 2025</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;757 words</footer>
-  <a class="entry-link" aria-label="post link to MHL Config Editor" href="https://callmeks.github.io/posts/mhl-config-editor/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -4,10 +4,45 @@
     <title>Guide on KS Blog</title>
     <link>https://callmeks.github.io/tags/guide/</link>
     <description>Recent content in Guide on KS Blog</description>
-    <generator>Hugo -- 0.139.3</generator>
+    <generator>Hugo -- 0.151.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 21 Apr 2025 21:14:45 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 08 Oct 2025 15:37:04 +0800</lastBuildDate>
     <atom:link href="https://callmeks.github.io/tags/guide/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Android Penetration Testing Setup Guide</title>
+      <link>https://callmeks.github.io/posts/android-penetration-testing-setup-guide/</link>
+      <pubDate>Wed, 08 Oct 2025 15:37:04 +0800</pubDate>
+      <guid>https://callmeks.github.io/posts/android-penetration-testing-setup-guide/</guid>
+      <description>&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
+&lt;p&gt;I created this blog post to showcase how I setup my android penetration testing environment in Windows.&lt;/p&gt;
+&lt;h3 id=&#34;tools&#34;&gt;Tools&lt;/h3&gt;
+&lt;p&gt;The list of tools that I will be installing:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Android Studio
+&lt;ul&gt;
+&lt;li&gt;build-tools&lt;/li&gt;
+&lt;li&gt;platform-tools&lt;/li&gt;
+&lt;li&gt;android virtual device (AVD)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;OpenJDK&lt;/li&gt;
+&lt;li&gt;Apktool&lt;/li&gt;
+&lt;li&gt;Jadx / Jadx-gui&lt;/li&gt;
+&lt;li&gt;Frida (Required Python)&lt;/li&gt;
+&lt;li&gt;Objection (Required Python)&lt;/li&gt;
+&lt;li&gt;Burp Suite CE&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Tools that are required to add into system environment (PATH) to make it work:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;OpenJDK (java.exe)&lt;/li&gt;
+&lt;li&gt;Apktool&lt;/li&gt;
+&lt;li&gt;Jadx&lt;/li&gt;
+&lt;li&gt;build-tools from &lt;a href=&#34;https://developer.android.com/tools#tools-build&#34;&gt;Android Studio&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;platform-tools from &lt;a href=&#34;https://developer.android.com/tools#tools-platform&#34;&gt;Android Studio&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;video&#34;&gt;Video&lt;/h2&gt;
+&lt;p&gt;To make things easier, I decided to just demo in a video instead.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Android Spyware Development</title>
       <link>https://callmeks.github.io/posts/android-spyware-development/</link>

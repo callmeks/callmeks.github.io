@@ -2,7 +2,8 @@ baseURL: https://callmeks.github.io
 languageCode: en-us
 title: KS Blog
 theme: PaperMod
-paginate: 3
+pagination:
+  pagerSize: 3
 
 params:
   defaultTheme: auto

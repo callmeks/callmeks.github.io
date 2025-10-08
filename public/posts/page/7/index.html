@@ -10,7 +10,7 @@
 <meta name="description" content="Posts - KS Blog">
 <meta name="author" content="">
 <link rel="canonical" href="https://callmeks.github.io/posts/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.d72444526d7ecbdb0015438a7fa89054a658bf759d0542e2e5df81ce94b493ee.css" integrity="sha256-1yREUm1&#43;y9sAFUOKf6iQVKZYv3WdBULi5d&#43;BzpS0k&#43;4=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.a482bf00fa5c046040ef7973ad5fdf5657890cacb596c93f1382f664ca542074.css" integrity="sha256-pIK/APpcBGBA73lzrV/fVleJDKy1lsk/E4L2ZMpUIHQ=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b">
 <link rel="icon" type="image/png" sizes="16x16" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b?size=16">
 <link rel="icon" type="image/png" sizes="32x32" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b?size=32">
@@ -18,7 +18,7 @@
 <link rel="mask-icon" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://callmeks.github.io/posts/index.xml">
+<link rel="alternate" type="application/rss+xml" href="https://callmeks.github.io/posts/index.xml" title="rss">
 <link rel="alternate" hreflang="en" href="https://callmeks.github.io/posts/">
 <noscript>
     <style>
@@ -99,7 +99,7 @@
         <div class="logo">
             <a href="https://callmeks.github.io/" accesskey="h" title="KS Blog (Alt + H)">KS Blog</a>
             <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -159,6 +159,21 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">MHL IOT Connect
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Challenge Description This challenge focuses on exploiting a security flaw related to the broadcast receiver in the “IOT Connect” application, allowing unauthorized users to activate the master switch, which can turn on all connected devices. The goal is to send a broadcast in a way that only authenticated users can trigger the master switch.
+IOT Connect APK
+Solution As usual, I started by performing static analysis and dynamic analysis to fully understand what the code is doing.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-03-20 16:28:41 +0800 +08'>March 20, 2025</span>&nbsp;·&nbsp;<span>5 min</span>&nbsp;·&nbsp;<span>900 words</span></footer>
+  <a class="entry-link" aria-label="post link to MHL IOT Connect" href="https://callmeks.github.io/posts/mhl-iot-connect/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">HTB SAW
     </h2>
   </header>
@@ -170,7 +185,7 @@ Static Analysis As usual, I started with jadx-gui for reading the decompiled Jav
 1 2 3 4 5 6 &lt;activity android:name=&#34;com.stego.saw.MainActivity&#34;&gt; &lt;intent-filter&gt; &lt;action android:name=&#34;android.intent.action.MAIN&#34;/&gt; &lt;category android:name=&#34;android.intent.category.LAUNCHER&#34;/&gt; &lt;/intent-filter&gt; &lt;/activity&gt; It seems like there’s only one activity to focus on. I then have a look in it. Inside the MainActivity.java, there’s a few that I think its interesting and useful.
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2025-02-19 22:38:23 +0800 +08'>February 19, 2025</span>&nbsp;·&nbsp;10 min&nbsp;·&nbsp;1987 words</footer>
+  <footer class="entry-footer"><span title='2025-02-19 22:38:23 +0800 +08'>February 19, 2025</span>&nbsp;·&nbsp;<span>10 min</span>&nbsp;·&nbsp;<span>1987 words</span></footer>
   <a class="entry-link" aria-label="post link to HTB SAW" href="https://callmeks.github.io/posts/htb-saw/"></a>
 </article>
 
@@ -186,26 +201,8 @@ Solution Static Analysis The first step is always static analysis. I started by 
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 &lt;application android:theme=&#34;@style/Theme.APKey&#34; android:label=&#34;@string/app_name&#34; android:icon=&#34;@mipmap/ic_launcher&#34; android:allowBackup=&#34;true&#34; android:supportsRtl=&#34;true&#34; android:roundIcon=&#34;@mipmap/ic_launcher_round&#34; android:appComponentFactory=&#34;androidx.core.app.CoreComponentFactory&#34;&gt; &lt;activity android:name=&#34;com.example.apkey.MainActivity&#34;&gt; &lt;intent-filter&gt; &lt;action android:name=&#34;android.intent.action.MAIN&#34;/&gt; &lt;category android:name=&#34;android.intent.category.LAUNCHER&#34;/&gt; &lt;/intent-filter&gt; &lt;/activity&gt; &lt;/application&gt; Since it’s gonna be MainActivity, we could have a look at the code. Inside the code, we have something interesting.
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2025-02-19 20:05:18 +0800 +08'>February 19, 2025</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;861 words</footer>
+  <footer class="entry-footer"><span title='2025-02-19 20:05:18 +0800 +08'>February 19, 2025</span>&nbsp;·&nbsp;<span>5 min</span>&nbsp;·&nbsp;<span>861 words</span></footer>
   <a class="entry-link" aria-label="post link to HTB APKey" href="https://callmeks.github.io/posts/htb-apkey/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">WGMY2024 World II
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Challenge Description Welp, time to do it again.
-Unable to install? That is a part of the challenge, try to overcome it.
-Author: Trailbl4z3r &amp; Monaruku
-hint: Tbh this is not a natively built app, more like something just wrapped into an app
-World-II.apk
-Solution Since it’s an APK file, Lets start with jadx-gui for static analysis. In terms of static analysis, it’s always best to check out AndroidManifest.xml first.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2024-12-29 13:40:56 +0800 +08'>December 29, 2024</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;915 words</footer>
-  <a class="entry-link" aria-label="post link to WGMY2024 World II" href="https://callmeks.github.io/posts/wgmy2024-world-ii/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

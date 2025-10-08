@@ -10,7 +10,7 @@
 <meta name="description" content="Posts - KS Blog">
 <meta name="author" content="">
 <link rel="canonical" href="https://callmeks.github.io/posts/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.d72444526d7ecbdb0015438a7fa89054a658bf759d0542e2e5df81ce94b493ee.css" integrity="sha256-1yREUm1&#43;y9sAFUOKf6iQVKZYv3WdBULi5d&#43;BzpS0k&#43;4=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.a482bf00fa5c046040ef7973ad5fdf5657890cacb596c93f1382f664ca542074.css" integrity="sha256-pIK/APpcBGBA73lzrV/fVleJDKy1lsk/E4L2ZMpUIHQ=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b">
 <link rel="icon" type="image/png" sizes="16x16" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b?size=16">
 <link rel="icon" type="image/png" sizes="32x32" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b?size=32">
@@ -18,7 +18,7 @@
 <link rel="mask-icon" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://callmeks.github.io/posts/index.xml">
+<link rel="alternate" type="application/rss+xml" href="https://callmeks.github.io/posts/index.xml" title="rss">
 <link rel="alternate" hreflang="en" href="https://callmeks.github.io/posts/">
 <noscript>
     <style>
@@ -99,7 +99,7 @@
         <div class="logo">
             <a href="https://callmeks.github.io/" accesskey="h" title="KS Blog (Alt + H)">KS Blog</a>
             <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -166,8 +166,24 @@
     <p>Introduction about myself a student that complated university studies related to cybersecurity a CTF player learnt cybersecurity for a few years but still weak in it How I learn ethical hacking Part 0 Back then, I don’t really know about red team and blue team and I just decided to learn hacking for fun. Since hacking others looks more fun, I decided to look into videos and anything related. The first courses I go through is actually Practical Ethical Hacking from TCM Security. After going through the first few topic of the course, I have some basic understanding about how hacking works (that’s what I thought back then). Eventually, I stopped the course halfway because the course started to go through hackthebox retired machine and I don’t have a VIP account to follow along. Instead, I decided to move on with PicoCTF and Tryhackme as some of the people mentioned this 2 platform is great for learning cybersecurity. I further improved my basic skills such as linux command and getting more new knowledge from Tryhackme since it has a lot of different room. As for PicoCTF, I was stunned for quite some times as that is the first time I find out about CTF. That is also when I found out that there are a lot of different hacking.
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2024-12-03 15:54:52 +0800 +08'>December 3, 2024</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;516 words</footer>
+  <footer class="entry-footer"><span title='2024-12-03 15:54:52 +0800 +08'>December 3, 2024</span>&nbsp;·&nbsp;<span>3 min</span>&nbsp;·&nbsp;<span>516 words</span></footer>
   <a class="entry-link" aria-label="post link to My Journey of Cybersec" href="https://callmeks.github.io/posts/my-journey-of-cybersec/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Android Penetration Testing Setup Guide
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Summary I created this blog post to showcase how I setup my android penetration testing environment in Windows.
+Tools The list of tools that I will be installing:
+Android Studio build-tools platform-tools android virtual device (AVD) OpenJDK Apktool Jadx / Jadx-gui Frida (Required Python) Objection (Required Python) Burp Suite CE Tools that are required to add into system environment (PATH) to make it work:
+OpenJDK (java.exe) Apktool Jadx build-tools from Android Studio platform-tools from Android Studio Video To make things easier, I decided to just demo in a video instead.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-10-08 15:37:04 +0800 +08'>October 8, 2025</span>&nbsp;·&nbsp;<span>1 min</span>&nbsp;·&nbsp;<span>123 words</span></footer>
+  <a class="entry-link" aria-label="post link to Android Penetration Testing Setup Guide" href="https://callmeks.github.io/posts/android-penetration-testing-setup-guide/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -181,23 +197,8 @@ Static Analysis I started out using jadx-gui to decompile and read the code.
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 &lt;activity android:name=&#34;com.app.rehack.MainActivity&#34; android:exported=&#34;true&#34;&gt; &lt;intent-filter&gt; &lt;action android:name=&#34;android.intent.action.MAIN&#34;/&gt; &lt;category android:name=&#34;android.intent.category.LAUNCHER&#34;/&gt; &lt;/intent-filter&gt; &lt;/activity&gt; &lt;activity android:name=&#34;com.app.rehack.NoteListActivity&#34; android:exported=&#34;true&#34;/&gt; &lt;activity android:name=&#34;com.app.rehack.AddNoteActivity&#34; android:exported=&#34;true&#34;/&gt; &lt;activity android:name=&#34;com.app.rehack.ViewNoteActivity&#34; android:exported=&#34;false&#34;/&gt; &lt;provider android:name=&#34;com.app.rehack.Utils.FileProvider&#34; android:writePermission=&#34;false&#34; android:enabled=&#34;true&#34; android:exported=&#34;false&#34; android:authorities=&#34;com.app.rehack&#34; android:grantUriPermissions=&#34;true&#34;&gt; &lt;meta-data android:name=&#34;android.support.FILE_PROVIDER_PATHS&#34; android:resource=&#34;@xml/provider_path&#34;/&gt; &lt;/provider&gt; Based on the AndroidManifest.xml, there’s 4 activities in total but only one activity is not exported. Aside of that, there’s a provider with grantUriPermissions=&#34;true&#34;. Based on previous challenge, this is actually vulnerable so I assume exploit path should be similar. The provider has a @xml/provider_path which provide the folder path of the file provider.
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2025-06-30 22:33:06 +0800 +08'>June 30, 2025</span>&nbsp;·&nbsp;9 min&nbsp;·&nbsp;1827 words</footer>
+  <footer class="entry-footer"><span title='2025-06-30 22:33:06 +0800 +08'>June 30, 2025</span>&nbsp;·&nbsp;<span>9 min</span>&nbsp;·&nbsp;<span>1827 words</span></footer>
   <a class="entry-link" aria-label="post link to ICSCTF SecureNote" href="https://callmeks.github.io/posts/icsctf-securenote/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">ICSCTF Senoparty
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Description I asked for the challenge from other people so I have no idea what the description is. All I know is this challenge required me to upload my malicious APK into the server Senoparty.apk
-Static Analysis I started out using jadx-gui to decompile and read the code.
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 &lt;activity android:theme=&#34;@style/Theme.Senoparty&#34; android:label=&#34;@string/app_name&#34; android:name=&#34;com.example.senoparty.MainActivity&#34; android:exported=&#34;true&#34;&gt; &lt;intent-filter&gt; &lt;action android:name=&#34;android.intent.action.MAIN&#34;/&gt; &lt;category android:name=&#34;android.intent.category.LAUNCHER&#34;/&gt; &lt;/intent-filter&gt; &lt;intent-filter&gt; &lt;action android:name=&#34;android.intent.action.VIEW&#34;/&gt; &lt;category android:name=&#34;android.intent.category.BROWSABLE&#34;/&gt; &lt;category android:name=&#34;android.intent.category.DEFAULT&#34;/&gt; &lt;data android:scheme=&#34;content&#34;/&gt; &lt;data android:scheme=&#34;file&#34;/&gt; &lt;/intent-filter&gt; &lt;/activity&gt; &lt;provider android:name=&#34;com.example.senoparty.SenopartyProvider&#34; android:exported=&#34;false&#34; android:authorities=&#34;com.example.senoparty.SenopartyProvider&#34; android:grantUriPermissions=&#34;true&#34;&gt; &lt;intent-filter&gt; &lt;action android:name=&#34;android.intent.action.VIEW&#34;/&gt; &lt;category android:name=&#34;android.intent.category.DEFAULT&#34;/&gt; &lt;/intent-filter&gt; &lt;/provider&gt; Based on the AndroidManifest.xml, there’s a MainActivity activity and a SenopartyProvider provider. I then first looked into the MainActivity.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2025-06-30 16:25:25 +0800 +08'>June 30, 2025</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;843 words</footer>
-  <a class="entry-link" aria-label="post link to ICSCTF Senoparty" href="https://callmeks.github.io/posts/icsctf-senoparty/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

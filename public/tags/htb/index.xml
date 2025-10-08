@@ -4,7 +4,7 @@
     <title>HTB on KS Blog</title>
     <link>https://callmeks.github.io/tags/htb/</link>
     <description>Recent content in HTB on KS Blog</description>
-    <generator>Hugo -- 0.139.3</generator>
+    <generator>Hugo -- 0.151.0</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 19 Feb 2025 22:38:23 +0800</lastBuildDate>
     <atom:link href="https://callmeks.github.io/tags/htb/index.xml" rel="self" type="application/rss+xml" />
@@ -16,8 +16,7 @@
       <description>&lt;h2 id=&#34;challenge-description&#34;&gt;Challenge Description&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;The malware forensics lab identified a new technique for hiding and executing code dynamically. A sample that seems to use this technique has just arrived in their queue. Can you help them?&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;static/SAW.apk&#34;&gt;SAW.apk&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;static/SAW.apk&#34;&gt;SAW.apk&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
 &lt;p&gt;This is something that I think quite hard but yea another fun challenge.&lt;/p&gt;
 &lt;h3 id=&#34;static-analysis&#34;&gt;Static Analysis&lt;/h3&gt;
@@ -50,8 +49,7 @@
       <description>&lt;h2 id=&#34;challenge-description&#34;&gt;Challenge Description&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;This app contains some unique keys. Can you get one?&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;static/APKey.apk&#34;&gt;APKey.apk&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;static/APKey.apk&#34;&gt;APKey.apk&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
 &lt;h3 id=&#34;static-analysis&#34;&gt;Static Analysis&lt;/h3&gt;
 &lt;p&gt;The first step is always static analysis. I started by using &lt;code&gt;jadx-gui&lt;/code&gt; to see the decompiled Java code. Looking into the &lt;code&gt;AndroidManifest.xml&lt;/code&gt;, it looks like there&amp;rsquo;s only one activity which is &lt;code&gt;MainActivity&lt;/code&gt;.&lt;/p&gt;

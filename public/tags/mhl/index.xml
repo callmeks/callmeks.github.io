@@ -4,7 +4,7 @@
     <title>MHL on KS Blog</title>
     <link>https://callmeks.github.io/tags/mhl/</link>
     <description>Recent content in MHL on KS Blog</description>
-    <generator>Hugo -- 0.139.3</generator>
+    <generator>Hugo -- 0.151.0</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 09 Apr 2025 15:35:42 +0800</lastBuildDate>
     <atom:link href="https://callmeks.github.io/tags/mhl/index.xml" rel="self" type="application/rss+xml" />
@@ -16,8 +16,7 @@
       <description>&lt;h2 id=&#34;challenge-description&#34;&gt;Challenge Description&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Welcome to the Config Editor Challenge! In this lab, you&amp;rsquo;ll dive into a realistic situation involving vulnerabilities in a widely-used third-party library. Your objective is to exploit a library-induced vulnerability to achieve RCE on an Android application.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;static/configeditor.apk&#34;&gt;configeditor.apk&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;static/configeditor.apk&#34;&gt;configeditor.apk&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
 &lt;p&gt;As usual, I started out by performing static analysis to read the code.&lt;/p&gt;
 &lt;h3 id=&#34;static-analysis&#34;&gt;Static Analysis&lt;/h3&gt;
@@ -72,8 +71,7 @@
       <description>&lt;h2 id=&#34;challenge-description&#34;&gt;Challenge Description&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Welcome to the NoteKeeper Application, where users can create and encode short notes. However, lurking within the app is a critical buffer overflow vulnerability. Your mission is to uncover this vulnerability and exploit it to achieve remote code execution.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;static/notekeeper.apk&#34;&gt;notekeeper.apk&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;static/notekeeper.apk&#34;&gt;notekeeper.apk&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
 &lt;p&gt;I started out by performing static analysis to look into the code&lt;/p&gt;
 &lt;h3 id=&#34;static-analysis&#34;&gt;Static Analysis&lt;/h3&gt;
@@ -110,8 +108,7 @@
       <description>&lt;h2 id=&#34;challenge-description&#34;&gt;Challenge Description&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Welcome to the Remote Code Execution (RCE) Challenge! This lab provides a real-world scenario where you&amp;rsquo;ll explore vulnerabilities in popular software. Your mission is to exploit a path traversal vulnerability combined with dynamic code loading to achieve remote code execution.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;static/documentviewer.apk&#34;&gt;documentviewer.apk&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;static/documentviewer.apk&#34;&gt;documentviewer.apk&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
 &lt;p&gt;I started out by working on static analysis.&lt;/p&gt;
 &lt;h3 id=&#34;static-analysis&#34;&gt;Static Analysis&lt;/h3&gt;
@@ -166,12 +163,9 @@
       <description>&lt;h2 id=&#34;challenge-description&#34;&gt;Challenge Description&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Welcome to the Android Insecure WebView Challenge! This challenge is designed to delve into the complexities of Android&amp;rsquo;s WebView component, exploiting a Cross-Site Scripting (XSS) vulnerability to achieve Remote Code Execution (RCE). It&amp;rsquo;s an immersive opportunity for participants to engage with Android application security, particularly focusing on WebView security issues.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;static/postboard.apk&#34;&gt;postboard.apk&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;static/postboard.apk&#34;&gt;postboard.apk&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
-&lt;p&gt;As usual, I started by performing static analysis to get some understanding of the application.&lt;/p&gt;
-&lt;h3 id=&#34;static-analysis&#34;&gt;Static Analysis&lt;/h3&gt;
-&lt;p&gt;I started out by reading the &lt;code&gt;AndroidManifest.xml&lt;/code&gt; code after decompiling using &lt;code&gt;jadx-gui&lt;/code&gt;.&lt;/p&gt;</description>
+&lt;p&gt;As usual, I started by performing static analysis to get some understanding of the application.&lt;/p&gt;</description>
     </item>
     <item>
       <title>MHL Food Store</title>
@@ -181,8 +175,7 @@
       <description>&lt;h2 id=&#34;challenge-description&#34;&gt;Challenge Description&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Welcome to the Android App Security Lab: SQL Injection Challenge! Dive into the world of cybersecurity with our hands-on lab. This challenge is centered around a fictitious &amp;ldquo;Food Store&amp;rdquo; app, highlighting the critical security flaw of SQL Injection (SQLi) within the app&amp;rsquo;s framework.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;static/foodstore.apk&#34;&gt;foodstore.apk&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;static/foodstore.apk&#34;&gt;foodstore.apk&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
 &lt;p&gt;As usual, static analysis to understand first.&lt;/p&gt;
 &lt;h3 id=&#34;static-analysis&#34;&gt;Static Analysis&lt;/h3&gt;
@@ -231,8 +224,7 @@
       <description>&lt;h2 id=&#34;challenge-description&#34;&gt;Challenge Description&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Welcome to the &amp;ldquo;Guess Me&amp;rdquo; Deep Link Exploitation Challenge! Immerse yourself in the world of cybersecurity with this hands-on lab. This challenge revolves around a fictitious &amp;ldquo;Guess Me&amp;rdquo; app, shedding light on a critical security flaw related to deep links that can lead to remote code execution within the app&amp;rsquo;s framework.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;static/guessme.apk&#34;&gt;guessme.apk&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;static/guessme.apk&#34;&gt;guessme.apk&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
 &lt;p&gt;I started out by performing static analysis.&lt;/p&gt;
 &lt;h3 id=&#34;static-analysis&#34;&gt;Static Analysis&lt;/h3&gt;
@@ -246,8 +238,7 @@
       <description>&lt;h2 id=&#34;challenge-description&#34;&gt;Challenge Description&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Welcome to the Secure Notes Challenge! This lab immerses you in the intricacies of Android content providers, challenging you to crack a PIN code protected by a content provider within an Android application. It&amp;rsquo;s an excellent opportunity to explore Android&amp;rsquo;s data management and security features.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;static/securenotes.apk&#34;&gt;securenote.apk&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;static/securenotes.apk&#34;&gt;securenote.apk&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
 &lt;p&gt;As usual, I start out by reading the code using static analysis&lt;/p&gt;
 &lt;h3 id=&#34;static-analysis&#34;&gt;Static Analysis&lt;/h3&gt;
@@ -261,8 +252,7 @@
       <description>&lt;h2 id=&#34;challenge-description&#34;&gt;Challenge Description&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Welcome to the Cyclic Scanner Challenge! This lab is designed to mimic real-world scenarios where vulnerabilities within Android services lead to exploitable situations. Participants will have the opportunity to exploit these vulnerabilities to achieve remote code execution (RCE) on an Android device.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;static/cyclicscanner.apk&#34;&gt;cyclicscanner.apk&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;static/cyclicscanner.apk&#34;&gt;cyclicscanner.apk&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
 &lt;p&gt;I started by performing static analysis to get an understanding on what the application is doing.&lt;/p&gt;
 &lt;h3 id=&#34;static-analysis&#34;&gt;Static Analysis&lt;/h3&gt;
@@ -276,8 +266,7 @@
       <description>&lt;h2 id=&#34;challenge-description&#34;&gt;Challenge Description&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Welcome to the Strings Challenge! In this lab,your goal is to find the flag. The flag&amp;rsquo;s format should be &amp;ldquo;MHL{&amp;hellip;}&amp;rdquo;. The challenge will give you a clear idea of how intents and intent filters work on android also you will get a hands-on experience using Frida APIs.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;static/Strings.apk&#34;&gt;Strings.apk&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;static/Strings.apk&#34;&gt;Strings.apk&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
 &lt;p&gt;This is interesting challenge. I started with static analysis first.&lt;/p&gt;
 &lt;h3 id=&#34;static-analysis&#34;&gt;Static Analysis&lt;/h3&gt;
@@ -291,8 +280,7 @@
       <description>&lt;h2 id=&#34;challenge-description&#34;&gt;Challenge Description&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;This challenge focuses on exploiting a security flaw related to the broadcast receiver in the &amp;ldquo;IOT Connect&amp;rdquo; application, allowing unauthorized users to activate the master switch, which can turn on all connected devices. The goal is to send a broadcast in a way that only authenticated users can trigger the master switch.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;static/IOTConnect.apk&#34;&gt;IOT Connect APK&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;static/IOTConnect.apk&#34;&gt;IOT Connect APK&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
 &lt;p&gt;As usual, I started by performing static analysis and dynamic analysis to fully understand what the code is doing.&lt;/p&gt;</description>
     </item>

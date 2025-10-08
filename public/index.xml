@@ -4,9 +4,9 @@
     <title>KS Blog</title>
     <link>https://callmeks.github.io/</link>
     <description>Recent content on KS Blog</description>
-    <generator>Hugo -- 0.139.3</generator>
+    <generator>Hugo -- 0.151.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 30 Jun 2025 22:33:06 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 08 Oct 2025 15:37:04 +0800</lastBuildDate>
     <atom:link href="https://callmeks.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>My Journey of Cybersec</title>
@@ -24,6 +24,41 @@
 &lt;p&gt;Back then, I don&amp;rsquo;t really know about red team and blue team and I just decided to learn hacking for fun. Since hacking others looks more fun, I decided to look into videos and anything related. The first courses I go through is actually Practical Ethical Hacking from TCM Security. After going through the first few topic of the course, I have some basic understanding about how hacking works (that&amp;rsquo;s what I thought back then). Eventually, I stopped the course halfway because the course started to go through hackthebox retired machine and I don&amp;rsquo;t have a VIP account to follow along. Instead, I decided to move on with PicoCTF and Tryhackme as some of the people mentioned this 2 platform is great for learning cybersecurity. I further improved my basic skills such as linux command and getting more new knowledge from Tryhackme since it has a lot of different room. As for PicoCTF, I was stunned for quite some times as that is the first time I find out about CTF. That is also when I found out that there are a lot of different hacking.&lt;/p&gt;</description>
     </item>
     <item>
+      <title>Android Penetration Testing Setup Guide</title>
+      <link>https://callmeks.github.io/posts/android-penetration-testing-setup-guide/</link>
+      <pubDate>Wed, 08 Oct 2025 15:37:04 +0800</pubDate>
+      <guid>https://callmeks.github.io/posts/android-penetration-testing-setup-guide/</guid>
+      <description>&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
+&lt;p&gt;I created this blog post to showcase how I setup my android penetration testing environment in Windows.&lt;/p&gt;
+&lt;h3 id=&#34;tools&#34;&gt;Tools&lt;/h3&gt;
+&lt;p&gt;The list of tools that I will be installing:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Android Studio
+&lt;ul&gt;
+&lt;li&gt;build-tools&lt;/li&gt;
+&lt;li&gt;platform-tools&lt;/li&gt;
+&lt;li&gt;android virtual device (AVD)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;OpenJDK&lt;/li&gt;
+&lt;li&gt;Apktool&lt;/li&gt;
+&lt;li&gt;Jadx / Jadx-gui&lt;/li&gt;
+&lt;li&gt;Frida (Required Python)&lt;/li&gt;
+&lt;li&gt;Objection (Required Python)&lt;/li&gt;
+&lt;li&gt;Burp Suite CE&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Tools that are required to add into system environment (PATH) to make it work:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;OpenJDK (java.exe)&lt;/li&gt;
+&lt;li&gt;Apktool&lt;/li&gt;
+&lt;li&gt;Jadx&lt;/li&gt;
+&lt;li&gt;build-tools from &lt;a href=&#34;https://developer.android.com/tools#tools-build&#34;&gt;Android Studio&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;platform-tools from &lt;a href=&#34;https://developer.android.com/tools#tools-platform&#34;&gt;Android Studio&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;video&#34;&gt;Video&lt;/h2&gt;
+&lt;p&gt;To make things easier, I decided to just demo in a video instead.&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>ICSCTF SecureNote</title>
       <link>https://callmeks.github.io/posts/icsctf-securenote/</link>
       <pubDate>Mon, 30 Jun 2025 22:33:06 +0800</pubDate>
@@ -31,8 +66,7 @@
       <description>&lt;h2 id=&#34;description&#34;&gt;Description&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;I asked for the challenge from other people so I have no idea what the description is. All I know is this challenge required me to upload my malicious APK into the server
-&lt;a href=&#34;static/SecureNote.apk&#34;&gt;SecureNote.apk&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;a href=&#34;static/SecureNote.apk&#34;&gt;SecureNote.apk&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;static-analysis&#34;&gt;Static Analysis&lt;/h2&gt;
 &lt;p&gt;I started out using &lt;code&gt;jadx-gui&lt;/code&gt; to decompile and read the code.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
@@ -107,8 +141,7 @@
       <description>&lt;h2 id=&#34;description&#34;&gt;Description&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;I asked for the challenge from other people so I have no idea what the description is. All I know is this challenge required me to upload my malicious APK into the server
-&lt;a href=&#34;static/Senoparty.apk&#34;&gt;Senoparty.apk&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;a href=&#34;static/Senoparty.apk&#34;&gt;Senoparty.apk&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;static-analysis&#34;&gt;Static Analysis&lt;/h2&gt;
 &lt;p&gt;I started out using &lt;code&gt;jadx-gui&lt;/code&gt; to decompile and read the code.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
@@ -181,8 +214,7 @@
       <description>&lt;h2 id=&#34;description&#34;&gt;Description&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;I asked for the challenge from other people so I have no idea what the description is.
-&lt;a href=&#34;static/EmojiGachaRPG.apk&#34;&gt;EmojiGachaRPG.apk&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;a href=&#34;static/EmojiGachaRPG.apk&#34;&gt;EmojiGachaRPG.apk&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;static-analysis&#34;&gt;Static Analysis&lt;/h2&gt;
 &lt;p&gt;I started out by decompiling it using &lt;code&gt;jadx-gui&lt;/code&gt; and looked into the &lt;code&gt;AndroidManifest.xml&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
@@ -237,8 +269,7 @@
       <description>&lt;h2 id=&#34;description&#34;&gt;Description&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;I asked for the challenge from other people so I have no idea what the description is.
-&lt;a href=&#34;static/SimpleGuess.apk&#34;&gt;SimpleGuess.apk&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;a href=&#34;static/SimpleGuess.apk&#34;&gt;SimpleGuess.apk&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;static-analysis&#34;&gt;Static Analysis&lt;/h2&gt;
 &lt;p&gt;As usual, I just start analyzing with &lt;code&gt;jadx-gui&lt;/code&gt;. I started with the &lt;code&gt;AndroidManifest.xml&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
@@ -276,8 +307,7 @@
       <guid>https://callmeks.github.io/posts/android-spyware-further-analysis/</guid>
       <description>&lt;h2 id=&#34;description&#34;&gt;Description&lt;/h2&gt;
 &lt;blockquote&gt;
-&lt;p&gt;This is a continuation of the &lt;a href=&#34;../android-spyware-maybank2u-apk&#34;&gt;Android Spyware Maybank2u APK&lt;/a&gt; where I dig deeper specifically on the decompilation failure. Although several solution was found previously, I did not fully understand on the issue and thats the reason I&amp;rsquo;m having the research here&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;This is a continuation of the &lt;a href=&#34;../android-spyware-maybank2u-apk&#34;&gt;Android Spyware Maybank2u APK&lt;/a&gt; where I dig deeper specifically on the decompilation failure. Although several solution was found previously, I did not fully understand on the issue and thats the reason I&amp;rsquo;m having the research here&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;the-issue&#34;&gt;The Issue&lt;/h2&gt;
 &lt;p&gt;The APK was not able to decompile as shown below.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
@@ -348,8 +378,7 @@
       <guid>https://callmeks.github.io/posts/android-spyware-maybank2u-apk/</guid>
       <description>&lt;h2 id=&#34;description&#34;&gt;Description&lt;/h2&gt;
 &lt;blockquote&gt;
-&lt;p&gt;I asked this APK from Fareed after I saw his post in &lt;a href=&#34;https://x.com/frdfzi/status/1914682801674240012&#34;&gt;X&lt;/a&gt; and decided to have a look into it.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;I asked this APK from Fareed after I saw his post in &lt;a href=&#34;https://x.com/frdfzi/status/1914682801674240012&#34;&gt;X&lt;/a&gt; and decided to have a look into it.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;analyzing-apk&#34;&gt;Analyzing APK&lt;/h2&gt;
 &lt;p&gt;This is interesting because this is my first time playing around malicious APK and I have no idea if it would affect anything on both my devices and my machine. As usual, I started out with static analysis first.&lt;/p&gt;
 &lt;h3 id=&#34;static-analysis&#34;&gt;Static Analysis&lt;/h3&gt;
@@ -381,8 +410,7 @@
       <description>&lt;h2 id=&#34;challenge-description&#34;&gt;Challenge Description&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Welcome to the Config Editor Challenge! In this lab, you&amp;rsquo;ll dive into a realistic situation involving vulnerabilities in a widely-used third-party library. Your objective is to exploit a library-induced vulnerability to achieve RCE on an Android application.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;static/configeditor.apk&#34;&gt;configeditor.apk&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;static/configeditor.apk&#34;&gt;configeditor.apk&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
 &lt;p&gt;As usual, I started out by performing static analysis to read the code.&lt;/p&gt;
 &lt;h3 id=&#34;static-analysis&#34;&gt;Static Analysis&lt;/h3&gt;
@@ -437,8 +465,7 @@
       <description>&lt;h2 id=&#34;challenge-description&#34;&gt;Challenge Description&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Welcome to the NoteKeeper Application, where users can create and encode short notes. However, lurking within the app is a critical buffer overflow vulnerability. Your mission is to uncover this vulnerability and exploit it to achieve remote code execution.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;static/notekeeper.apk&#34;&gt;notekeeper.apk&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;static/notekeeper.apk&#34;&gt;notekeeper.apk&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
 &lt;p&gt;I started out by performing static analysis to look into the code&lt;/p&gt;
 &lt;h3 id=&#34;static-analysis&#34;&gt;Static Analysis&lt;/h3&gt;
@@ -475,8 +502,7 @@
       <description>&lt;h2 id=&#34;challenge-description&#34;&gt;Challenge Description&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Welcome to the Remote Code Execution (RCE) Challenge! This lab provides a real-world scenario where you&amp;rsquo;ll explore vulnerabilities in popular software. Your mission is to exploit a path traversal vulnerability combined with dynamic code loading to achieve remote code execution.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;static/documentviewer.apk&#34;&gt;documentviewer.apk&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;static/documentviewer.apk&#34;&gt;documentviewer.apk&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
 &lt;p&gt;I started out by working on static analysis.&lt;/p&gt;
 &lt;h3 id=&#34;static-analysis&#34;&gt;Static Analysis&lt;/h3&gt;
@@ -531,12 +557,9 @@
       <description>&lt;h2 id=&#34;challenge-description&#34;&gt;Challenge Description&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Welcome to the Android Insecure WebView Challenge! This challenge is designed to delve into the complexities of Android&amp;rsquo;s WebView component, exploiting a Cross-Site Scripting (XSS) vulnerability to achieve Remote Code Execution (RCE). It&amp;rsquo;s an immersive opportunity for participants to engage with Android application security, particularly focusing on WebView security issues.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;static/postboard.apk&#34;&gt;postboard.apk&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;static/postboard.apk&#34;&gt;postboard.apk&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
-&lt;p&gt;As usual, I started by performing static analysis to get some understanding of the application.&lt;/p&gt;
-&lt;h3 id=&#34;static-analysis&#34;&gt;Static Analysis&lt;/h3&gt;
-&lt;p&gt;I started out by reading the &lt;code&gt;AndroidManifest.xml&lt;/code&gt; code after decompiling using &lt;code&gt;jadx-gui&lt;/code&gt;.&lt;/p&gt;</description>
+&lt;p&gt;As usual, I started by performing static analysis to get some understanding of the application.&lt;/p&gt;</description>
     </item>
     <item>
       <title>MHL Food Store</title>
@@ -546,8 +569,7 @@
       <description>&lt;h2 id=&#34;challenge-description&#34;&gt;Challenge Description&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Welcome to the Android App Security Lab: SQL Injection Challenge! Dive into the world of cybersecurity with our hands-on lab. This challenge is centered around a fictitious &amp;ldquo;Food Store&amp;rdquo; app, highlighting the critical security flaw of SQL Injection (SQLi) within the app&amp;rsquo;s framework.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;static/foodstore.apk&#34;&gt;foodstore.apk&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;static/foodstore.apk&#34;&gt;foodstore.apk&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
 &lt;p&gt;As usual, static analysis to understand first.&lt;/p&gt;
 &lt;h3 id=&#34;static-analysis&#34;&gt;Static Analysis&lt;/h3&gt;
@@ -596,8 +618,7 @@
       <description>&lt;h2 id=&#34;challenge-description&#34;&gt;Challenge Description&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Welcome to the &amp;ldquo;Guess Me&amp;rdquo; Deep Link Exploitation Challenge! Immerse yourself in the world of cybersecurity with this hands-on lab. This challenge revolves around a fictitious &amp;ldquo;Guess Me&amp;rdquo; app, shedding light on a critical security flaw related to deep links that can lead to remote code execution within the app&amp;rsquo;s framework.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;static/guessme.apk&#34;&gt;guessme.apk&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;static/guessme.apk&#34;&gt;guessme.apk&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
 &lt;p&gt;I started out by performing static analysis.&lt;/p&gt;
 &lt;h3 id=&#34;static-analysis&#34;&gt;Static Analysis&lt;/h3&gt;
@@ -611,8 +632,7 @@
       <description>&lt;h2 id=&#34;challenge-description&#34;&gt;Challenge Description&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Welcome to the Secure Notes Challenge! This lab immerses you in the intricacies of Android content providers, challenging you to crack a PIN code protected by a content provider within an Android application. It&amp;rsquo;s an excellent opportunity to explore Android&amp;rsquo;s data management and security features.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;static/securenotes.apk&#34;&gt;securenote.apk&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;static/securenotes.apk&#34;&gt;securenote.apk&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
 &lt;p&gt;As usual, I start out by reading the code using static analysis&lt;/p&gt;
 &lt;h3 id=&#34;static-analysis&#34;&gt;Static Analysis&lt;/h3&gt;
@@ -626,8 +646,7 @@
       <description>&lt;h2 id=&#34;challenge-description&#34;&gt;Challenge Description&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Welcome to the Cyclic Scanner Challenge! This lab is designed to mimic real-world scenarios where vulnerabilities within Android services lead to exploitable situations. Participants will have the opportunity to exploit these vulnerabilities to achieve remote code execution (RCE) on an Android device.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;static/cyclicscanner.apk&#34;&gt;cyclicscanner.apk&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;static/cyclicscanner.apk&#34;&gt;cyclicscanner.apk&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
 &lt;p&gt;I started by performing static analysis to get an understanding on what the application is doing.&lt;/p&gt;
 &lt;h3 id=&#34;static-analysis&#34;&gt;Static Analysis&lt;/h3&gt;
@@ -641,8 +660,7 @@
       <description>&lt;h2 id=&#34;challenge-description&#34;&gt;Challenge Description&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Welcome to the Strings Challenge! In this lab,your goal is to find the flag. The flag&amp;rsquo;s format should be &amp;ldquo;MHL{&amp;hellip;}&amp;rdquo;. The challenge will give you a clear idea of how intents and intent filters work on android also you will get a hands-on experience using Frida APIs.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;static/Strings.apk&#34;&gt;Strings.apk&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;static/Strings.apk&#34;&gt;Strings.apk&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
 &lt;p&gt;This is interesting challenge. I started with static analysis first.&lt;/p&gt;
 &lt;h3 id=&#34;static-analysis&#34;&gt;Static Analysis&lt;/h3&gt;
@@ -656,8 +674,7 @@
       <description>&lt;h2 id=&#34;challenge-description&#34;&gt;Challenge Description&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;This challenge focuses on exploiting a security flaw related to the broadcast receiver in the &amp;ldquo;IOT Connect&amp;rdquo; application, allowing unauthorized users to activate the master switch, which can turn on all connected devices. The goal is to send a broadcast in a way that only authenticated users can trigger the master switch.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;static/IOTConnect.apk&#34;&gt;IOT Connect APK&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;static/IOTConnect.apk&#34;&gt;IOT Connect APK&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
 &lt;p&gt;As usual, I started by performing static analysis and dynamic analysis to fully understand what the code is doing.&lt;/p&gt;</description>
     </item>
@@ -669,8 +686,7 @@
       <description>&lt;h2 id=&#34;challenge-description&#34;&gt;Challenge Description&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;The malware forensics lab identified a new technique for hiding and executing code dynamically. A sample that seems to use this technique has just arrived in their queue. Can you help them?&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;static/SAW.apk&#34;&gt;SAW.apk&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;static/SAW.apk&#34;&gt;SAW.apk&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
 &lt;p&gt;This is something that I think quite hard but yea another fun challenge.&lt;/p&gt;
 &lt;h3 id=&#34;static-analysis&#34;&gt;Static Analysis&lt;/h3&gt;
@@ -703,8 +719,7 @@
       <description>&lt;h2 id=&#34;challenge-description&#34;&gt;Challenge Description&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;This app contains some unique keys. Can you get one?&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;static/APKey.apk&#34;&gt;APKey.apk&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;static/APKey.apk&#34;&gt;APKey.apk&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
 &lt;h3 id=&#34;static-analysis&#34;&gt;Static Analysis&lt;/h3&gt;
 &lt;p&gt;The first step is always static analysis. I started by using &lt;code&gt;jadx-gui&lt;/code&gt; to see the decompiled Java code. Looking into the &lt;code&gt;AndroidManifest.xml&lt;/code&gt;, it looks like there&amp;rsquo;s only one activity which is &lt;code&gt;MainActivity&lt;/code&gt;.&lt;/p&gt;
@@ -758,8 +773,7 @@
 &lt;p&gt;Author: Trailbl4z3r &amp;amp; Monaruku&lt;/p&gt;
 &lt;p&gt;hint:
 Tbh this is not a natively built app, more like something just wrapped into an app&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;static/World_II.apk&#34;&gt;World-II.apk&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;static/World_II.apk&#34;&gt;World-II.apk&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
 &lt;p&gt;Since it&amp;rsquo;s an APK file, Lets start with &lt;code&gt;jadx-gui&lt;/code&gt; for static analysis. In terms of static analysis, it&amp;rsquo;s always best to check out &lt;code&gt;AndroidManifest.xml&lt;/code&gt; first.&lt;/p&gt;</description>
     </item>
@@ -794,8 +808,7 @@ Tbh this is not a natively built app, more like something just wrapped into an a
 &lt;li&gt;Docker version: &lt;a href=&#34;https://hub.docker.com/r/gjuniioor/owasp-bricks&#34;&gt;here&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
-&lt;p&gt;This is a series where I will write my own Nmap NSE script to solve that challenge. This is actually a task given by &lt;a href=&#34;https://www.youtube.com/@mastaghimau&#34;&gt;masta ghimau&lt;/a&gt; during &lt;a href=&#34;https://cybercamp.my/mcc2023-the-journey-begins/&#34;&gt;MCC 2023&lt;/a&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;This is a series where I will write my own Nmap NSE script to solve that challenge. This is actually a task given by &lt;a href=&#34;https://www.youtube.com/@mastaghimau&#34;&gt;masta ghimau&lt;/a&gt; during &lt;a href=&#34;https://cybercamp.my/mcc2023-the-journey-begins/&#34;&gt;MCC 2023&lt;/a&gt;.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;challenge-solution&#34;&gt;Challenge Solution&lt;/h2&gt;
 &lt;p&gt;Login level 5 is just a simple SQL injection which will convert password into md5 hash. We could easily overcome it by injecting in username field.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
@@ -855,8 +868,7 @@ Tbh this is not a natively built app, more like something just wrapped into an a
 &lt;li&gt;Docker version: &lt;a href=&#34;https://hub.docker.com/r/gjuniioor/owasp-bricks&#34;&gt;here&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
-&lt;p&gt;This is a series where I will write my own Nmap NSE script to solve that challenge. This is actually a task given by &lt;a href=&#34;https://www.youtube.com/@mastaghimau&#34;&gt;masta ghimau&lt;/a&gt; during &lt;a href=&#34;https://cybercamp.my/mcc2023-the-journey-begins/&#34;&gt;MCC 2023&lt;/a&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;This is a series where I will write my own Nmap NSE script to solve that challenge. This is actually a task given by &lt;a href=&#34;https://www.youtube.com/@mastaghimau&#34;&gt;masta ghimau&lt;/a&gt; during &lt;a href=&#34;https://cybercamp.my/mcc2023-the-journey-begins/&#34;&gt;MCC 2023&lt;/a&gt;.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;challenge-solution&#34;&gt;Challenge Solution&lt;/h2&gt;
 &lt;p&gt;Login level 4 is just a SQL injection with bracket and uses double quote. Here&amp;rsquo;s an example: &lt;code&gt;SQL Query: SELECT * FROM users WHERE name=(&amp;quot;a&amp;quot;) and password=(&amp;quot;a&amp;quot;)&lt;/code&gt;. We could just modify previous NSE script by changing the query.&lt;/p&gt;</description>
     </item>
@@ -871,8 +883,7 @@ Tbh this is not a natively built app, more like something just wrapped into an a
 &lt;li&gt;Docker version: &lt;a href=&#34;https://hub.docker.com/r/gjuniioor/owasp-bricks&#34;&gt;here&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
-&lt;p&gt;This is a series where I will write my own Nmap NSE script to solve that challenge. This is actually a task given by &lt;a href=&#34;https://www.youtube.com/@mastaghimau&#34;&gt;masta ghimau&lt;/a&gt; during &lt;a href=&#34;https://cybercamp.my/mcc2023-the-journey-begins/&#34;&gt;MCC 2023&lt;/a&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;This is a series where I will write my own Nmap NSE script to solve that challenge. This is actually a task given by &lt;a href=&#34;https://www.youtube.com/@mastaghimau&#34;&gt;masta ghimau&lt;/a&gt; during &lt;a href=&#34;https://cybercamp.my/mcc2023-the-journey-begins/&#34;&gt;MCC 2023&lt;/a&gt;.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;challenge-solution&#34;&gt;Challenge Solution&lt;/h2&gt;
 &lt;p&gt;Login level 3 is just a slightly harder SQL injection as it add brackets. Here&amp;rsquo;s an example: &lt;code&gt;SQL Query: SELECT * FROM users WHERE name=(&#39;1&#39;) and password=(&#39;1&#39;) LIMIT 0,1&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
@@ -932,8 +943,7 @@ Tbh this is not a natively built app, more like something just wrapped into an a
 &lt;li&gt;Docker version: &lt;a href=&#34;https://hub.docker.com/r/gjuniioor/owasp-bricks&#34;&gt;here&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
-&lt;p&gt;This is a series where I will write my own Nmap NSE script to solve that challenge. This is actually a task given by &lt;a href=&#34;https://www.youtube.com/@mastaghimau&#34;&gt;masta ghimau&lt;/a&gt; during &lt;a href=&#34;https://cybercamp.my/mcc2023-the-journey-begins/&#34;&gt;MCC 2023&lt;/a&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;This is a series where I will write my own Nmap NSE script to solve that challenge. This is actually a task given by &lt;a href=&#34;https://www.youtube.com/@mastaghimau&#34;&gt;masta ghimau&lt;/a&gt; during &lt;a href=&#34;https://cybercamp.my/mcc2023-the-journey-begins/&#34;&gt;MCC 2023&lt;/a&gt;.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;challenge-solution&#34;&gt;Challenge Solution&lt;/h2&gt;
 &lt;p&gt;Login level 2 is just a simple SQL injection which javascript validation. Since we are using Nmap NSE to perform SQL injection, it will ignore javascript as it is front end validation. We can use the same NSE script as previous challenge.&lt;/p&gt;</description>
     </item>
@@ -948,8 +958,7 @@ Tbh this is not a natively built app, more like something just wrapped into an a
 &lt;li&gt;Docker version: &lt;a href=&#34;https://hub.docker.com/r/gjuniioor/owasp-bricks&#34;&gt;here&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
-&lt;p&gt;This is a series where I will write my own Nmap NSE script to solve that challenge. This is actually a task given by &lt;a href=&#34;https://www.youtube.com/@mastaghimau&#34;&gt;masta ghimau&lt;/a&gt; during &lt;a href=&#34;https://cybercamp.my/mcc2023-the-journey-begins/&#34;&gt;MCC 2023&lt;/a&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;This is a series where I will write my own Nmap NSE script to solve that challenge. This is actually a task given by &lt;a href=&#34;https://www.youtube.com/@mastaghimau&#34;&gt;masta ghimau&lt;/a&gt; during &lt;a href=&#34;https://cybercamp.my/mcc2023-the-journey-begins/&#34;&gt;MCC 2023&lt;/a&gt;.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;challenge-solution&#34;&gt;Challenge Solution&lt;/h2&gt;
 &lt;p&gt;Login level 1 is just a simple SQL injection. The hardest part is writing a custom NSE script.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
@@ -1005,8 +1014,7 @@ Tbh this is not a natively built app, more like something just wrapped into an a
       <guid>https://callmeks.github.io/posts/journey-of-creating-android-ctf/</guid>
       <description>&lt;h2 id=&#34;overview-about-the-journey&#34;&gt;Overview about the journey&lt;/h2&gt;
 &lt;blockquote&gt;
-&lt;p&gt;I have 0 knowledge about kotlin as well as creating Android APK. Most of the things that I mentioned below is also my first time.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;I have 0 knowledge about kotlin as well as creating Android APK. Most of the things that I mentioned below is also my first time.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;part-0&#34;&gt;PART 0&lt;/h2&gt;
 &lt;p&gt;Here&amp;rsquo;s the part where I started out by exploring how to create an Android APK. Basically just tons of youtube vidoes and blogs. The final decision? I just go with Android Studio. The installation is simple but remember to download system image for Virtual Device which is also a part of Android Studio.&lt;/p&gt;</description>
     </item>

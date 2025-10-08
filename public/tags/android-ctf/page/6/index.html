@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="canonical" href="https://callmeks.github.io/tags/android-ctf/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.d72444526d7ecbdb0015438a7fa89054a658bf759d0542e2e5df81ce94b493ee.css" integrity="sha256-1yREUm1&#43;y9sAFUOKf6iQVKZYv3WdBULi5d&#43;BzpS0k&#43;4=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.a482bf00fa5c046040ef7973ad5fdf5657890cacb596c93f1382f664ca542074.css" integrity="sha256-pIK/APpcBGBA73lzrV/fVleJDKy1lsk/E4L2ZMpUIHQ=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b">
 <link rel="icon" type="image/png" sizes="16x16" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b?size=16">
 <link rel="icon" type="image/png" sizes="32x32" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b?size=32">
@@ -18,7 +18,7 @@
 <link rel="mask-icon" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://callmeks.github.io/tags/android-ctf/index.xml">
+<link rel="alternate" type="application/rss+xml" href="https://callmeks.github.io/tags/android-ctf/index.xml" title="rss">
 <link rel="alternate" hreflang="en" href="https://callmeks.github.io/tags/android-ctf/">
 <noscript>
     <style>
@@ -84,7 +84,7 @@
         <div class="logo">
             <a href="https://callmeks.github.io/" accesskey="h" title="KS Blog (Alt + H)">KS Blog</a>
             <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -154,7 +154,7 @@ Solution Static Analysis The first step is always static analysis. I started by 
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 &lt;application android:theme=&#34;@style/Theme.APKey&#34; android:label=&#34;@string/app_name&#34; android:icon=&#34;@mipmap/ic_launcher&#34; android:allowBackup=&#34;true&#34; android:supportsRtl=&#34;true&#34; android:roundIcon=&#34;@mipmap/ic_launcher_round&#34; android:appComponentFactory=&#34;androidx.core.app.CoreComponentFactory&#34;&gt; &lt;activity android:name=&#34;com.example.apkey.MainActivity&#34;&gt; &lt;intent-filter&gt; &lt;action android:name=&#34;android.intent.action.MAIN&#34;/&gt; &lt;category android:name=&#34;android.intent.category.LAUNCHER&#34;/&gt; &lt;/intent-filter&gt; &lt;/activity&gt; &lt;/application&gt; Since it’s gonna be MainActivity, we could have a look at the code. Inside the code, we have something interesting.
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2025-02-19 20:05:18 +0800 +08'>February 19, 2025</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;861 words</footer>
+  <footer class="entry-footer"><span title='2025-02-19 20:05:18 +0800 +08'>February 19, 2025</span>&nbsp;·&nbsp;<span>5 min</span>&nbsp;·&nbsp;<span>861 words</span></footer>
   <a class="entry-link" aria-label="post link to HTB APKey" href="https://callmeks.github.io/posts/htb-apkey/"></a>
 </article>
 
@@ -172,7 +172,7 @@ World-II.apk
 Solution Since it’s an APK file, Lets start with jadx-gui for static analysis. In terms of static analysis, it’s always best to check out AndroidManifest.xml first.
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2024-12-29 13:40:56 +0800 +08'>December 29, 2024</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;915 words</footer>
+  <footer class="entry-footer"><span title='2024-12-29 13:40:56 +0800 +08'>December 29, 2024</span>&nbsp;·&nbsp;<span>5 min</span>&nbsp;·&nbsp;<span>915 words</span></footer>
   <a class="entry-link" aria-label="post link to WGMY2024 World II" href="https://callmeks.github.io/posts/wgmy2024-world-ii/"></a>
 </article>
 
@@ -186,7 +186,7 @@ Solution Since it’s an APK file, Lets start with jadx-gui for static analysis.
 PART 0 Here’s the part where I started out by exploring how to create an Android APK. Basically just tons of youtube vidoes and blogs. The final decision? I just go with Android Studio. The installation is simple but remember to download system image for Virtual Device which is also a part of Android Studio.
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2024-12-03 16:07:05 +0800 +08'>December 3, 2024</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;1133 words</footer>
+  <footer class="entry-footer"><span title='2024-12-03 16:07:05 +0800 +08'>December 3, 2024</span>&nbsp;·&nbsp;<span>6 min</span>&nbsp;·&nbsp;<span>1133 words</span></footer>
   <a class="entry-link" aria-label="post link to Journey of Creating Android CTF" href="https://callmeks.github.io/posts/journey-of-creating-android-ctf/"></a>
 </article>
 <footer class="page-footer">

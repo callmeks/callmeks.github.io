@@ -4,10 +4,45 @@
     <title>Android on KS Blog</title>
     <link>https://callmeks.github.io/tags/android/</link>
     <description>Recent content in Android on KS Blog</description>
-    <generator>Hugo -- 0.139.3</generator>
+    <generator>Hugo -- 0.151.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 29 Jun 2025 20:44:04 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 08 Oct 2025 15:37:04 +0800</lastBuildDate>
     <atom:link href="https://callmeks.github.io/tags/android/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Android Penetration Testing Setup Guide</title>
+      <link>https://callmeks.github.io/posts/android-penetration-testing-setup-guide/</link>
+      <pubDate>Wed, 08 Oct 2025 15:37:04 +0800</pubDate>
+      <guid>https://callmeks.github.io/posts/android-penetration-testing-setup-guide/</guid>
+      <description>&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
+&lt;p&gt;I created this blog post to showcase how I setup my android penetration testing environment in Windows.&lt;/p&gt;
+&lt;h3 id=&#34;tools&#34;&gt;Tools&lt;/h3&gt;
+&lt;p&gt;The list of tools that I will be installing:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Android Studio
+&lt;ul&gt;
+&lt;li&gt;build-tools&lt;/li&gt;
+&lt;li&gt;platform-tools&lt;/li&gt;
+&lt;li&gt;android virtual device (AVD)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;OpenJDK&lt;/li&gt;
+&lt;li&gt;Apktool&lt;/li&gt;
+&lt;li&gt;Jadx / Jadx-gui&lt;/li&gt;
+&lt;li&gt;Frida (Required Python)&lt;/li&gt;
+&lt;li&gt;Objection (Required Python)&lt;/li&gt;
+&lt;li&gt;Burp Suite CE&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Tools that are required to add into system environment (PATH) to make it work:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;OpenJDK (java.exe)&lt;/li&gt;
+&lt;li&gt;Apktool&lt;/li&gt;
+&lt;li&gt;Jadx&lt;/li&gt;
+&lt;li&gt;build-tools from &lt;a href=&#34;https://developer.android.com/tools#tools-build&#34;&gt;Android Studio&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;platform-tools from &lt;a href=&#34;https://developer.android.com/tools#tools-platform&#34;&gt;Android Studio&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;video&#34;&gt;Video&lt;/h2&gt;
+&lt;p&gt;To make things easier, I decided to just demo in a video instead.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Android Spyware Further Analysis</title>
       <link>https://callmeks.github.io/posts/android-spyware-further-analysis/</link>
@@ -15,8 +50,7 @@
       <guid>https://callmeks.github.io/posts/android-spyware-further-analysis/</guid>
       <description>&lt;h2 id=&#34;description&#34;&gt;Description&lt;/h2&gt;
 &lt;blockquote&gt;
-&lt;p&gt;This is a continuation of the &lt;a href=&#34;../android-spyware-maybank2u-apk&#34;&gt;Android Spyware Maybank2u APK&lt;/a&gt; where I dig deeper specifically on the decompilation failure. Although several solution was found previously, I did not fully understand on the issue and thats the reason I&amp;rsquo;m having the research here&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;This is a continuation of the &lt;a href=&#34;../android-spyware-maybank2u-apk&#34;&gt;Android Spyware Maybank2u APK&lt;/a&gt; where I dig deeper specifically on the decompilation failure. Although several solution was found previously, I did not fully understand on the issue and thats the reason I&amp;rsquo;m having the research here&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;the-issue&#34;&gt;The Issue&lt;/h2&gt;
 &lt;p&gt;The APK was not able to decompile as shown below.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
@@ -87,8 +121,7 @@
       <guid>https://callmeks.github.io/posts/android-spyware-maybank2u-apk/</guid>
       <description>&lt;h2 id=&#34;description&#34;&gt;Description&lt;/h2&gt;
 &lt;blockquote&gt;
-&lt;p&gt;I asked this APK from Fareed after I saw his post in &lt;a href=&#34;https://x.com/frdfzi/status/1914682801674240012&#34;&gt;X&lt;/a&gt; and decided to have a look into it.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;I asked this APK from Fareed after I saw his post in &lt;a href=&#34;https://x.com/frdfzi/status/1914682801674240012&#34;&gt;X&lt;/a&gt; and decided to have a look into it.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;analyzing-apk&#34;&gt;Analyzing APK&lt;/h2&gt;
 &lt;p&gt;This is interesting because this is my first time playing around malicious APK and I have no idea if it would affect anything on both my devices and my machine. As usual, I started out with static analysis first.&lt;/p&gt;
 &lt;h3 id=&#34;static-analysis&#34;&gt;Static Analysis&lt;/h3&gt;

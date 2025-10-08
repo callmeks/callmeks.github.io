@@ -10,7 +10,7 @@
 <meta name="description" content="Posts - KS Blog">
 <meta name="author" content="">
 <link rel="canonical" href="https://callmeks.github.io/posts/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.d72444526d7ecbdb0015438a7fa89054a658bf759d0542e2e5df81ce94b493ee.css" integrity="sha256-1yREUm1&#43;y9sAFUOKf6iQVKZYv3WdBULi5d&#43;BzpS0k&#43;4=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.a482bf00fa5c046040ef7973ad5fdf5657890cacb596c93f1382f664ca542074.css" integrity="sha256-pIK/APpcBGBA73lzrV/fVleJDKy1lsk/E4L2ZMpUIHQ=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b">
 <link rel="icon" type="image/png" sizes="16x16" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b?size=16">
 <link rel="icon" type="image/png" sizes="32x32" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b?size=32">
@@ -18,7 +18,7 @@
 <link rel="mask-icon" href="https://en.gravatar.com/avatar/9f3c6bb94301eda83e6a03211b184f6b">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://callmeks.github.io/posts/index.xml">
+<link rel="alternate" type="application/rss+xml" href="https://callmeks.github.io/posts/index.xml" title="rss">
 <link rel="alternate" hreflang="en" href="https://callmeks.github.io/posts/">
 <noscript>
     <style>
@@ -99,7 +99,7 @@
         <div class="logo">
             <a href="https://callmeks.github.io/" accesskey="h" title="KS Blog (Alt + H)">KS Blog</a>
             <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -159,6 +159,22 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">MHL Secure Notes
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Challenge Description Welcome to the Secure Notes Challenge! This lab immerses you in the intricacies of Android content providers, challenging you to crack a PIN code protected by a content provider within an Android application. It’s an excellent opportunity to explore Android’s data management and security features.
+securenote.apk
+Solution As usual, I start out by reading the code using static analysis
+Static Analysis To read the apk code, I used jadx-gui.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-03-31 22:47:33 +0800 +08'>March 31, 2025</span>&nbsp;·&nbsp;<span>3 min</span>&nbsp;·&nbsp;<span>596 words</span></footer>
+  <a class="entry-link" aria-label="post link to MHL Secure Notes" href="https://callmeks.github.io/posts/mhl-secure-notes/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">MHL Cyclic Scanner
     </h2>
   </header>
@@ -169,7 +185,7 @@ Solution I started by performing static analysis to get an understanding on what
 Static Analysis I started out by looking into the AndroidManifest.xml after decompiling using jadx-gui.
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2025-03-30 12:42:08 +0800 +08'>March 30, 2025</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;809 words</footer>
+  <footer class="entry-footer"><span title='2025-03-30 12:42:08 +0800 +08'>March 30, 2025</span>&nbsp;·&nbsp;<span>4 min</span>&nbsp;·&nbsp;<span>809 words</span></footer>
   <a class="entry-link" aria-label="post link to MHL Cyclic Scanner" href="https://callmeks.github.io/posts/mhl-cyclic-scanner/"></a>
 </article>
 
@@ -185,23 +201,8 @@ Solution This is interesting challenge. I started with static analysis first.
 Static Analysis As usual, I used jadx-gui to have a look at the source code.
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2025-03-21 20:35:52 +0800 +08'>March 21, 2025</span>&nbsp;·&nbsp;10 min&nbsp;·&nbsp;2041 words</footer>
+  <footer class="entry-footer"><span title='2025-03-21 20:35:52 +0800 +08'>March 21, 2025</span>&nbsp;·&nbsp;<span>10 min</span>&nbsp;·&nbsp;<span>2041 words</span></footer>
   <a class="entry-link" aria-label="post link to MHL Strings" href="https://callmeks.github.io/posts/mhl-strings/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">MHL IOT Connect
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Challenge Description This challenge focuses on exploiting a security flaw related to the broadcast receiver in the “IOT Connect” application, allowing unauthorized users to activate the master switch, which can turn on all connected devices. The goal is to send a broadcast in a way that only authenticated users can trigger the master switch.
-IOT Connect APK
-Solution As usual, I started by performing static analysis and dynamic analysis to fully understand what the code is doing.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2025-03-20 16:28:41 +0800 +08'>March 20, 2025</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;900 words</footer>
-  <a class="entry-link" aria-label="post link to MHL IOT Connect" href="https://callmeks.github.io/posts/mhl-iot-connect/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

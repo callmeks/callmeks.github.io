@@ -4,7 +4,7 @@
     <title>NSE on KS Blog</title>
     <link>https://callmeks.github.io/tags/nse/</link>
     <description>Recent content in NSE on KS Blog</description>
-    <generator>Hugo -- 0.139.3</generator>
+    <generator>Hugo -- 0.151.0</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 03 Dec 2024 16:23:41 +0800</lastBuildDate>
     <atom:link href="https://callmeks.github.io/tags/nse/index.xml" rel="self" type="application/rss+xml" />
@@ -19,8 +19,7 @@
 &lt;li&gt;Docker version: &lt;a href=&#34;https://hub.docker.com/r/gjuniioor/owasp-bricks&#34;&gt;here&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
-&lt;p&gt;This is a series where I will write my own Nmap NSE script to solve that challenge. This is actually a task given by &lt;a href=&#34;https://www.youtube.com/@mastaghimau&#34;&gt;masta ghimau&lt;/a&gt; during &lt;a href=&#34;https://cybercamp.my/mcc2023-the-journey-begins/&#34;&gt;MCC 2023&lt;/a&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;This is a series where I will write my own Nmap NSE script to solve that challenge. This is actually a task given by &lt;a href=&#34;https://www.youtube.com/@mastaghimau&#34;&gt;masta ghimau&lt;/a&gt; during &lt;a href=&#34;https://cybercamp.my/mcc2023-the-journey-begins/&#34;&gt;MCC 2023&lt;/a&gt;.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;challenge-solution&#34;&gt;Challenge Solution&lt;/h2&gt;
 &lt;p&gt;Login level 5 is just a simple SQL injection which will convert password into md5 hash. We could easily overcome it by injecting in username field.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
@@ -80,8 +79,7 @@
 &lt;li&gt;Docker version: &lt;a href=&#34;https://hub.docker.com/r/gjuniioor/owasp-bricks&#34;&gt;here&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
-&lt;p&gt;This is a series where I will write my own Nmap NSE script to solve that challenge. This is actually a task given by &lt;a href=&#34;https://www.youtube.com/@mastaghimau&#34;&gt;masta ghimau&lt;/a&gt; during &lt;a href=&#34;https://cybercamp.my/mcc2023-the-journey-begins/&#34;&gt;MCC 2023&lt;/a&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;This is a series where I will write my own Nmap NSE script to solve that challenge. This is actually a task given by &lt;a href=&#34;https://www.youtube.com/@mastaghimau&#34;&gt;masta ghimau&lt;/a&gt; during &lt;a href=&#34;https://cybercamp.my/mcc2023-the-journey-begins/&#34;&gt;MCC 2023&lt;/a&gt;.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;challenge-solution&#34;&gt;Challenge Solution&lt;/h2&gt;
 &lt;p&gt;Login level 4 is just a SQL injection with bracket and uses double quote. Here&amp;rsquo;s an example: &lt;code&gt;SQL Query: SELECT * FROM users WHERE name=(&amp;quot;a&amp;quot;) and password=(&amp;quot;a&amp;quot;)&lt;/code&gt;. We could just modify previous NSE script by changing the query.&lt;/p&gt;</description>
     </item>
@@ -96,8 +94,7 @@
 &lt;li&gt;Docker version: &lt;a href=&#34;https://hub.docker.com/r/gjuniioor/owasp-bricks&#34;&gt;here&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
-&lt;p&gt;This is a series where I will write my own Nmap NSE script to solve that challenge. This is actually a task given by &lt;a href=&#34;https://www.youtube.com/@mastaghimau&#34;&gt;masta ghimau&lt;/a&gt; during &lt;a href=&#34;https://cybercamp.my/mcc2023-the-journey-begins/&#34;&gt;MCC 2023&lt;/a&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;This is a series where I will write my own Nmap NSE script to solve that challenge. This is actually a task given by &lt;a href=&#34;https://www.youtube.com/@mastaghimau&#34;&gt;masta ghimau&lt;/a&gt; during &lt;a href=&#34;https://cybercamp.my/mcc2023-the-journey-begins/&#34;&gt;MCC 2023&lt;/a&gt;.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;challenge-solution&#34;&gt;Challenge Solution&lt;/h2&gt;
 &lt;p&gt;Login level 3 is just a slightly harder SQL injection as it add brackets. Here&amp;rsquo;s an example: &lt;code&gt;SQL Query: SELECT * FROM users WHERE name=(&#39;1&#39;) and password=(&#39;1&#39;) LIMIT 0,1&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
@@ -157,8 +154,7 @@
 &lt;li&gt;Docker version: &lt;a href=&#34;https://hub.docker.com/r/gjuniioor/owasp-bricks&#34;&gt;here&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
-&lt;p&gt;This is a series where I will write my own Nmap NSE script to solve that challenge. This is actually a task given by &lt;a href=&#34;https://www.youtube.com/@mastaghimau&#34;&gt;masta ghimau&lt;/a&gt; during &lt;a href=&#34;https://cybercamp.my/mcc2023-the-journey-begins/&#34;&gt;MCC 2023&lt;/a&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;This is a series where I will write my own Nmap NSE script to solve that challenge. This is actually a task given by &lt;a href=&#34;https://www.youtube.com/@mastaghimau&#34;&gt;masta ghimau&lt;/a&gt; during &lt;a href=&#34;https://cybercamp.my/mcc2023-the-journey-begins/&#34;&gt;MCC 2023&lt;/a&gt;.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;challenge-solution&#34;&gt;Challenge Solution&lt;/h2&gt;
 &lt;p&gt;Login level 2 is just a simple SQL injection which javascript validation. Since we are using Nmap NSE to perform SQL injection, it will ignore javascript as it is front end validation. We can use the same NSE script as previous challenge.&lt;/p&gt;</description>
     </item>
@@ -173,8 +169,7 @@
 &lt;li&gt;Docker version: &lt;a href=&#34;https://hub.docker.com/r/gjuniioor/owasp-bricks&#34;&gt;here&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
-&lt;p&gt;This is a series where I will write my own Nmap NSE script to solve that challenge. This is actually a task given by &lt;a href=&#34;https://www.youtube.com/@mastaghimau&#34;&gt;masta ghimau&lt;/a&gt; during &lt;a href=&#34;https://cybercamp.my/mcc2023-the-journey-begins/&#34;&gt;MCC 2023&lt;/a&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;This is a series where I will write my own Nmap NSE script to solve that challenge. This is actually a task given by &lt;a href=&#34;https://www.youtube.com/@mastaghimau&#34;&gt;masta ghimau&lt;/a&gt; during &lt;a href=&#34;https://cybercamp.my/mcc2023-the-journey-begins/&#34;&gt;MCC 2023&lt;/a&gt;.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;challenge-solution&#34;&gt;Challenge Solution&lt;/h2&gt;
 &lt;p&gt;Login level 1 is just a simple SQL injection. The hardest part is writing a custom NSE script.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
