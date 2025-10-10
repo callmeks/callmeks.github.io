@@ -139,6 +139,10 @@ On the Proxy, select manual and add your computer's IP address as the proxy host
 
 ![alt text](img/index-21.png#center)
 
+If you want need an android application to try out, here's one for testing purposes. 
+
+[httpreq.apk](static/httpreq.apk)
+
 ## Video Guide
 
 I know its complicated and confusing so I have provided a video version as well.
