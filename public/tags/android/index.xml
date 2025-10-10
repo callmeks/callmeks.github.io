@@ -6,8 +6,22 @@
     <description>Recent content in Android on KS Blog</description>
     <generator>Hugo -- 0.151.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 08 Oct 2025 15:37:04 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 10 Oct 2025 16:07:09 +0800</lastBuildDate>
     <atom:link href="https://callmeks.github.io/tags/android/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Android Traffic Interception Guide</title>
+      <link>https://callmeks.github.io/posts/android-traffic-interception-guide/</link>
+      <pubDate>Fri, 10 Oct 2025 16:07:09 +0800</pubDate>
+      <guid>https://callmeks.github.io/posts/android-traffic-interception-guide/</guid>
+      <description>&lt;h2 id=&#34;prerequisite&#34;&gt;Prerequisite&lt;/h2&gt;
+&lt;p&gt;If you have look into my previous post, &lt;a href=&#34;../Android-Penetration-Testing-Setup-Guide/&#34;&gt;Android Penetration Testing Setup Guide&lt;/a&gt;, do have a look into it to ensure that you have installed the tools.&lt;/p&gt;
+&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
+&lt;p&gt;I created this blog post to showcase how I intercept android traffic using Burp Suite.&lt;/p&gt;
+&lt;h2 id=&#34;creating-an-android-emulator&#34;&gt;Creating an Android Emulator&lt;/h2&gt;
+&lt;p&gt;To create an android emulator, I will be using Android Studio as an example.&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;alt text&#34; loading=&#34;lazy&#34; src=&#34;https://callmeks.github.io/posts/android-traffic-interception-guide/img/index.png#center&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Select &amp;ldquo;More Actions&amp;rdquo; &amp;gt; &amp;ldquo;Virtual Device Manager&amp;rdquo;. This is where the android emulator is managed.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Android Penetration Testing Setup Guide</title>
       <link>https://callmeks.github.io/posts/android-penetration-testing-setup-guide/</link>

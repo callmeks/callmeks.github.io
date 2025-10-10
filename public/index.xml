@@ -6,7 +6,7 @@
     <description>Recent content on KS Blog</description>
     <generator>Hugo -- 0.151.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 08 Oct 2025 15:37:04 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 10 Oct 2025 16:07:09 +0800</lastBuildDate>
     <atom:link href="https://callmeks.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>My Journey of Cybersec</title>
@@ -22,6 +22,20 @@
 &lt;h2 id=&#34;how-i-learn-ethical-hacking&#34;&gt;How I learn ethical hacking&lt;/h2&gt;
 &lt;h3 id=&#34;part-0&#34;&gt;Part 0&lt;/h3&gt;
 &lt;p&gt;Back then, I don&amp;rsquo;t really know about red team and blue team and I just decided to learn hacking for fun. Since hacking others looks more fun, I decided to look into videos and anything related. The first courses I go through is actually Practical Ethical Hacking from TCM Security. After going through the first few topic of the course, I have some basic understanding about how hacking works (that&amp;rsquo;s what I thought back then). Eventually, I stopped the course halfway because the course started to go through hackthebox retired machine and I don&amp;rsquo;t have a VIP account to follow along. Instead, I decided to move on with PicoCTF and Tryhackme as some of the people mentioned this 2 platform is great for learning cybersecurity. I further improved my basic skills such as linux command and getting more new knowledge from Tryhackme since it has a lot of different room. As for PicoCTF, I was stunned for quite some times as that is the first time I find out about CTF. That is also when I found out that there are a lot of different hacking.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Android Traffic Interception Guide</title>
+      <link>https://callmeks.github.io/posts/android-traffic-interception-guide/</link>
+      <pubDate>Fri, 10 Oct 2025 16:07:09 +0800</pubDate>
+      <guid>https://callmeks.github.io/posts/android-traffic-interception-guide/</guid>
+      <description>&lt;h2 id=&#34;prerequisite&#34;&gt;Prerequisite&lt;/h2&gt;
+&lt;p&gt;If you have look into my previous post, &lt;a href=&#34;../Android-Penetration-Testing-Setup-Guide/&#34;&gt;Android Penetration Testing Setup Guide&lt;/a&gt;, do have a look into it to ensure that you have installed the tools.&lt;/p&gt;
+&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
+&lt;p&gt;I created this blog post to showcase how I intercept android traffic using Burp Suite.&lt;/p&gt;
+&lt;h2 id=&#34;creating-an-android-emulator&#34;&gt;Creating an Android Emulator&lt;/h2&gt;
+&lt;p&gt;To create an android emulator, I will be using Android Studio as an example.&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;alt text&#34; loading=&#34;lazy&#34; src=&#34;https://callmeks.github.io/posts/android-traffic-interception-guide/img/index.png#center&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Select &amp;ldquo;More Actions&amp;rdquo; &amp;gt; &amp;ldquo;Virtual Device Manager&amp;rdquo;. This is where the android emulator is managed.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Android Penetration Testing Setup Guide</title>

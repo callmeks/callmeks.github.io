@@ -159,6 +159,21 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">ICSCTF SecureNote
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Description I asked for the challenge from other people so I have no idea what the description is. All I know is this challenge required me to upload my malicious APK into the server SecureNote.apk
+Static Analysis I started out using jadx-gui to decompile and read the code.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 &lt;activity android:name=&#34;com.app.rehack.MainActivity&#34; android:exported=&#34;true&#34;&gt; &lt;intent-filter&gt; &lt;action android:name=&#34;android.intent.action.MAIN&#34;/&gt; &lt;category android:name=&#34;android.intent.category.LAUNCHER&#34;/&gt; &lt;/intent-filter&gt; &lt;/activity&gt; &lt;activity android:name=&#34;com.app.rehack.NoteListActivity&#34; android:exported=&#34;true&#34;/&gt; &lt;activity android:name=&#34;com.app.rehack.AddNoteActivity&#34; android:exported=&#34;true&#34;/&gt; &lt;activity android:name=&#34;com.app.rehack.ViewNoteActivity&#34; android:exported=&#34;false&#34;/&gt; &lt;provider android:name=&#34;com.app.rehack.Utils.FileProvider&#34; android:writePermission=&#34;false&#34; android:enabled=&#34;true&#34; android:exported=&#34;false&#34; android:authorities=&#34;com.app.rehack&#34; android:grantUriPermissions=&#34;true&#34;&gt; &lt;meta-data android:name=&#34;android.support.FILE_PROVIDER_PATHS&#34; android:resource=&#34;@xml/provider_path&#34;/&gt; &lt;/provider&gt; Based on the AndroidManifest.xml, there’s 4 activities in total but only one activity is not exported. Aside of that, there’s a provider with grantUriPermissions=&#34;true&#34;. Based on previous challenge, this is actually vulnerable so I assume exploit path should be similar. The provider has a @xml/provider_path which provide the folder path of the file provider.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-06-30 22:33:06 +0800 +08'>June 30, 2025</span>&nbsp;·&nbsp;<span>9 min</span>&nbsp;·&nbsp;<span>1827 words</span></footer>
+  <a class="entry-link" aria-label="post link to ICSCTF SecureNote" href="https://callmeks.github.io/posts/icsctf-securenote/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">ICSCTF Senoparty
     </h2>
   </header>
@@ -185,21 +200,6 @@ Static Analysis I started out by decompiling it using jadx-gui and looked into t
   </div>
   <footer class="entry-footer"><span title='2025-06-30 15:48:09 +0800 +08'>June 30, 2025</span>&nbsp;·&nbsp;<span>3 min</span>&nbsp;·&nbsp;<span>556 words</span></footer>
   <a class="entry-link" aria-label="post link to ICSCTF BabyGacha" href="https://callmeks.github.io/posts/icsctf-babygacha/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">ICSCTF Simple Guess
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Description I asked for the challenge from other people so I have no idea what the description is. SimpleGuess.apk
-Static Analysis As usual, I just start analyzing with jadx-gui. I started with the AndroidManifest.xml.
-1 2 3 4 5 6 7 8 9 10 &lt;activity android:theme=&#34;@style/Theme.SimpleGuess&#34; android:label=&#34;@string/app_name&#34; android:name=&#34;com.example.simpleguess.MainActivity&#34; android:exported=&#34;true&#34;&gt; &lt;intent-filter&gt; &lt;action android:name=&#34;android.intent.action.MAIN&#34;/&gt; &lt;category android:name=&#34;android.intent.category.LAUNCHER&#34;/&gt; &lt;/intent-filter&gt; &lt;/activity&gt; There’s only one activity named MainActivity so I just look into this.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2025-06-30 14:44:58 +0800 +08'>June 30, 2025</span>&nbsp;·&nbsp;<span>4 min</span>&nbsp;·&nbsp;<span>775 words</span></footer>
-  <a class="entry-link" aria-label="post link to ICSCTF Simple Guess" href="https://callmeks.github.io/posts/icsctf-simple-guess/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

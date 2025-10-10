@@ -159,6 +159,23 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">MHL Document Viewer
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Challenge Description Welcome to the Remote Code Execution (RCE) Challenge! This lab provides a real-world scenario where you’ll explore vulnerabilities in popular software. Your mission is to exploit a path traversal vulnerability combined with dynamic code loading to achieve remote code execution.
+documentviewer.apk
+Solution I started out by working on static analysis.
+Static Analysis As usual, I check the AndroidManifest.xml.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 &lt;activity android:name=&#34;com.mobilehackinglab.documentviewer.MainActivity&#34; android:exported=&#34;true&#34;&gt; &lt;intent-filter&gt; &lt;action android:name=&#34;android.intent.action.MAIN&#34;/&gt; &lt;category android:name=&#34;android.intent.category.LAUNCHER&#34;/&gt; &lt;/intent-filter&gt; &lt;intent-filter&gt; &lt;action android:name=&#34;android.intent.action.VIEW&#34;/&gt; &lt;category android:name=&#34;android.intent.category.DEFAULT&#34;/&gt; &lt;category android:name=&#34;android.intent.category.BROWSABLE&#34;/&gt; &lt;data android:scheme=&#34;file&#34;/&gt; &lt;data android:scheme=&#34;http&#34;/&gt; &lt;data android:scheme=&#34;https&#34;/&gt; &lt;data android:mimeType=&#34;application/pdf&#34;/&gt; &lt;/intent-filter&gt; &lt;/activity&gt; There is only one MainActivity activity and it has the intent filter where it accept some URI parameter.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-04-07 22:16:32 +0800 +08'>April 7, 2025</span>&nbsp;·&nbsp;<span>7 min</span>&nbsp;·&nbsp;<span>1402 words</span></footer>
+  <a class="entry-link" aria-label="post link to MHL Document Viewer" href="https://callmeks.github.io/posts/mhl-document-viewer/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">MHL Post Board
     </h2>
   </header>
@@ -187,22 +204,6 @@ Static Analysis I started out by reading the AndroidManifest.xml code first.
   </div>
   <footer class="entry-footer"><span title='2025-04-03 22:58:30 +0800 +08'>April 3, 2025</span>&nbsp;·&nbsp;<span>4 min</span>&nbsp;·&nbsp;<span>770 words</span></footer>
   <a class="entry-link" aria-label="post link to MHL Food Store" href="https://callmeks.github.io/posts/mhl-food-store/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">MHL Guess Me
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Challenge Description Welcome to the “Guess Me” Deep Link Exploitation Challenge! Immerse yourself in the world of cybersecurity with this hands-on lab. This challenge revolves around a fictitious “Guess Me” app, shedding light on a critical security flaw related to deep links that can lead to remote code execution within the app’s framework.
-guessme.apk
-Solution I started out by performing static analysis.
-Static Analysis As usual, jadx-gui for reading the code.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2025-04-01 18:19:43 +0800 +08'>April 1, 2025</span>&nbsp;·&nbsp;<span>5 min</span>&nbsp;·&nbsp;<span>1061 words</span></footer>
-  <a class="entry-link" aria-label="post link to MHL Guess Me" href="https://callmeks.github.io/posts/mhl-guess-me/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
